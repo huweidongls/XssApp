@@ -23,7 +23,8 @@
         <activity android:name=".page.MessageDetailsActivity" />
         <activity android:name=".page.ConsumptionRecordsActivity" />
         <activity android:name=".page.ConsumptionDetailsActivity" />
-        <activity android:name=".page.MyAddressActivity"></activity>
+        <activity android:name=".page.MyAddressActivity" />
+        <activity android:name=".page.InsertAddressActivity"></activity>
     </application>
 
 </manifest>

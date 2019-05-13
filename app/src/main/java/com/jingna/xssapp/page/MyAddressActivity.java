@@ -1,6 +1,7 @@
 package com.jingna.xssapp.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -60,11 +61,16 @@ public class MyAddressActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back, R.id.btn_insert})
     public void onClick(View view){
+        Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.btn_insert:
+                intent.setClass(context, InsertAddressActivity.class);
+                startActivity(intent);
                 break;
         }
     }
