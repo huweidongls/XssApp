@@ -20,7 +20,10 @@
         <activity android:name=".page.ForgotPwdActivity" />
         <activity android:name=".page.ForgotPwd1Activity" />
         <activity android:name=".page.MessageActivity" />
-        <activity android:name=".page.MessageDetailsActivity"></activity>
+        <activity android:name=".page.MessageDetailsActivity" />
+        <activity android:name=".page.ConsumptionRecordsActivity" />
+        <activity android:name=".page.ConsumptionDetailsActivity" />
+        <activity android:name=".page.MyAddressActivity"></activity>
     </application>
 
 </manifest>

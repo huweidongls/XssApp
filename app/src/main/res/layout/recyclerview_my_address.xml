@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_marginTop="7dp"
+        android:background="@color/white_ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginRight="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_toLeftOf="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginTop="21dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="2dp"
+                    android:src="@mipmap/address_default"
+                    android:layout_width="28dp"
+                    android:layout_height="14dp" />
+
+                <TextView
+                    android:layout_marginLeft="2dp"
+                    android:textColor="@color/black_333333"
+                    android:textSize="13sp"
+                    android:text="黑龙江省哈尔滨市道里区工厂街41号厂街41号"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:textSize="13sp"
+                android:textColor="@color/black_333333"
+                android:text="海蒂"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="16dp"
+                android:text="131****5678"
+                android:textColor="@color/black_333333"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_width="107dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_gravity="center_vertical"
+                android:layout_width="53dp"
+                android:layout_height="53dp">
+
+                <ImageView
+                    android:src="@mipmap/address_edit"
+                    android:layout_centerInParent="true"
+                    android:layout_width="8dp"
+                    android:layout_height="22dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_gravity="center_vertical"
+                android:layout_width="54dp"
+                android:layout_height="54dp">
+
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/address_del"
+                    android:layout_width="16dp"
+                    android:layout_height="22dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

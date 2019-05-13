@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:src="@color/gray_979797"
+            android:src="@mipmap/message_details_avatar"
             android:layout_width="42dp"
             android:layout_height="42dp" />
 
