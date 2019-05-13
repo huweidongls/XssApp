@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseFragment;
 import com.jingna.xssapp.page.LoginActivity;
+import com.jingna.xssapp.page.MessageActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,12 +53,16 @@ public class FragmentMy extends BaseFragment {
 
     }
 
-    @OnClick({R.id.rl_fast_order})
+    @OnClick({R.id.rl_fast_order, R.id.rl_message})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_fast_order:
                 intent.setClass(getContext(), LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_message:
+                intent.setClass(getContext(), MessageActivity.class);
                 startActivity(intent);
                 break;
         }

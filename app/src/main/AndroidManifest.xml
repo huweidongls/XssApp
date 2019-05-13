@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".page.LoginActivity" />
         <activity android:name=".page.ForgotPwdActivity" />
-        <activity android:name=".page.ForgotPwd1Activity"></activity>
+        <activity android:name=".page.ForgotPwd1Activity" />
+        <activity android:name=".page.MessageActivity" />
+        <activity android:name=".page.MessageDetailsActivity"></activity>
     </application>
 
 </manifest>

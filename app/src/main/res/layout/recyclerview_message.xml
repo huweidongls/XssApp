@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:background="@drawable/bg_999999_3dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="17dp"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textColor="@color/white_ffffff"
+            android:text="2019年03月14日  13:46"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp" />
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:background="@drawable/selector_fragment_my_bg"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="11dp"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:textColor="@color/black_333333"
+                android:text="室内卫生"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="#666666"
+                android:textSize="13sp"
+                android:layout_marginTop="34dp"
+                android:layout_marginLeft="11dp"
+                android:text="您的订单14657613，系统已经派单。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_marginRight="14dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginTop="24dp"
+                android:background="#EEEEEE"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/black_333333"
+                    android:text="点击查看订单"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_marginRight="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/right_gray"
+                    android:layout_width="11dp"
+                    android:layout_height="22dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
