@@ -3,6 +3,11 @@ package com.jingna.xssapp.app;
 import android.app.Activity;
 import android.app.Application;
 
+import com.jingna.xssapp.util.Const;
+import com.jingna.xssapp.util.EditPwdTimeCount;
+import com.jingna.xssapp.util.ForgotTimeCount;
+import com.vise.xsnow.http.ViseHttp;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,8 +19,19 @@ public class MyApplication extends Application {
 
     private static MyApplication instance;
     private List<Activity> mList = new LinkedList<Activity>();
+    public static EditPwdTimeCount editPwdTimeCount;
+    public static ForgotTimeCount forgotTimeCount;
 
     public MyApplication() {
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ViseHttp.init(this);
+        ViseHttp.CONFIG().baseUrl(Const.BASE_URL);
+        editPwdTimeCount = new EditPwdTimeCount(60000, 1000);
+        forgotTimeCount = new ForgotTimeCount(60000, 1000);
     }
 
     public synchronized static MyApplication getInstance() {

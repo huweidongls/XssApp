@@ -48,6 +48,7 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/rl_fast_order"
             android:background="@drawable/selector_fragment_my_bg"
             android:layout_width="match_parent"
             android:layout_height="52dp">

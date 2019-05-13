@@ -1,5 +1,6 @@
 package com.jingna.xssapp.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +12,11 @@ import android.widget.RelativeLayout;
 
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseFragment;
+import com.jingna.xssapp.page.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import q.rorbin.badgeview.QBadgeView;
 
 /**
@@ -48,4 +51,16 @@ public class FragmentMy extends BaseFragment {
                 .setBadgeNumber(95);
 
     }
+
+    @OnClick({R.id.rl_fast_order})
+    public void onClick(View view){
+        Intent intent = new Intent();
+        switch (view.getId()){
+            case R.id.rl_fast_order:
+                intent.setClass(getContext(), LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.jingna.xssapp.app.MyApplication;
+import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.fragment.FragmentIndex;
 import com.jingna.xssapp.fragment.FragmentMy;
 import com.jingna.xssapp.fragment.FragmentOrder;
@@ -23,7 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private Context context = MainActivity.this;
 
