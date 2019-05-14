@@ -29,6 +29,7 @@ import com.jingna.xssapp.adapter.FragmentIndexTuijianAdapter;
 import com.jingna.xssapp.base.BaseFragment;
 import com.jingna.xssapp.bean.BaiduCityBean;
 import com.jingna.xssapp.page.CityActivity;
+import com.jingna.xssapp.page.ZixunActivity;
 import com.jingna.xssapp.util.Gps;
 import com.jingna.xssapp.util.PositionUtil;
 import com.jingna.xssapp.util.ToastUtil;
@@ -133,12 +134,16 @@ public class FragmentIndex extends BaseFragment {
 
     }
 
-    @OnClick({R.id.ll_city})
+    @OnClick({R.id.ll_city, R.id.ll_zixun})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.ll_city:
                 intent.setClass(getContext(), CityActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll_zixun:
+                intent.setClass(getContext(), ZixunActivity.class);
                 startActivity(intent);
                 break;
         }

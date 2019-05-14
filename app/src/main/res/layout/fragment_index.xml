@@ -121,6 +121,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_zixun"
                 android:orientation="horizontal"
                 android:background="@mipmap/zixun_bg"
                 android:layout_marginTop="6dp"

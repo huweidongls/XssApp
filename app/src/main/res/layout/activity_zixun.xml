@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jingna.xssapp.page.ZixunActivity">
+
+    <RelativeLayout
+        style="@style/rl_top_bar">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_top_back" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_toLeftOf="@+id/rl_search"
+            android:layout_toRightOf="@+id/rl_back"
+            android:id="@+id/rl_search_bg"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/search_bg"
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/fadajing"
+                android:layout_width="14dp"
+                android:layout_height="11dp" />
+
+            <TextView
+                android:layout_marginLeft="34dp"
+                android:layout_centerVertical="true"
+                android:textColor="#666666"
+                android:textSize="13sp"
+                android:text="莲子养生汤"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_search"
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="@color/black_333333"
+                android:textSize="17sp"
+                android:text="搜索"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_all"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="资讯"
+                android:id="@+id/tv_all"
+                android:layout_centerInParent="true"
+                android:textColor="#F83030"
+                android:textSize="17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/view_all"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:background="#F83030"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_lingquan"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="领券"
+                android:id="@+id/tv_lingquan"
+                android:layout_centerInParent="true"
+                android:textColor="@color/black_333333"
+                android:textSize="17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/view_lingquan"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:background="#F83030"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_qidai1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="敬请期待"
+                android:id="@+id/tv_qidai1"
+                android:layout_centerInParent="true"
+                android:textColor="@color/black_333333"
+                android:textSize="17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/view_qidai1"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:background="#F83030"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_qidai2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="敬请期待"
+                android:id="@+id/tv_qidai2"
+                android:layout_centerInParent="true"
+                android:textColor="#333333"
+                android:textSize="17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:visibility="gone"
+                android:id="@+id/view_qidai2"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:background="#F83030"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>
