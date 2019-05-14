@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.MyAddressAdapter;
@@ -25,8 +26,8 @@ public class MyAddressActivity extends BaseActivity {
 
     @BindView(R.id.rv)
     RecyclerView recyclerView;
-    @BindView(R.id.iv_message_null)
-    ImageView ivMessageNull;
+    @BindView(R.id.ll_message_null)
+    LinearLayout llMessageNull;
 
     private MyAddressAdapter adapter;
     private List<String> mList;
@@ -53,10 +54,10 @@ public class MyAddressActivity extends BaseActivity {
             recyclerView.setLayoutManager(manager);
             recyclerView.setAdapter(adapter);
             recyclerView.setVisibility(View.VISIBLE);
-            ivMessageNull.setVisibility(View.GONE);
+            llMessageNull.setVisibility(View.GONE);
         }else {
             recyclerView.setVisibility(View.GONE);
-            ivMessageNull.setVisibility(View.VISIBLE);
+            llMessageNull.setVisibility(View.VISIBLE);
         }
 
     }

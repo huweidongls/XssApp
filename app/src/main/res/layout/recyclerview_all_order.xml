@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginTop="7dp"
+        android:background="@drawable/selector_fragment_my_bg"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:src="#333333"
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="49dp"
+                android:textSize="17sp"
+                android:textColor="@color/black_333333"
+                android:text="空调清洗"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_marginRight="14dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/right_gray"
+                android:layout_width="8dp"
+                android:layout_height="16dp" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="31dp"
+                android:textColor="@color/black_333333"
+                android:textSize="13sp"
+                android:text="待评价"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@color/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="13sp"
+            android:textColor="@color/black_333333"
+            android:text="订单编号：5646331"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="13sp"
+            android:textColor="@color/black_333333"
+            android:text="预约时间：2019-03-22  15:00-15:30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="13sp"
+            android:textColor="@color/black_333333"
+            android:text="服务地址：北京市海淀区海淀黄庄北里小区15号楼1单元1202"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="57dp">
+
+            <TextView
+                android:gravity="center"
+                android:textSize="13sp"
+                android:text="评价服务"
+                android:textColor="@color/white_ffffff"
+                android:background="@drawable/bg_e86d00_2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="7dp"
+                android:layout_width="83dp"
+                android:layout_height="31dp" />
+
+            <TextView
+                android:gravity="center"
+                android:textSize="13sp"
+                android:text="删除订单"
+                android:textColor="@color/white_ffffff"
+                android:background="@drawable/bg_f83030_2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:layout_width="83dp"
+                android:layout_height="31dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

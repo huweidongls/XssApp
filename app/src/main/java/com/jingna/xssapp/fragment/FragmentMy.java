@@ -16,6 +16,7 @@ import com.jingna.xssapp.page.ConsumptionRecordsActivity;
 import com.jingna.xssapp.page.LoginActivity;
 import com.jingna.xssapp.page.MessageActivity;
 import com.jingna.xssapp.page.MyAddressActivity;
+import com.jingna.xssapp.page.PersonInformationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,7 +56,7 @@ public class FragmentMy extends BaseFragment {
 
     }
 
-    @OnClick({R.id.rl_fast_order, R.id.rl_message, R.id.rl_consumption_records, R.id.rl_address})
+    @OnClick({R.id.rl_fast_order, R.id.rl_message, R.id.rl_consumption_records, R.id.rl_address, R.id.ll_edit})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -73,6 +74,10 @@ public class FragmentMy extends BaseFragment {
                 break;
             case R.id.rl_address:
                 intent.setClass(getContext(), MyAddressActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll_edit:
+                intent.setClass(getContext(), PersonInformationActivity.class);
                 startActivity(intent);
                 break;
         }
