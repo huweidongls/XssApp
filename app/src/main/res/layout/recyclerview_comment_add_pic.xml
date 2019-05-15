@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginBottom="5dp"
+        android:id="@+id/ll_add"
+        android:layout_marginTop="10dp"
+        android:elevation="4dp"
+        android:background="@color/white_ffffff"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_width="105dp"
+        android:layout_height="105dp">
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/updata_pic"
+            android:layout_width="105dp"
+            android:layout_height="105dp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginBottom="5dp"
+        android:id="@+id/rl_pic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_width="105dp"
+        android:layout_height="105dp">
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_delete"-->
+        <!--android:layout_marginLeft="-7.5dp"-->
+        <!--android:layout_marginTop="2.5dp"-->
+        <!--android:layout_toRightOf="@+id/rl_pic"-->
+        <!--android:src="@mipmap/guanbi2"-->
+        <!--android:layout_width="15dp"-->
+        <!--android:layout_height="15dp" />-->
+
+</RelativeLayout>
