@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:layout_width="319dp"
+        android:layout_height="120dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/white_ffffff"
+            android:layout_width="212dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black_333333"
+                android:textSize="17sp"
+                android:text="新手红包"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black_333333"
+                android:textSize="13sp"
+                android:text="订单满100元使用"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black_333333"
+                android:textSize="10sp"
+                android:text="有效期：2019-04-20至2019-05-20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="#F83030"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="35sp"
+                    android:textColor="@color/white_ffffff"
+                    android:text="10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="17sp"
+                    android:textColor="@color/white_ffffff"
+                    android:text="元"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/white_ffffff"
+                android:textSize="10sp"
+                android:text="仅限平台线上使用"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_ffffff_14dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="立即使用"
+                android:textColor="#F83030"
+                android:layout_width="83dp"
+                android:layout_height="28dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

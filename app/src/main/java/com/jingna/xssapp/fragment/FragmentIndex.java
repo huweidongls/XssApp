@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.FragmentIndexTuijianAdapter;
 import com.jingna.xssapp.base.BaseFragment;
@@ -134,7 +135,7 @@ public class FragmentIndex extends BaseFragment {
 
     }
 
-    @OnClick({R.id.ll_city, R.id.ll_zixun})
+    @OnClick({R.id.ll_city, R.id.ll_zixun, R.id.rl_more})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -145,6 +146,10 @@ public class FragmentIndex extends BaseFragment {
             case R.id.ll_zixun:
                 intent.setClass(getContext(), ZixunActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.rl_more:
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.selectFragment(1);
                 break;
         }
     }

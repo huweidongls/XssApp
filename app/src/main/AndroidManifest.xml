@@ -61,7 +61,8 @@
         <activity android:name=".page.InsertAddressActivity" />
         <activity android:name=".page.PersonInformationActivity" />
         <activity android:name=".page.CityActivity" />
-        <activity android:name=".page.ZixunActivity"></activity>
+        <activity android:name=".page.ZixunActivity" />
+        <activity android:name=".page.ZixunDetailsActivity"></activity>
     </application>
 
 </manifest>

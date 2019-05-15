@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseFragment;
 import com.jingna.xssapp.page.ConsumptionRecordsActivity;
@@ -56,13 +57,13 @@ public class FragmentMy extends BaseFragment {
 
     }
 
-    @OnClick({R.id.rl_fast_order, R.id.rl_message, R.id.rl_consumption_records, R.id.rl_address, R.id.ll_edit})
+    @OnClick({R.id.rl_fast_order, R.id.rl_message, R.id.rl_consumption_records, R.id.rl_address, R.id.ll_edit, R.id.ll_order,
+    R.id.rl_login})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_fast_order:
-                intent.setClass(getContext(), LoginActivity.class);
-                startActivity(intent);
+
                 break;
             case R.id.rl_message:
                 intent.setClass(getContext(), MessageActivity.class);
@@ -78,6 +79,14 @@ public class FragmentMy extends BaseFragment {
                 break;
             case R.id.ll_edit:
                 intent.setClass(getContext(), PersonInformationActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll_order:
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.selectFragment(2);
+                break;
+            case R.id.rl_login:
+                intent.setClass(getContext(), LoginActivity.class);
                 startActivity(intent);
                 break;
         }

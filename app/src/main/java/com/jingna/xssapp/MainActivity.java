@@ -123,6 +123,27 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    public void selectFragment(int i){
+        switch (i){
+            case 0:
+                selectButton(ibIndex);
+                switchFragment(0);
+                break;
+            case 1:
+                selectButton(ibService);
+                switchFragment(1);
+                break;
+            case 2:
+                selectButton(ibOrder);
+                switchFragment(2);
+                break;
+            case 3:
+                selectButton(ibMy);
+                switchFragment(3);
+                break;
+        }
+    }
+
     private class MenuOnClickListener implements View.OnClickListener {
 
         @Override

@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.ViewpagerAdapter;
 import com.jingna.xssapp.base.BaseActivity;
-import com.jingna.xssapp.fragment.FragmentAllOrder;
-import com.jingna.xssapp.fragment.FragmentCompleteOrder;
-import com.jingna.xssapp.fragment.FragmentIngOrder;
+import com.jingna.xssapp.fragment.FragmentLingquan;
+import com.jingna.xssapp.fragment.FragmentQidai;
+import com.jingna.xssapp.fragment.FragmentZixun;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,10 +64,10 @@ public class ZixunActivity extends BaseActivity {
     private void initData() {
 
         fragmentList = new ArrayList<>();
-        fragmentList.add(new FragmentAllOrder());
-        fragmentList.add(new FragmentIngOrder());
-        fragmentList.add(new FragmentCompleteOrder());
-        fragmentList.add(new FragmentCompleteOrder());
+        fragmentList.add(new FragmentZixun());
+        fragmentList.add(new FragmentLingquan());
+        fragmentList.add(new FragmentQidai());
+        fragmentList.add(new FragmentQidai());
         mViewPagerFragmentAdapter = new ViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
