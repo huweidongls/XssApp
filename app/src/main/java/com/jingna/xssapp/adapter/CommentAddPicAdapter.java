@@ -52,17 +52,14 @@ public class CommentAddPicAdapter extends RecyclerView.Adapter<CommentAddPicAdap
             holder.llAdd.setVisibility(View.GONE);
         } else {
             holder.rlPic.setVisibility(View.VISIBLE);
-//            holder.ivDelete.setVisibility(View.VISIBLE);
             holder.llAdd.setVisibility(View.VISIBLE);
         }
         if (getItemViewType(position) == TYPE_ADD) {
             holder.llAdd.setVisibility(View.VISIBLE);
             holder.rlPic.setVisibility(View.GONE);
-//            holder.ivDelete.setVisibility(View.GONE);
         } else {
             holder.llAdd.setVisibility(View.GONE);
             holder.rlPic.setVisibility(View.VISIBLE);
-//            holder.ivDelete.setVisibility(View.VISIBLE);
             Glide.with(context).load(data.get(position)).into(holder.ivPic);
         }
         holder.llAdd.setOnClickListener(new View.OnClickListener() {
@@ -71,12 +68,6 @@ public class CommentAddPicAdapter extends RecyclerView.Adapter<CommentAddPicAdap
                 listener.addImg();
             }
         });
-//        holder.ivDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.deleteImg(position);
-//            }
-//        });
     }
 
     @Override
@@ -96,14 +87,12 @@ public class CommentAddPicAdapter extends RecyclerView.Adapter<CommentAddPicAdap
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private LinearLayout llAdd;
-//        private ImageView ivDelete;
         private RelativeLayout rlPic;
         private ImageView ivPic;
 
         public ViewHolder(View itemView) {
             super(itemView);
             llAdd = itemView.findViewById(R.id.ll_add);
-//            ivDelete = itemView.findViewById(R.id.iv_delete);
             rlPic = itemView.findViewById(R.id.rl_pic);
             ivPic = itemView.findViewById(R.id.iv_pic);
         }
@@ -111,7 +100,6 @@ public class CommentAddPicAdapter extends RecyclerView.Adapter<CommentAddPicAdap
 
     public interface ClickListener{
         void addImg();
-//        void deleteImg(int i);
     }
 
 }
