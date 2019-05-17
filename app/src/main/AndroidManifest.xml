@@ -65,7 +65,7 @@
         <activity android:name=".page.ZixunDetailsActivity" />
         <activity android:name=".page.MyCouponsActivity" />
         <activity android:name=".page.MyCommentActivity" />
-        <activity android:name=".page.CommentOrderActivity"/>
+        <activity android:name=".page.CommentOrderActivity" />
         <activity
             android:name="com.donkingliang.imageselector.ImageSelectorActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -88,6 +88,14 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".page.SetActivity" />
+        <activity android:name=".page.AboutActivity" />
+        <activity android:name=".page.BookingOrderActivity" />
+        <activity android:name=".page.PayBookingOrderActivity" />
+        <activity android:name=".page.BookingOrderResultActivity" />
+        <activity android:name=".page.ServiceDetailsActivity" />
+        <activity android:name=".page.OrderDetailsActivity"></activity>
     </application>
 
 </manifest>

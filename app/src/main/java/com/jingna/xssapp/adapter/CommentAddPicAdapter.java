@@ -54,10 +54,13 @@ public class CommentAddPicAdapter extends RecyclerView.Adapter<CommentAddPicAdap
             holder.rlPic.setVisibility(View.VISIBLE);
             holder.llAdd.setVisibility(View.VISIBLE);
         }
-        if (getItemViewType(position) == TYPE_ADD) {
+        if (getItemViewType(position) == TYPE_ADD&&data.size() == MAX_SIZE) {
+            holder.llAdd.setVisibility(View.GONE);
+            holder.rlPic.setVisibility(View.GONE);
+        } else if(getItemViewType(position) == TYPE_ADD&&data.size()<MAX_SIZE){
             holder.llAdd.setVisibility(View.VISIBLE);
             holder.rlPic.setVisibility(View.GONE);
-        } else {
+        } else if(getItemViewType(position) == TYPE_PIC){
             holder.llAdd.setVisibility(View.GONE);
             holder.rlPic.setVisibility(View.VISIBLE);
             Glide.with(context).load(data.get(position)).into(holder.ivPic);

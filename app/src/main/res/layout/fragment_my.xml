@@ -11,6 +11,7 @@
         android:layout_height="183dp">
 
         <ImageView
+            android:id="@+id/iv_set"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="12dp"
             android:src="@mipmap/my_set"

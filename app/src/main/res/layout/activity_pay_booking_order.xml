@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/line"
+    tools:context="com.jingna.xssapp.page.PayBookingOrderActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        style="@style/rl_top_bar">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_top_back" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:text="预约下单"
+            style="@style/tv_top_title" />
+
+        <RelativeLayout
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/message_kefu"
+                android:layout_width="20dp"
+                android:layout_height="19dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="52dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="#f83030"
+            android:textSize="17sp"
+            android:text="￥"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:textColor="#f83030"
+            android:textSize="25sp"
+            android:text="449.90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="22dp"
+        android:textColor="#666666"
+        android:textSize="13sp"
+        android:text="清洗空调费用-订单编号2132145555"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:layout_marginTop="52dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="9dp"
+                android:src="@mipmap/weixin"
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="42dp"
+                android:textColor="@color/black_333333"
+                android:textSize="14sp"
+                android:text="微信支付"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/zhifu_select"
+                android:layout_width="19dp"
+                android:layout_height="19dp" />
+
+        </RelativeLayout>
+
+        <View
+            android:background="@color/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="9dp"
+                android:src="@mipmap/zhifubao"
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="42dp"
+                android:textColor="@color/black_333333"
+                android:textSize="14sp"
+                android:text="支付宝支付"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/zhifu_unselect"
+                android:layout_width="19dp"
+                android:layout_height="19dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_to_pay"
+        android:background="#f83030"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="190dp"
+        android:textSize="17sp"
+        android:textColor="@color/white_ffffff"
+        android:text="去 支 付"
+        android:layout_width="294dp"
+        android:layout_height="42dp" />
+
+</LinearLayout>

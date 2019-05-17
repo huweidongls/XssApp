@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/line"
+    tools:context="com.jingna.xssapp.page.AboutActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        style="@style/rl_top_bar">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_top_back" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:text="关于我们"
+            style="@style/tv_top_title" />
+
+        <RelativeLayout
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/message_kefu"
+                android:layout_width="20dp"
+                android:layout_height="19dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="86dp"
+        android:src="#F83030"
+        android:layout_width="66dp"
+        android:layout_height="66dp" />
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="13dp"
+        android:textColor="@color/black_333333"
+        android:textSize="15sp"
+        android:text="洗刷刷  V1.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
+        android:textSize="13sp"
+        android:textColor="#999999"
+        android:text="隐私政策  |  用户协议"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

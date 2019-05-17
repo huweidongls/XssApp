@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseFragment;
+import com.jingna.xssapp.page.BookingOrderActivity;
 import com.jingna.xssapp.page.ConsumptionRecordsActivity;
 import com.jingna.xssapp.page.LoginActivity;
 import com.jingna.xssapp.page.MessageActivity;
@@ -20,6 +21,7 @@ import com.jingna.xssapp.page.MyAddressActivity;
 import com.jingna.xssapp.page.MyCommentActivity;
 import com.jingna.xssapp.page.MyCouponsActivity;
 import com.jingna.xssapp.page.PersonInformationActivity;
+import com.jingna.xssapp.page.SetActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,12 +62,13 @@ public class FragmentMy extends BaseFragment {
     }
 
     @OnClick({R.id.rl_fast_order, R.id.rl_message, R.id.rl_consumption_records, R.id.rl_address, R.id.ll_edit, R.id.ll_order,
-    R.id.rl_login, R.id.rl_coupons, R.id.rl_my_comment})
+    R.id.rl_login, R.id.rl_coupons, R.id.rl_my_comment, R.id.iv_set})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_fast_order:
-
+                intent.setClass(getContext(), BookingOrderActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rl_message:
                 intent.setClass(getContext(), MessageActivity.class);
@@ -97,6 +100,10 @@ public class FragmentMy extends BaseFragment {
                 break;
             case R.id.rl_my_comment:
                 intent.setClass(getContext(), MyCommentActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.iv_set:
+                intent.setClass(getContext(), SetActivity.class);
                 startActivity(intent);
                 break;
         }

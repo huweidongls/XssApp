@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line"
+    tools:context="com.jingna.xssapp.page.SetActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        style="@style/rl_top_bar">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_top_back" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:text="设置"
+            style="@style/tv_top_title" />
+
+        <RelativeLayout
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/message_kefu"
+                android:layout_width="20dp"
+                android:layout_height="19dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:orientation="vertical"
+        android:layout_marginTop="7dp"
+        android:layout_below="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_about"
+            android:layout_width="match_parent"
+            android:layout_height="52dp">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:textColor="@color/black_333333"
+                android:textSize="17sp"
+                android:text="关于我们"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/right_gray"
+                android:layout_width="11dp"
+                android:layout_height="22dp" />
+
+        </RelativeLayout>
+
+        <View
+            android:background="@color/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:textColor="@color/black_333333"
+                android:textSize="17sp"
+                android:text="检查更新"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/right_gray"
+                android:layout_width="11dp"
+                android:layout_height="22dp" />
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="33dp"
+                android:text="已是最新版本"
+                android:textColor="#999999"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_marginBottom="109dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="#f83030"
+        android:textColor="@color/white_ffffff"
+        android:textSize="17sp"
+        android:text="退 出 登 录"
+        android:layout_width="294dp"
+        android:layout_height="42dp" />
+
+</RelativeLayout>
