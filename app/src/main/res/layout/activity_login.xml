@@ -179,6 +179,7 @@
                 android:layout_height="wrap_content" />
             
             <Button
+                android:id="@+id/btn_login"
                 android:layout_marginTop="29dp"
                 android:background="@mipmap/btn_login"
                 android:layout_width="294dp"
@@ -238,7 +239,7 @@
 
                     <EditText
                         android:layout_centerVertical="true"
-                        android:inputType="phone"
+                        android:inputType="number"
                         android:id="@+id/et_register_code"
                         android:textCursorDrawable="@mipmap/et_guangbiao"
                         android:textColor="@color/white_ffffff"
@@ -313,6 +314,7 @@
             </RelativeLayout>
 
             <Button
+                android:id="@+id/btn_fast_register"
                 android:background="@mipmap/btn_fast_register"
                 android:layout_marginTop="28dp"
                 android:layout_width="294dp"

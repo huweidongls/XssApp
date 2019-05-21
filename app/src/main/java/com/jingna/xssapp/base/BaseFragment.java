@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 
 import com.jingna.xssapp.broadcastreceiver.NetBroadcastReceiver;
 import com.jingna.xssapp.util.NetUtil;
+import com.jingna.xssapp.util.StringUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -55,6 +56,12 @@ public class BaseFragment extends Fragment implements NetBroadcastReceiver.NetEv
 //        evevt = this;
 //        inspectNet();
 //    }
+
+    public String getToken(String url){
+        String token = StringUtils.stringToMD5(url);
+        String tokens = StringUtils.stringToMD5(token);
+        return tokens;
+    }
 
     @Override
     public void onDestroy() {

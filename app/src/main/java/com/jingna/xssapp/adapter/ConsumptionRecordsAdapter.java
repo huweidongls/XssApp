@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.bean.TransactionDetailsBean;
 import com.jingna.xssapp.page.ConsumptionDetailsActivity;
 
 import java.util.List;
@@ -20,9 +22,9 @@ import java.util.List;
 public class ConsumptionRecordsAdapter extends RecyclerView.Adapter<ConsumptionRecordsAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<TransactionDetailsBean.ObjBean> data;
 
-    public ConsumptionRecordsAdapter(List<String> data) {
+    public ConsumptionRecordsAdapter(List<TransactionDetailsBean.ObjBean> data) {
         this.data = data;
     }
 
@@ -36,6 +38,16 @@ public class ConsumptionRecordsAdapter extends RecyclerView.Adapter<ConsumptionR
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+        holder.tvType.setText(data.get(position).getTypename());
+        holder.tvTime.setText(data.get(position).getAddtime());
+        holder.tvPrice.setText(Double.valueOf(data.get(position).getPrice())+"元");
+        if(data.get(position).getRadio().equals("0")){
+            holder.tvPayType.setText("未支付");
+        }else if(data.get(position).getRadio().equals("1")){
+            holder.tvPayType.setText("支付成功");
+        }
+
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,10 +66,18 @@ public class ConsumptionRecordsAdapter extends RecyclerView.Adapter<ConsumptionR
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private LinearLayout ll;
+        private TextView tvType;
+        private TextView tvTime;
+        private TextView tvPrice;
+        private TextView tvPayType;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ll = itemView.findViewById(R.id.ll);
+            tvType = itemView.findViewById(R.id.tv_type);
+            tvTime = itemView.findViewById(R.id.tv_time);
+            tvPrice = itemView.findViewById(R.id.tv_price);
+            tvPayType = itemView.findViewById(R.id.tv_pay_type);
         }
     }
 

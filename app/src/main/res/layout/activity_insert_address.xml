@@ -74,6 +74,7 @@
                 android:layout_height="match_parent">
 
                 <EditText
+                    android:id="@+id/et_name"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
@@ -110,6 +111,7 @@
                 android:layout_height="match_parent">
 
                 <EditText
+                    android:id="@+id/et_phone"
                     android:inputType="phone"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
@@ -184,6 +186,7 @@
                 android:layout_height="match_parent">
 
                 <EditText
+                    android:id="@+id/et_address"
                     android:layout_marginTop="13dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
@@ -204,6 +207,7 @@
             android:layout_height="7dp"/>
 
         <RelativeLayout
+            android:id="@+id/rl_default"
             android:layout_width="match_parent"
             android:layout_height="46dp">
 
@@ -225,8 +229,9 @@
                 android:layout_height="17dp">
 
                 <ImageView
+                    android:id="@+id/iv_address_default"
                     android:layout_centerInParent="true"
-                    android:src="@mipmap/address_red2"
+                    android:src="#ffffff"
                     android:layout_width="10dp"
                     android:layout_height="10dp" />
 
@@ -237,6 +242,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_save"
         android:layout_marginBottom="94dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

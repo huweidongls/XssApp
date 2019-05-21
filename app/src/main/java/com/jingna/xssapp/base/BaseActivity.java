@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.jingna.xssapp.util.StringUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -46,6 +47,12 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    public String getToken(String url){
+        String token = StringUtils.stringToMD5(url);
+        String tokens = StringUtils.stringToMD5(token);
+        return tokens;
     }
 
     public void toDialog(Context context, String title, String message, DialogInterface.OnClickListener listener, DialogInterface.OnClickListener listener1){

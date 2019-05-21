@@ -3,7 +3,7 @@ package com.jingna.xssapp.app;
 import android.app.Activity;
 import android.app.Application;
 
-import com.jingna.xssapp.util.Const;
+import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.EditPwdTimeCount;
 import com.jingna.xssapp.util.ForgotTimeCount;
 import com.vise.xsnow.http.ViseHttp;
@@ -29,7 +29,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ViseHttp.init(this);
-        ViseHttp.CONFIG().baseUrl(Const.BASE_URL);
+        ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL);
         editPwdTimeCount = new EditPwdTimeCount(60000, 1000);
         forgotTimeCount = new ForgotTimeCount(60000, 1000);
     }

@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseFragment;
+import com.jingna.xssapp.bean.MemberInfoBean;
+import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.page.BookingOrderActivity;
 import com.jingna.xssapp.page.ConsumptionRecordsActivity;
 import com.jingna.xssapp.page.LoginActivity;
@@ -22,6 +26,12 @@ import com.jingna.xssapp.page.MyCommentActivity;
 import com.jingna.xssapp.page.MyCouponsActivity;
 import com.jingna.xssapp.page.PersonInformationActivity;
 import com.jingna.xssapp.page.SetActivity;
+import com.jingna.xssapp.util.SpUtils;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +46,10 @@ public class FragmentMy extends BaseFragment {
 
     @BindView(R.id.rl_coupons_num)
     RelativeLayout rlCouponsNum;
+    @BindView(R.id.tv_kefu_phone)
+    TextView tvKefuPhone;
+
+    private String uid = "";
 
     @Nullable
     @Override
@@ -48,16 +62,46 @@ public class FragmentMy extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        uid = SpUtils.getUid(getContext());
+    }
+
     private void initData() {
 
-        new QBadgeView(getContext())
-                .bindTarget(rlCouponsNum)
-                .setShowShadow(false)
-                .setBadgeBackgroundColor(Color.parseColor("#F83030"))
-                .setBadgeTextColor(Color.parseColor("#FFFFFF"))
-                .setBadgeGravity(Gravity.END|Gravity.CENTER_VERTICAL)
-                .setBadgeTextSize(13, true)
-                .setBadgeNumber(95);
+        ViseHttp.POST(NetUrl.memberInfoUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.memberInfoUrl))
+                .addParam("uid", SpUtils.getUid(getContext()))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                MemberInfoBean memberInfoBean = gson.fromJson(data, MemberInfoBean.class);
+                                tvKefuPhone.setText(memberInfoBean.getObj().getTel());
+                                String num = memberInfoBean.getObj().getNum();
+                                new QBadgeView(getContext())
+                                        .bindTarget(rlCouponsNum)
+                                        .setShowShadow(false)
+                                        .setBadgeBackgroundColor(Color.parseColor("#F83030"))
+                                        .setBadgeTextColor(Color.parseColor("#FFFFFF"))
+                                        .setBadgeGravity(Gravity.END|Gravity.CENTER_VERTICAL)
+                                        .setBadgeTextSize(13, true)
+                                        .setBadgeNumber(Integer.parseInt(num));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
 
@@ -67,44 +111,89 @@ public class FragmentMy extends BaseFragment {
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_fast_order:
-                intent.setClass(getContext(), BookingOrderActivity.class);
-                startActivity(intent);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), BookingOrderActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.rl_message:
-                intent.setClass(getContext(), MessageActivity.class);
-                startActivity(intent);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), MessageActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.rl_consumption_records:
-                intent.setClass(getContext(), ConsumptionRecordsActivity.class);
-                startActivity(intent);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), ConsumptionRecordsActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.rl_address:
-                intent.setClass(getContext(), MyAddressActivity.class);
-                startActivity(intent);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), MyAddressActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_edit:
-                intent.setClass(getContext(), PersonInformationActivity.class);
-                startActivity(intent);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), PersonInformationActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_order:
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.selectFragment(2);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.selectFragment(2);
+                }
                 break;
             case R.id.rl_login:
                 intent.setClass(getContext(), LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_coupons:
-                intent.setClass(getContext(), MyCouponsActivity.class);
-                startActivity(intent);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), MyCouponsActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.rl_my_comment:
-                intent.setClass(getContext(), MyCommentActivity.class);
-                startActivity(intent);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), MyCommentActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.iv_set:
-                intent.setClass(getContext(), SetActivity.class);
-                startActivity(intent);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), SetActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
     }

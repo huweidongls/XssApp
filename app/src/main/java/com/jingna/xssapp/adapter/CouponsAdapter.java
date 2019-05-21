@@ -5,8 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.bean.CouponListBean;
 
 import java.util.List;
 
@@ -17,9 +21,9 @@ import java.util.List;
 public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<CouponListBean.ObjBean> data;
 
-    public CouponsAdapter(List<String> data) {
+    public CouponsAdapter(List<CouponListBean.ObjBean> data) {
         this.data = data;
     }
 
@@ -32,8 +36,24 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        holder.tvPrice.setText(data.get(position).getMoney());
+        holder.tvType.setText(data.get(position).getDecript());
+        holder.tvName.setText(data.get(position).getDiscountname());
+        holder.tvTime.setText("有效期至："+data.get(position).getTermofvalidity());
+        holder.tvText.setText(data.get(position).getText());
+        holder.ivRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.tvText.getVisibility() == View.GONE){
+                    holder.tvText.setVisibility(View.VISIBLE);
+                    Glide.with(context).load(R.mipmap.round_bottom).into(holder.ivRight);
+                }else if(holder.tvText.getVisibility() == View.VISIBLE){
+                    holder.tvText.setVisibility(View.GONE);
+                    Glide.with(context).load(R.mipmap.round_right).into(holder.ivRight);
+                }
+            }
+        });
     }
 
     @Override
@@ -43,8 +63,21 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        private TextView tvPrice;
+        private TextView tvType;
+        private TextView tvName;
+        private TextView tvTime;
+        private ImageView ivRight;
+        private TextView tvText;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            tvPrice = itemView.findViewById(R.id.tv_price);
+            tvType = itemView.findViewById(R.id.tv_type);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvTime = itemView.findViewById(R.id.tv_time);
+            ivRight = itemView.findViewById(R.id.iv_right);
+            tvText = itemView.findViewById(R.id.tv_text);
         }
     }
 

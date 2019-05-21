@@ -11,7 +11,7 @@ import com.vise.xsnow.cache.SpCache;
 public class SpUtils {
 
     private static SpCache spCache;
-    public static String USER_ID = "user_id";
+    public static String UID = "uid";
     public static String PHONENUM = "phonenum";
     public static String TOKEN = "token";
     public static String SEARCH_HISTORY = "search_history";
@@ -46,14 +46,14 @@ public class SpUtils {
         return spCache.get(PHONENUM, "0");
     }
 
-    public static void setUserId(Context context, String userid){
+    public static void setUid(Context context, String userid){
         spCache = new SpCache(context, "user_info");
-        spCache.put(USER_ID, userid);
+        spCache.put(UID, userid);
     }
 
-    public static String getUserId(Context context){
+    public static String getUid(Context context){
         spCache = new SpCache(context, "user_info");
-        return spCache.get(USER_ID, "0");
+        return spCache.get(UID, "0");
     }
 
     public static void clear(Context context){

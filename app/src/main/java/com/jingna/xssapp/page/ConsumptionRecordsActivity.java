@@ -6,9 +6,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.ConsumptionRecordsAdapter;
 import com.jingna.xssapp.base.BaseActivity;
+import com.jingna.xssapp.bean.TransactionDetailsBean;
+import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.SpUtils;
+import com.jingna.xssapp.util.ToastUtil;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +35,7 @@ public class ConsumptionRecordsActivity extends BaseActivity {
     RecyclerView recyclerView;
 
     private ConsumptionRecordsAdapter adapter;
-    private List<String> mList;
+    private List<TransactionDetailsBean.ObjBean> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +49,36 @@ public class ConsumptionRecordsActivity extends BaseActivity {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        adapter = new ConsumptionRecordsAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(context);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        ViseHttp.POST(NetUrl.transactionDetailsUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.transactionDetailsUrl))
+                .addParam("uid", SpUtils.getUid(context))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                TransactionDetailsBean bean = gson.fromJson(data, TransactionDetailsBean.class);
+                                mList = bean.getObj();
+                                adapter = new ConsumptionRecordsAdapter(mList);
+                                LinearLayoutManager manager = new LinearLayoutManager(context);
+                                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                recyclerView.setLayoutManager(manager);
+                                recyclerView.setAdapter(adapter);
+                            }else {
+                                ToastUtil.showShort(context, jsonObject.optString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
 

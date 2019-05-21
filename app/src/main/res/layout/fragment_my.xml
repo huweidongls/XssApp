@@ -394,12 +394,12 @@
                 android:layout_height="22dp" />
 
             <TextView
+                android:id="@+id/tv_kefu_phone"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dp"
                 android:layout_toLeftOf="@+id/right6"
                 android:textColor="@color/black_333333"
                 android:textSize="13sp"
-                android:text="400-1234-5678"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

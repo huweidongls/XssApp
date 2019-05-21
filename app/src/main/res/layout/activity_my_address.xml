@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"/>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_message_null"
             android:orientation="vertical"
             android:layout_centerHorizontal="true"

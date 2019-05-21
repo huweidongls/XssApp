@@ -30,6 +30,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_price"
                         android:textSize="35sp"
                         android:textColor="#F83030"
                         android:text="50"
@@ -46,6 +47,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_type"
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center_horizontal"
                     android:textColor="#F83030"
@@ -63,6 +65,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_marginTop="20dp"
                     android:textSize="14sp"
                     android:textColor="@color/black_333333"
@@ -71,6 +74,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_time"
                     android:layout_marginTop="16dp"
                     android:textSize="13sp"
                     android:textColor="#666666"
@@ -94,6 +98,7 @@
                         android:layout_height="wrap_content" />
 
                     <ImageView
+                        android:id="@+id/iv_right"
                         android:src="@mipmap/round_right"
                         android:layout_gravity="center_vertical"
                         android:layout_width="15dp"
@@ -102,6 +107,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_text"
                     android:visibility="gone"
                     android:layout_marginBottom="12dp"
                     android:textSize="10sp"

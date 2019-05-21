@@ -103,6 +103,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/btn_sure"
         android:background="@mipmap/btn_sure"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="56dp"

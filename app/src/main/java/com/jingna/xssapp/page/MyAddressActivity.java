@@ -9,9 +9,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.MyAddressAdapter;
 import com.jingna.xssapp.base.BaseActivity;
+import com.jingna.xssapp.bean.MemberAddressListBean;
+import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.SpUtils;
+import com.jingna.xssapp.util.ToastUtil;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +40,7 @@ public class MyAddressActivity extends BaseActivity {
     LinearLayout llMessageNull;
 
     private MyAddressAdapter adapter;
-    private List<String> mList;
+    private List<MemberAddressListBean.ObjBean> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,27 +48,54 @@ public class MyAddressActivity extends BaseActivity {
         setContentView(R.layout.activity_my_address);
 
         ButterKnife.bind(MyAddressActivity.this);
-        initData();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initData();
     }
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        if(mList.size()>0){
-            adapter = new MyAddressAdapter(mList);
-            LinearLayoutManager manager = new LinearLayoutManager(context);
-            manager.setOrientation(LinearLayoutManager.VERTICAL);
-            recyclerView.setLayoutManager(manager);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setVisibility(View.VISIBLE);
-            llMessageNull.setVisibility(View.GONE);
-        }else {
-            recyclerView.setVisibility(View.GONE);
-            llMessageNull.setVisibility(View.VISIBLE);
-        }
+        ViseHttp.POST(NetUrl.memberAddressListUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.memberAddressListUrl))
+                .addParam("uid", SpUtils.getUid(context))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                MemberAddressListBean bean = gson.fromJson(data, MemberAddressListBean.class);
+                                mList = bean.getObj();
+                                if(mList.size()>0){
+                                    adapter = new MyAddressAdapter(mList);
+                                    LinearLayoutManager manager = new LinearLayoutManager(context);
+                                    manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                    recyclerView.setLayoutManager(manager);
+                                    recyclerView.setAdapter(adapter);
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    llMessageNull.setVisibility(View.GONE);
+                                }else {
+                                    recyclerView.setVisibility(View.GONE);
+                                    llMessageNull.setVisibility(View.VISIBLE);
+                                }
+                            }else {
+                                ToastUtil.showShort(context, jsonObject.optString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
 

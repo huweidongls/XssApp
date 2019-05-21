@@ -4,18 +4,30 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.JsonBean;
+import com.jingna.xssapp.bean.MemberAddressInfoBean;
+import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.GetJsonDataUtil;
+import com.jingna.xssapp.util.SpUtils;
+import com.jingna.xssapp.util.StringUtils;
+import com.jingna.xssapp.util.ToastUtil;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -29,16 +41,28 @@ public class InsertAddressActivity extends BaseActivity {
 
     @BindView(R.id.tv_address_details)
     TextView tvAddressDetails;
+    @BindView(R.id.et_name)
+    EditText etName;
+    @BindView(R.id.et_phone)
+    EditText etPhone;
+    @BindView(R.id.et_address)
+    EditText etAddress;
+    @BindView(R.id.iv_address_default)
+    ImageView ivAddressDefault;
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+
+    private String radio = "0";
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_address);
 
+        id = getIntent().getStringExtra("id");
         ButterKnife.bind(InsertAddressActivity.this);
         initData();
 
@@ -47,10 +71,45 @@ public class InsertAddressActivity extends BaseActivity {
     private void initData() {
 
         initJsonData();
+        if(!StringUtils.isEmpty(id)){
+            ViseHttp.POST(NetUrl.memberAddressInfoUrl)
+                    .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.memberAddressInfoUrl))
+                    .addParam("id", id)
+                    .request(new ACallback<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(data);
+                                if(jsonObject.optInt("code") == 200){
+                                    Gson gson = new Gson();
+                                    MemberAddressInfoBean infoBean = gson.fromJson(data, MemberAddressInfoBean.class);
+                                    etName.setText(infoBean.getObj().getName());
+                                    etPhone.setText(infoBean.getObj().getTel());
+                                    tvAddressDetails.setText(infoBean.getObj().getAddress());
+                                    etAddress.setText(infoBean.getObj().getDetailedaddress());
+                                    if(infoBean.getObj().getRadio().equals("0")){
+                                        Glide.with(context).load("#ffffff").into(ivAddressDefault);
+                                        radio = "0";
+                                    }else if(infoBean.getObj().getRadio().equals("1")){
+                                        Glide.with(context).load(R.mipmap.address_red2).into(ivAddressDefault);
+                                        radio = "1";
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFail(int errCode, String errMsg) {
+
+                        }
+                    });
+        }
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_address_details})
+    @OnClick({R.id.rl_back, R.id.rl_address_details, R.id.btn_save, R.id.rl_default})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.rl_back:
@@ -77,6 +136,89 @@ public class InsertAddressActivity extends BaseActivity {
         pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
                 pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
                 pvOptions.show();
+                break;
+            case R.id.btn_save:
+                String name = etName.getText().toString();
+                String phone = etPhone.getText().toString();
+                String address = tvAddressDetails.getText().toString();
+                String addressDetails = etAddress.getText().toString();
+                if(StringUtils.isEmpty(name)||StringUtils.isEmpty(phone)||StringUtils.isEmpty(address)||StringUtils.isEmpty(addressDetails)){
+                    ToastUtil.showShort(context, "数据不能为空");
+                }else if(!StringUtils.isPhoneNumberValid(phone)){
+                    ToastUtil.showShort(context, "请输入正确的手机号码");
+                }else {
+                    if(StringUtils.isEmpty(id)){
+                        ViseHttp.POST(NetUrl.add_MemberAddressUrl)
+                                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.add_MemberAddressUrl))
+                                .addParam("uid", SpUtils.getUid(context))
+                                .addParam("name", name)
+                                .addParam("tel", phone)
+                                .addParam("city", address)
+                                .addParam("detailedaddress", addressDetails)
+                                .addParam("radio", radio)
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if(jsonObject.optInt("code") == 200){
+                                                ToastUtil.showShort(context, jsonObject.optString("message"));
+                                                finish();
+                                            }else {
+                                                ToastUtil.showShort(context, jsonObject.optString("message"));
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+
+                                    }
+                                });
+                    }else {
+                        ViseHttp.POST(NetUrl.saveMemberAddressUrl)
+                                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.saveMemberAddressUrl))
+                                .addParam("uid", SpUtils.getUid(context))
+                                .addParam("name", name)
+                                .addParam("tel", phone)
+                                .addParam("city", address)
+                                .addParam("detailedaddress", addressDetails)
+                                .addParam("radio", radio)
+                                .addParam("id", id)
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String data) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if(jsonObject.optInt("code") == 200){
+                                                ToastUtil.showShort(context, jsonObject.optString("message"));
+                                                finish();
+                                            }else {
+                                                ToastUtil.showShort(context, jsonObject.optString("message"));
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+
+                                    }
+                                });
+                    }
+                }
+                break;
+            case R.id.rl_default:
+                if(radio.equals("0")){
+                    Glide.with(context).load(R.mipmap.address_red2).into(ivAddressDefault);
+                    radio = "1";
+                }else if(radio.equals("1")){
+                    Glide.with(context).load("#ffffff").into(ivAddressDefault);
+                    radio = "0";
+                }
                 break;
         }
     }
