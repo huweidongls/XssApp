@@ -35,11 +35,28 @@ public class FragmentService extends BaseFragment {
     private FenleiRightAdapter rightAdapter;
     private List<String> mList1;
 
+    private String id = "";
+    private String city = "";
+
+    public static FragmentService newInstance(String id, String city) {
+        FragmentService newFragment = new FragmentService();
+        Bundle bundle = new Bundle();
+        bundle.putString("id", id);
+        bundle.putString("city", city);
+        newFragment.setArguments(bundle);
+        return newFragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_service, null);
 
+        Bundle args = getArguments();
+        if (args != null) {
+            id = args.getString("id");
+            city = args.getString("city");
+        }
         ButterKnife.bind(this, view);
         initData();
 

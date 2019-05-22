@@ -43,13 +43,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".page.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".page.LoginActivity" />
         <activity android:name=".page.ForgotPwdActivity" />
         <activity android:name=".page.ForgotPwd1Activity" />
@@ -95,7 +96,9 @@
         <activity android:name=".page.PayBookingOrderActivity" />
         <activity android:name=".page.BookingOrderResultActivity" />
         <activity android:name=".page.ServiceDetailsActivity" />
-        <activity android:name=".page.OrderDetailsActivity"></activity>
+        <activity android:name=".page.OrderDetailsActivity" />
+        <activity android:name=".page.ServicePersonnelActivity" />
+        <activity android:name=".page.ServicePersonnelDetailsActivity" />
     </application>
 
 </manifest>

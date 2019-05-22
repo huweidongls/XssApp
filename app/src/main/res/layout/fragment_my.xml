@@ -65,6 +65,13 @@
 
             </RelativeLayout>
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_avatar"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="81dp"
+                android:layout_height="81dp" />
+
             <LinearLayout
                 android:id="@+id/ll_edit"
                 android:layout_marginBottom="11dp"

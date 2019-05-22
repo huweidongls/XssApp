@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/line"
-    tools:context="com.jingna.xssapp.page.MessageActivity">
+    tools:context="com.jingna.xssapp.page.ServicePersonnelActivity">
 
     <RelativeLayout
         style="@style/rl_top_bar">
@@ -22,31 +22,14 @@
         </RelativeLayout>
 
         <TextView
-            android:text="消息通知"
+            android:text="服务人员"
             style="@style/tv_top_title" />
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <ImageView
-            android:visibility="gone"
-            android:id="@+id/iv_message_null"
-            android:layout_marginTop="60dp"
-            android:adjustViewBounds="true"
-            android:src="@mipmap/message_null"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

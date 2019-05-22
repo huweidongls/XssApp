@@ -8,9 +8,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
@@ -48,6 +50,8 @@ public class FragmentMy extends BaseFragment {
     RelativeLayout rlCouponsNum;
     @BindView(R.id.tv_kefu_phone)
     TextView tvKefuPhone;
+    @BindView(R.id.iv_avatar)
+    ImageView ivAvatar;
 
     private String uid = "";
 
@@ -82,6 +86,7 @@ public class FragmentMy extends BaseFragment {
                                 Gson gson = new Gson();
                                 MemberInfoBean memberInfoBean = gson.fromJson(data, MemberInfoBean.class);
                                 tvKefuPhone.setText(memberInfoBean.getObj().getTel());
+                                Glide.with(getContext()).load(NetUrl.BASE_URL+memberInfoBean.getObj().getHeadimg()).into(ivAvatar);
                                 String num = memberInfoBean.getObj().getNum();
                                 new QBadgeView(getContext())
                                         .bindTarget(rlCouponsNum)
@@ -165,8 +170,12 @@ public class FragmentMy extends BaseFragment {
                 }
                 break;
             case R.id.rl_login:
-                intent.setClass(getContext(), LoginActivity.class);
-                startActivity(intent);
+                if(uid.equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+
+                }
                 break;
             case R.id.rl_coupons:
                 if(uid.equals("0")){

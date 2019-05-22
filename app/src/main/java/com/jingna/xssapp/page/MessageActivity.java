@@ -7,9 +7,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.MessageAdapter;
 import com.jingna.xssapp.base.BaseActivity;
+import com.jingna.xssapp.bean.MemberMessageBean;
+import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.SpUtils;
+import com.jingna.xssapp.util.ToastUtil;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +38,7 @@ public class MessageActivity extends BaseActivity {
     ImageView ivMessageNull;
 
     private MessageAdapter adapter;
-    private List<String> mList;
+    private List<MemberMessageBean.ObjBean> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +52,43 @@ public class MessageActivity extends BaseActivity {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        if(mList.size()>0){
-            adapter = new MessageAdapter(mList);
-            LinearLayoutManager manager = new LinearLayoutManager(context);
-            manager.setOrientation(LinearLayoutManager.VERTICAL);
-            recyclerView.setLayoutManager(manager);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setVisibility(View.VISIBLE);
-            ivMessageNull.setVisibility(View.GONE);
-        }else {
-            recyclerView.setVisibility(View.GONE);
-            ivMessageNull.setVisibility(View.VISIBLE);
-        }
+        ViseHttp.POST(NetUrl.member_messageUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.member_messageUrl))
+                .addParam("uid", SpUtils.getUid(context))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                MemberMessageBean bean = gson.fromJson(data, MemberMessageBean.class);
+                                mList = bean.getObj();
+                                if(mList.size()>0){
+                                    adapter = new MessageAdapter(mList);
+                                    LinearLayoutManager manager = new LinearLayoutManager(context);
+                                    manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                    recyclerView.setLayoutManager(manager);
+                                    recyclerView.setAdapter(adapter);
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    ivMessageNull.setVisibility(View.GONE);
+                                }else {
+                                    recyclerView.setVisibility(View.GONE);
+                                    ivMessageNull.setVisibility(View.VISIBLE);
+                                }
+                            }else {
+                                ToastUtil.showShort(context, jsonObject.optString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
 

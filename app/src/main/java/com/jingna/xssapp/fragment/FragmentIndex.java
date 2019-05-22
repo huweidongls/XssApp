@@ -1,39 +1,30 @@
 package com.jingna.xssapp.fragment;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.FragmentIndexTuijianAdapter;
 import com.jingna.xssapp.base.BaseFragment;
-import com.jingna.xssapp.bean.BaiduCityBean;
+import com.jingna.xssapp.bean.IndexBannerBean;
+import com.jingna.xssapp.bean.NewsListBean;
+import com.jingna.xssapp.bean.PriceListBean;
+import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.page.CityActivity;
+import com.jingna.xssapp.page.ServicePersonnelActivity;
 import com.jingna.xssapp.page.ZixunActivity;
-import com.jingna.xssapp.util.Gps;
-import com.jingna.xssapp.util.PositionUtil;
-import com.jingna.xssapp.util.ToastUtil;
+import com.jingna.xssapp.widget.ScrollTextView;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.youth.banner.Banner;
@@ -41,7 +32,6 @@ import com.youth.banner.Banner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,56 +51,156 @@ public class FragmentIndex extends BaseFragment {
     RecyclerView recyclerView;
     @BindView(R.id.tv_city)
     TextView tvCity;
+    @BindView(R.id.tv_zixun)
+    ScrollTextView tvZixun;
+    @BindView(R.id.iv1)
+    ImageView iv1;
+    @BindView(R.id.iv2)
+    ImageView iv2;
+    @BindView(R.id.iv3)
+    ImageView iv3;
+    @BindView(R.id.iv4)
+    ImageView iv4;
+    @BindView(R.id.iv5)
+    ImageView iv5;
 
     private FragmentIndexTuijianAdapter adapter;
     private List<String> mList;
 
-    private LocationManager locationManager;
-    private double latitude = 0.0;
-    private double longitude = 0.0;
-    private String latLongString = "";
+    private List<IndexBannerBean.ObjBean> bannerList;
+    private List<NewsListBean.ObjBean> newsList;
 
-    private Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    getCity();
-                    break;
-            }
-        }
+    private String id = "";
+    private String city = "";
 
-    };
+    public static FragmentIndex newInstance(String id, String city) {
+        FragmentIndex newFragment = new FragmentIndex();
+        Bundle bundle = new Bundle();
+        bundle.putString("id", id);
+        bundle.putString("city", city);
+        newFragment.setArguments(bundle);
+        return newFragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, null);
 
+        Bundle args = getArguments();
+        if (args != null) {
+            id = args.getString("id");
+            city = args.getString("city");
+        }
         ButterKnife.bind(this, view);
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         initData();
+        initBanner();
+        initZixun();
+        initFive();
 
         return view;
     }
 
+    private void initFive() {
+
+        ViseHttp.POST(NetUrl.priceListUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.priceListUrl))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                PriceListBean bean = gson.fromJson(data, PriceListBean.class);
+                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(0).getImgurl()).into(iv1);
+                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(1).getImgurl()).into(iv2);
+                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(2).getImgurl()).into(iv3);
+                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(3).getImgurl()).into(iv4);
+                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(4).getImgurl()).into(iv5);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
+    }
+
+    private void initZixun() {
+
+        ViseHttp.POST(NetUrl.newslistUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.newslistUrl))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                NewsListBean bean = gson.fromJson(data, NewsListBean.class);
+                                newsList = bean.getObj();
+                                List<String> list = new ArrayList<>();
+                                for (NewsListBean.ObjBean bean1 : newsList){
+                                    list.add(bean1.getTitle());
+                                }
+                                tvZixun.setList(list);
+                                tvZixun.startScroll();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
+    }
+
+    private void initBanner() {
+
+        ViseHttp.POST(NetUrl.indexBnnerListUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.indexBnnerListUrl))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                IndexBannerBean bannerBean = gson.fromJson(data, IndexBannerBean.class);
+                                bannerList = bannerBean.getObj();
+                                List<String> list = new ArrayList<>();
+                                for (IndexBannerBean.ObjBean bean : bannerList){
+                                    list.add(NetUrl.BASE_URL+bean.getImgurl());
+                                }
+                                init(banner, list);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
+    }
+
     private void initData() {
 
-        if (locationManager.getProvider(LocationManager.NETWORK_PROVIDER) != null || locationManager.getProvider(LocationManager.GPS_PROVIDER) != null) {
-            /*
-             * 进行定位
-             * provider:用于定位的locationProvider字符串:LocationManager.NETWORK_PROVIDER/LocationManager.GPS_PROVIDER
-             * minTime:时间更新间隔，单位：ms
-             * minDistance:位置刷新距离，单位：m
-             * listener:用于定位更新的监听者locationListener
-             */
-            getLocation();
-        } else {
-            //无法定位：1、提示用户打开定位服务；2、跳转到设置界面
-            ToastUtil.showShort(getContext(), "无法定位，请打开定位服务");
-            Intent i = new Intent();
-            i.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(i);
-        }
+        String[] s = city.split("-");
+        tvCity.setText(s[1]);
         mList = new ArrayList<>();
         mList.add("");
         mList.add("");
@@ -135,7 +225,7 @@ public class FragmentIndex extends BaseFragment {
 
     }
 
-    @OnClick({R.id.ll_city, R.id.ll_zixun, R.id.rl_more})
+    @OnClick({R.id.ll_city, R.id.ll_zixun, R.id.rl_more, R.id.iv_service_personnel})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -151,60 +241,16 @@ public class FragmentIndex extends BaseFragment {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.selectFragment(1);
                 break;
+            case R.id.iv_service_personnel:
+                intent.setClass(getContext(), ServicePersonnelActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
-    public void getLocation() {
-        new Thread() {
-            @Override
-            public void run() {
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    Log.i("123123", "没权限");
-                    return;
-                }
-                Log.i("123123", "有权限");
-                Location location = locationManager
-                        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                if (location != null) {
-                    Gps gps = PositionUtil.Gps84_To_bd09(location.getLatitude(), location.getLongitude());
-                    latitude = gps.getWgLat();
-                    longitude = gps.getWgLon();
-                    Log.e("123123", latitude+"----"+longitude);
-                    handler.sendEmptyMessage(1);
-                }
-            }
-        }.start();
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        tvZixun.stopScroll();
     }
-
-    public void getCity() {
-        try {
-            String url = "http://api.map.baidu.com/geocoder?output=json&location=" + latitude + "," + longitude + "&key=8dDPAEEMwPNZgxg4YhNUXqWoV8GNItO1";
-            ViseHttp.GET(url)
-                    .request(new ACallback<String>() {
-                        @Override
-                        public void onSuccess(String data) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(data);
-                                if (jsonObject.getString("status").equals("OK")) {
-                                    Gson gson = new Gson();
-                                    BaiduCityBean model = gson.fromJson(data, BaiduCityBean.class);
-                                    latLongString = model.getResult().getAddressComponent().getCity();
-                                    tvCity.setText(latLongString);
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFail(int errCode, String errMsg) {
-
-                        }
-                    });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }
