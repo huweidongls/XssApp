@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.bean.ServiceTypeListBean;
 
 import java.util.List;
 
@@ -22,15 +23,16 @@ import java.util.List;
 public class FenleiLeftAdapter extends RecyclerView.Adapter<FenleiLeftAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<ServiceTypeListBean.ObjBean> data;
     private int select = 0;
     private ItemClickListener listener;
+    private boolean isFrist = true;
 
     public void setListener(ItemClickListener listener) {
         this.listener = listener;
     }
 
-    public FenleiLeftAdapter(List<String> data) {
+    public FenleiLeftAdapter(List<ServiceTypeListBean.ObjBean> data) {
         this.data = data;
     }
 
@@ -44,6 +46,7 @@ public class FenleiLeftAdapter extends RecyclerView.Adapter<FenleiLeftAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.tv.setText(data.get(position).getTypename());
         if(position == select){
             holder.iv.setVisibility(View.VISIBLE);
 //            holder.tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
@@ -60,13 +63,18 @@ public class FenleiLeftAdapter extends RecyclerView.Adapter<FenleiLeftAdapter.Vi
             holder.tv.setTextColor(Color.parseColor("#333333"));
             holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
         }
+        if(isFrist){
+            select = 0;
+            listener.onItemClick(0);
+            isFrist = false;
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(select != position){
                     select = position;
                     notifyDataSetChanged();
-//                    listener.onItemClick(position);
+                    listener.onItemClick(position);
                 }
             }
         });

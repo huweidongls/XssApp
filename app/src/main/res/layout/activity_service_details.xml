@@ -52,6 +52,8 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:scaleType="fitXY"
+                android:id="@+id/iv_title"
                 android:src="#666666"
                 android:layout_width="match_parent"
                 android:layout_height="149dp" />
@@ -63,6 +65,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_marginTop="13dp"
                     android:layout_marginLeft="15dp"
                     android:textColor="@color/black_333333"
@@ -72,6 +75,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_text"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="15dp"
@@ -84,30 +88,47 @@
 
             </LinearLayout>
             
-            <RelativeLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_marginTop="7dp"
                 android:background="@color/white_ffffff"
                 android:layout_width="match_parent"
-                android:layout_height="45dp">
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:src="#F83030"
+                        android:layout_width="3dp"
+                        android:layout_height="21dp" />
+
+                    <TextView
+                        android:layout_marginLeft="11dp"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="17sp"
+                        android:textColor="@color/black_333333"
+                        android:text="参考耗时"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="11dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="17sp"
-                    android:text="参考耗时"
+                    android:id="@+id/tv_reference"
+                    android:layout_marginBottom="11dp"
+                    android:layout_marginRight="22dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginLeft="21dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                
-                <ImageView
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="14dp"
-                    android:src="@mipmap/right_6"
-                    android:layout_width="5dp"
-                    android:layout_height="10dp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_marginTop="7dp"
@@ -140,26 +161,18 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_marginRight="22dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="基础收费：3元/平米"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_marginRight="22dp"
+                <RelativeLayout
                     android:layout_marginBottom="11dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="深度清洁：5元/平米"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:descendantFocusability="blocksDescendants"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -195,33 +208,11 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_servicestandards"
+                    android:layout_marginBottom="11dp"
                     android:layout_marginRight="22dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="1.家电、厨电的内部清洁不在日常保洁的服务范围内，此类需求请参考家电清洗服务。"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_marginRight="22dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="2.窗外玻璃以及纱窗、百叶窗、防护窗清洗不在清洗范围内，此类需求请参考玻璃清洗服务。"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_marginRight="22dp"
-                    android:layout_marginBottom="11dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="3.窗帘、古董字画、宗教陈设、花草绿植、天花板及其附属品（灯具、吊顶等）不在清洁范围内。"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -259,23 +250,11 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_professionaltools"
+                    android:layout_marginBottom="11dp"
                     android:layout_marginRight="22dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="九色分区毛巾"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_marginRight="22dp"
-                    android:layout_marginBottom="11dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="静电除尘干巾"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -311,6 +290,15 @@
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_serviceguarantee"
+                    android:layout_marginBottom="11dp"
+                    android:layout_marginRight="22dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginLeft="21dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 

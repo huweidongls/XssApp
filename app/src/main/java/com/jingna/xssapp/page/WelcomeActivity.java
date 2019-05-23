@@ -157,8 +157,10 @@ public class WelcomeActivity extends BaseActivity {
                                                             finish();
                                                         }else {
                                                             ToastUtil.showShort(context, "当前城市未开通");
+                                                            String[] s = latLongString.split("-");
                                                             Intent intent = new Intent();
                                                             intent.setClass(context, CityActivity.class);
+                                                            intent.putExtra("city", s[1]);
                                                             startActivity(intent);
                                                             finish();
                                                         }

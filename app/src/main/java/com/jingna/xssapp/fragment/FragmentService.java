@@ -8,10 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.FenleiLeftAdapter;
 import com.jingna.xssapp.adapter.FenleiRightAdapter;
 import com.jingna.xssapp.base.BaseFragment;
+import com.jingna.xssapp.bean.ServiceTypeAndServiceListBean;
+import com.jingna.xssapp.bean.ServiceTypeListBean;
+import com.jingna.xssapp.net.NetUrl;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +40,9 @@ public class FragmentService extends BaseFragment {
     RecyclerView rvRight;
 
     private FenleiLeftAdapter leftAdapter;
-    private List<String> mList;
+    private List<ServiceTypeListBean.ObjBean> mList;
     private FenleiRightAdapter rightAdapter;
-    private List<String> mList1;
+    private List<ServiceTypeAndServiceListBean.ObjBean> mList1;
 
     private String id = "";
     private String city = "";
@@ -65,27 +74,67 @@ public class FragmentService extends BaseFragment {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        leftAdapter = new FenleiLeftAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvFenlei.setLayoutManager(manager);
-        rvFenlei.setAdapter(leftAdapter);
+        ViseHttp.POST(NetUrl.serviceTypeListUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.serviceTypeListUrl))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                final Gson gson = new Gson();
+                                ServiceTypeListBean bean = gson.fromJson(data, ServiceTypeListBean.class);
+                                mList = bean.getObj();
+                                leftAdapter = new FenleiLeftAdapter(mList);
+                                LinearLayoutManager manager = new LinearLayoutManager(getContext());
+                                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                rvFenlei.setLayoutManager(manager);
+                                rvFenlei.setAdapter(leftAdapter);
+                                leftAdapter.setListener(new FenleiLeftAdapter.ItemClickListener() {
+                                    @Override
+                                    public void onItemClick(int i) {
+                                        ViseHttp.POST(NetUrl.serviceTypeAndServiceListUrl)
+                                                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.serviceTypeAndServiceListUrl))
+                                                .addParam("city", id)
+                                                .addParam("sid", mList.get(i).getId())
+                                                .request(new ACallback<String>() {
+                                                    @Override
+                                                    public void onSuccess(String data) {
+                                                        try {
+                                                            JSONObject jsonObject1 = new JSONObject(data);
+                                                            if(jsonObject1.optInt("code") == 200){
+                                                                Gson gson1 = new Gson();
+                                                                ServiceTypeAndServiceListBean bean1 = gson1.fromJson(data, ServiceTypeAndServiceListBean.class);
+                                                                mList1 = bean1.getObj();
+                                                                rightAdapter = new FenleiRightAdapter(mList1);
+                                                                LinearLayoutManager manager1 = new LinearLayoutManager(getContext());
+                                                                manager1.setOrientation(LinearLayoutManager.VERTICAL);
+                                                                rvRight.setLayoutManager(manager1);
+                                                                rvRight.setAdapter(rightAdapter);
+                                                            }
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
 
-        mList1 = new ArrayList<>();
-        mList1.add("");
-        mList1.add("");
-        mList1.add("");
-        rightAdapter = new FenleiRightAdapter(mList1);
-        LinearLayoutManager manager1 = new LinearLayoutManager(getContext());
-        manager1.setOrientation(LinearLayoutManager.VERTICAL);
-        rvRight.setLayoutManager(manager1);
-        rvRight.setAdapter(rightAdapter);
+                                                    @Override
+                                                    public void onFail(int errCode, String errMsg) {
+
+                                                    }
+                                                });
+                                    }
+                                });
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
 }

@@ -8,35 +8,35 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jingna.xssapp.R;
-import com.jingna.xssapp.bean.OpenCityListBean;
+import com.jingna.xssapp.bean.WokerContentBean;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2019/5/14.
+ * Created by Administrator on 2019/5/23.
  */
 
-public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
+public class ServicePersonnelDetailsTrainAdapter extends RecyclerView.Adapter<ServicePersonnelDetailsTrainAdapter.ViewHolder> {
 
     private Context context;
-    private List<OpenCityListBean.ObjBean> data;
+    private List<WokerContentBean.ObjBean.TrainBean> data;
 
-    public CityAdapter(List<OpenCityListBean.ObjBean> data) {
+    public ServicePersonnelDetailsTrainAdapter(List<WokerContentBean.ObjBean.TrainBean> data) {
         this.data = data;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_city, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_service_personnel_details_train, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String[] s = data.get(position).getCity_area().split("-");
-        holder.tvTitle.setText(s[1]);
+        holder.tvName.setText(data.get(position).getOrganizationname());
+        holder.tvTime.setText(data.get(position).getStart_time()+"-"+data.get(position).getEnd_time());
     }
 
     @Override
@@ -46,11 +46,13 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tvTitle;
+        private TextView tvName;
+        private TextView tvTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvTime = itemView.findViewById(R.id.tv_time);
         }
     }
 

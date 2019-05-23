@@ -7,9 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.bean.WokerListBean;
+import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.page.ServicePersonnelDetailsActivity;
 
 import java.util.ArrayList;
@@ -22,9 +27,9 @@ import java.util.List;
 public class ServicePersonnelAdapter extends RecyclerView.Adapter<ServicePersonnelAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<WokerListBean.ObjBean> data;
 
-    public ServicePersonnelAdapter(List<String> data) {
+    public ServicePersonnelAdapter(List<WokerListBean.ObjBean> data) {
         this.data = data;
     }
 
@@ -37,7 +42,13 @@ public class ServicePersonnelAdapter extends RecyclerView.Adapter<ServicePersonn
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getHeadimg()).into(holder.ivAvatar);
+        holder.tvName.setText(data.get(position).getName());
+        holder.tvServiceNum.setText("服务次数："+data.get(position).getServicenum()+"次");
+        holder.tvAge.setText(data.get(position).getAge()+"岁");
+
         List<String> list = new ArrayList<>();
         list.add("");
         list.add("");
@@ -52,6 +63,7 @@ public class ServicePersonnelAdapter extends RecyclerView.Adapter<ServicePersonn
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, ServicePersonnelDetailsActivity.class);
+                intent.putExtra("id", data.get(position).getId());
                 context.startActivity(intent);
             }
         });
@@ -67,11 +79,19 @@ public class ServicePersonnelAdapter extends RecyclerView.Adapter<ServicePersonn
 
         private RecyclerView recyclerView;
         private LinearLayout ll;
+        private ImageView ivAvatar;
+        private TextView tvName;
+        private TextView tvAge;
+        private TextView tvServiceNum;
 
         public ViewHolder(View itemView) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.rv);
             ll = itemView.findViewById(R.id.ll);
+            ivAvatar = itemView.findViewById(R.id.iv_avatar);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvAge = itemView.findViewById(R.id.tv_age);
+            tvServiceNum = itemView.findViewById(R.id.tv_service_num);
         }
     }
 

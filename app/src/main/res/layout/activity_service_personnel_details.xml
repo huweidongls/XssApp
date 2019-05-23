@@ -45,6 +45,7 @@
                 android:layout_height="97dp">
 
                 <ImageView
+                    android:id="@+id/iv_avatar"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="14dp"
                     android:src="@mipmap/message_details_avatar"
@@ -66,17 +67,17 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/tv_name"
                             android:textColor="@color/black_333333"
                             android:textSize="17sp"
-                            android:text="杨阿姨"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
                         <TextView
+                            android:id="@+id/tv_age"
                             android:layout_marginLeft="10dp"
                             android:textColor="@color/black_333333"
                             android:textSize="13sp"
-                            android:text="48岁"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -89,10 +90,10 @@
                         android:layout_height="17dp"/>
 
                     <TextView
+                        android:id="@+id/tv_service_num"
                         android:layout_marginTop="6dp"
                         android:textColor="@color/black_333333"
                         android:textSize="13sp"
-                        android:text="服务次数：48次"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -139,43 +140,11 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_essentialinformation"
+                    android:layout_marginBottom="11dp"
                     android:layout_marginRight="22dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="工作编号：5646331"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_marginRight="22dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="证件号码：125**********1212"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_marginRight="22dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="工作年限：3年"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_marginRight="22dp"
-                    android:layout_marginBottom="11dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="         籍贯：黑龙江·哈尔滨"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -258,26 +227,18 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_marginRight="22dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="九色分区毛巾"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:descendantFocusability="blocksDescendants"
+                    android:layout_marginBottom="14dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_marginRight="22dp"
-                    android:layout_marginBottom="11dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginLeft="21dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="13sp"
-                    android:text="静电除尘干巾"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_train"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -306,60 +267,20 @@
                         android:layout_gravity="center_vertical"
                         android:textSize="17sp"
                         android:textColor="@color/black_333333"
-                        android:text="服务保障"
+                        android:text="资质证明"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="7dp"
-                android:background="@color/white_ffffff"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:src="#F83030"
-                        android:layout_width="3dp"
-                        android:layout_height="21dp" />
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_marginLeft="11dp"
-                        android:layout_gravity="center_vertical"
-                        android:textSize="17sp"
-                        android:textColor="@color/black_333333"
-                        android:text="用户评价（180）"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="14dp"
-                        android:src="@mipmap/right_6"
-                        android:layout_width="5dp"
-                        android:layout_height="10dp" />
-
-                </LinearLayout>
-
                 <RelativeLayout
                     android:descendantFocusability="blocksDescendants"
+                    android:layout_marginBottom="7dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv"
+                        android:id="@+id/rv_img"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 

@@ -18,6 +18,7 @@ import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.FragmentIndexTuijianAdapter;
 import com.jingna.xssapp.base.BaseFragment;
 import com.jingna.xssapp.bean.IndexBannerBean;
+import com.jingna.xssapp.bean.IndexServiceListBean;
 import com.jingna.xssapp.bean.NewsListBean;
 import com.jingna.xssapp.bean.PriceListBean;
 import com.jingna.xssapp.net.NetUrl;
@@ -65,7 +66,7 @@ public class FragmentIndex extends BaseFragment {
     ImageView iv5;
 
     private FragmentIndexTuijianAdapter adapter;
-    private List<String> mList;
+    private List<IndexServiceListBean.ObjBean> mList;
 
     private List<IndexBannerBean.ObjBean> bannerList;
     private List<NewsListBean.ObjBean> newsList;
@@ -201,27 +202,39 @@ public class FragmentIndex extends BaseFragment {
 
         String[] s = city.split("-");
         tvCity.setText(s[1]);
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        adapter = new FragmentIndexTuijianAdapter(mList);
-        GridLayoutManager manager = new GridLayoutManager(getContext(), 3){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+
+        ViseHttp.POST(NetUrl.indexServiceListUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.indexServiceListUrl))
+                .addParam("city_id", id)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                IndexServiceListBean bean = gson.fromJson(data, IndexServiceListBean.class);
+                                mList = bean.getObj();
+                                adapter = new FragmentIndexTuijianAdapter(mList);
+                                GridLayoutManager manager = new GridLayoutManager(getContext(), 3){
+                                    @Override
+                                    public boolean canScrollVertically() {
+                                        return false;
+                                    }
+                                };
+                                recyclerView.setLayoutManager(manager);
+                                recyclerView.setAdapter(adapter);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
 
@@ -230,7 +243,9 @@ public class FragmentIndex extends BaseFragment {
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.ll_city:
+                String[] s = city.split("-");
                 intent.setClass(getContext(), CityActivity.class);
+                intent.putExtra("city", s[1]);
                 startActivity(intent);
                 break;
             case R.id.ll_zixun:
@@ -243,6 +258,7 @@ public class FragmentIndex extends BaseFragment {
                 break;
             case R.id.iv_service_personnel:
                 intent.setClass(getContext(), ServicePersonnelActivity.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
                 break;
         }

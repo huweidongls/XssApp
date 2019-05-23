@@ -8,35 +8,34 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jingna.xssapp.R;
-import com.jingna.xssapp.bean.OpenCityListBean;
+import com.jingna.xssapp.bean.ServiceContentBean;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2019/5/14.
+ * Created by Administrator on 2019/5/23.
  */
 
-public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
+public class ServiceDetailsPriceAdapter extends RecyclerView.Adapter<ServiceDetailsPriceAdapter.ViewHolder> {
 
     private Context context;
-    private List<OpenCityListBean.ObjBean> data;
+    private List<ServiceContentBean.ObjBean.PriceBean> data;
 
-    public CityAdapter(List<OpenCityListBean.ObjBean> data) {
+    public ServiceDetailsPriceAdapter(List<ServiceContentBean.ObjBean.PriceBean> data) {
         this.data = data;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_city, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_service_details_price, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String[] s = data.get(position).getCity_area().split("-");
-        holder.tvTitle.setText(s[1]);
+        holder.tv.setText(data.get(position).getInfo());
     }
 
     @Override
@@ -46,11 +45,11 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tvTitle;
+        private TextView tv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tv_title);
+            tv = itemView.findViewById(R.id.tv);
         }
     }
 

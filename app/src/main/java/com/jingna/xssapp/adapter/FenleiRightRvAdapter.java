@@ -6,8 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.bean.ServiceTypeAndServiceListBean;
+import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.page.ServiceDetailsActivity;
 
 import java.util.List;
@@ -19,9 +24,9 @@ import java.util.List;
 public class FenleiRightRvAdapter extends RecyclerView.Adapter<FenleiRightRvAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<ServiceTypeAndServiceListBean.ObjBean.ServiceBean> data;
 
-    public FenleiRightRvAdapter(List<String> data) {
+    public FenleiRightRvAdapter(List<ServiceTypeAndServiceListBean.ObjBean.ServiceBean> data) {
         this.data = data;
     }
 
@@ -34,12 +39,17 @@ public class FenleiRightRvAdapter extends RecyclerView.Adapter<FenleiRightRvAdap
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getImgurl()).into(holder.iv);
+        holder.tvName.setText(data.get(position).getServicename());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, ServiceDetailsActivity.class);
+                intent.putExtra("id", data.get(position).getId());
                 context.startActivity(intent);
 
             }
@@ -53,8 +63,13 @@ public class FenleiRightRvAdapter extends RecyclerView.Adapter<FenleiRightRvAdap
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        private ImageView iv;
+        private TextView tvName;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            iv = itemView.findViewById(R.id.iv);
+            tvName = itemView.findViewById(R.id.tv_name);
         }
     }
 

@@ -11,11 +11,13 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/iv_title"
             android:src="@mipmap/message_details_avatar"
             android:layout_width="104dp"
             android:layout_height="104dp" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:textSize="13sp"

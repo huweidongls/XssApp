@@ -5,38 +5,39 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.jingna.xssapp.R;
-import com.jingna.xssapp.bean.OpenCityListBean;
+import com.jingna.xssapp.bean.WokerContentBean;
+import com.jingna.xssapp.net.NetUrl;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2019/5/14.
+ * Created by Administrator on 2019/5/23.
  */
 
-public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
+public class ServicePersonnelDetailsImgAdapter extends RecyclerView.Adapter<ServicePersonnelDetailsImgAdapter.ViewHolder> {
 
     private Context context;
-    private List<OpenCityListBean.ObjBean> data;
+    private List<WokerContentBean.ObjBean.ImgBean> data;
 
-    public CityAdapter(List<OpenCityListBean.ObjBean> data) {
+    public ServicePersonnelDetailsImgAdapter(List<WokerContentBean.ObjBean.ImgBean> data) {
         this.data = data;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_city, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_service_personnel_details_img, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String[] s = data.get(position).getCity_area().split("-");
-        holder.tvTitle.setText(s[1]);
+        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getImgurl()).into(holder.iv);
     }
 
     @Override
@@ -46,11 +47,11 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tvTitle;
+        private ImageView iv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tv_title);
+            iv = itemView.findViewById(R.id.iv);
         }
     }
 

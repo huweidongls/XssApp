@@ -44,4 +44,18 @@ public class NetUrl {
     public static String priceListUrl = "index.php/api/Index/Home/PriceList";
     //定位接口
     public static String locationUrl = "index.php/api/Index/Home/Location";
+    //首页推荐服务
+    public static String indexServiceListUrl = "index.php/api/Index/Home/IndexServiceList";
+    //已开通城市列表
+    public static String openCityListUrl = "index.php/api/Index/Home/OpenCityList";
+    //工人列表
+    public static String wokerListUrl = "index.php/api/Index/Home/WokerList";
+    //工人详情
+    public static String wokerContentUrl = "index.php/api/Index/Home/WokerContent";
+    //服务类别列表
+    public static String serviceTypeListUrl = "index.php/api/Index/Home/ServiceTypeList";
+    //获取服务和二级类别
+    public static String serviceTypeAndServiceListUrl = "index.php/api/Index/Home/ServiceTypeAndServiceList";
+    //服务详情
+    public static String serviceContentUrl = "index.php/api/Index/Home/ServiceContent";
 }
