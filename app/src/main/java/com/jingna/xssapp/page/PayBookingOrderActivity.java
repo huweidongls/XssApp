@@ -5,11 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseActivity;
+import com.jingna.xssapp.bean.WxPayBean;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.Logger;
+import com.jingna.xssapp.wxapi.WXShare;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -21,18 +31,22 @@ public class PayBookingOrderActivity extends BaseActivity {
     private Context context = PayBookingOrderActivity.this;
 
     private Map<String, String> map;
+    private WXShare wxShare;
+    private IWXAPI api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_booking_order);
 
+        api = WXAPIFactory.createWXAPI(PayBookingOrderActivity.this, null);
+        api.registerApp(WXShare.APP_ID);
         map = (Map<String, String>) getIntent().getSerializableExtra("map");
         ButterKnife.bind(PayBookingOrderActivity.this);
 
     }
 
-    private void initData() {
+    private void pay() {
 
         ViseHttp.POST(NetUrl.order_insertUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.order_insertUrl))
@@ -40,7 +54,17 @@ public class PayBookingOrderActivity extends BaseActivity {
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
-
+                        try {
+                            Logger.e("123123", data);
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                WxPayBean payBean = gson.fromJson(data, WxPayBean.class);
+                                wxPay(payBean.getObj());
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
@@ -59,11 +83,25 @@ public class PayBookingOrderActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_to_pay:
-                initData();
+                pay();
 //                intent.setClass(context, BookingOrderResultActivity.class);
 //                startActivity(intent);
                 break;
         }
+    }
+
+    public void wxPay(WxPayBean.ObjBean model) {
+        api.registerApp(WXShare.APP_ID);
+        PayReq req = new PayReq();
+        req.appId = model.getAppId();
+        req.partnerId = model.getPartnerId();
+        req.prepayId = model.getPrepayId();
+        req.nonceStr = model.getNonceStr();
+        req.timeStamp = model.getTimestamp() + "";
+        req.packageValue = "Sign=WXPay";
+        req.sign = model.getSign();
+        req.extData = "app data";
+        api.sendReq(req);
     }
 
 }

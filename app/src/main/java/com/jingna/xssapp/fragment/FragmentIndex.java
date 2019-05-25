@@ -80,9 +80,6 @@ public class FragmentIndex extends BaseFragment {
     private String id = "";
     private String city = "";
 
-    private WXShare wxShare;
-    private IWXAPI api;
-
     public static FragmentIndex newInstance(String id, String city) {
         FragmentIndex newFragment = new FragmentIndex();
         Bundle bundle = new Bundle();
@@ -97,7 +94,6 @@ public class FragmentIndex extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, null);
 
-        api = WXAPIFactory.createWXAPI(getContext(), null);
         Bundle args = getArguments();
         if (args != null) {
             id = args.getString("id");
@@ -323,20 +319,6 @@ public class FragmentIndex extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         tvZixun.stopScroll();
-    }
-
-    public void wxPay(WxPayBean model) {
-        api.registerApp(WXShare.APP_ID);
-        PayReq req = new PayReq();
-        req.appId = model.getAppId();
-        req.partnerId = model.getMchId();
-        req.prepayId = model.getPrepayId();
-        req.nonceStr = model.getNonceStr();
-        req.timeStamp = model.getTimeStamp() + "";
-        req.packageValue = "Sign=WXPay";
-        req.sign = model.getPaySign();
-        req.extData = "app data";
-        api.sendReq(req);
     }
 
 }

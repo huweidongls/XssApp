@@ -7,6 +7,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,8 @@ import com.jingna.xssapp.bean.MemberAddressListBean;
 import com.jingna.xssapp.bean.PreAboutBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.SpUtils;
+import com.jingna.xssapp.util.StringUtils;
+import com.jingna.xssapp.util.ToastUtil;
 import com.jingna.xssapp.widget.CustomDatePicker;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -131,6 +135,22 @@ public class BookingOrderActivity extends BaseActivity {
 
     private void initData() {
 
+        etNum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         tvServiceName.setText(name);
         selectNumView = LayoutInflater.from(context).inflate(R.layout.popupwindow_booking_order_num, null);
         rvSelectNum = selectNumView.findViewById(R.id.rv);
@@ -210,21 +230,26 @@ public class BookingOrderActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_sure:
-                int serviceNum = Integer.valueOf(etNum.getText().toString());
-                double price = jichuPrice+(numMoney*serviceNum)-couponsPrice;
-                Map<String, String> map = new LinkedHashMap<>();
-                map.put("uid", SpUtils.getUid(context));
-                map.put("fid", id);
-                map.put("cid", addressId);
-                map.put("ptime", tvTime.getText().toString());
-                map.put("price", price+"");
-                map.put("remarks", etMoreNote.getText().toString());
-                map.put("number", etNum.getText().toString());
-                map.put("specid", specid);
-                map.put("dis_id", couponsId);
-                intent.setClass(context, PayBookingOrderActivity.class);
-                intent.putExtra("map", (Serializable) map);
-                startActivity(intent);
+                if(StringUtils.isEmpty(addressId)||StringUtils.isEmpty(tvTime.getText().toString())||StringUtils.isEmpty(etNum.getText().toString())
+                        ||StringUtils.isEmpty(specid)){
+                    ToastUtil.showShort(context, "请完善信息后提交");
+                }else {
+                    int serviceNum = Integer.valueOf(etNum.getText().toString());
+                    double price = jichuPrice+(numMoney*serviceNum)-couponsPrice;
+                    Map<String, String> map = new LinkedHashMap<>();
+                    map.put("uid", SpUtils.getUid(context));
+                    map.put("fid", id);
+                    map.put("cid", addressId);
+                    map.put("ptime", tvTime.getText().toString());
+                    map.put("price", price+"");
+                    map.put("remarks", etMoreNote.getText().toString()+"");
+                    map.put("number", etNum.getText().toString());
+                    map.put("specid", specid);
+                    map.put("dis_id", couponsId);
+                    intent.setClass(context, PayBookingOrderActivity.class);
+                    intent.putExtra("map", (Serializable) map);
+                    startActivity(intent);
+                }
                 break;
             case R.id.rl_jianhao:
                 if(personNum > 1){

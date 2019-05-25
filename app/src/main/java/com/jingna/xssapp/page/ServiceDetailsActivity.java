@@ -19,6 +19,7 @@ import com.jingna.xssapp.bean.ServiceContentBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.Base64Utils;
 import com.jingna.xssapp.util.HtmlFromUtils;
+import com.jingna.xssapp.util.SpUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
@@ -150,10 +151,15 @@ public class ServiceDetailsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_sure:
-                intent.setClass(context, BookingOrderActivity.class);
-                intent.putExtra("id", bean.getObj().getId());
-                intent.putExtra("name", bean.getObj().getServicename());
-                startActivity(intent);
+                if(SpUtils.getUid(context).equals("0")){
+                    intent.setClass(context, LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(context, BookingOrderActivity.class);
+                    intent.putExtra("id", bean.getObj().getId());
+                    intent.putExtra("name", bean.getObj().getServicename());
+                    startActivity(intent);
+                }
                 break;
         }
     }

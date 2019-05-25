@@ -1,5 +1,7 @@
 package com.jingna.xssapp.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Administrator on 2019/4/8.
  */
@@ -7,76 +9,123 @@ package com.jingna.xssapp.bean;
 public class WxPayBean {
 
     /**
-     * appId : wx859554b4226ad6fa
-     * mchId : 1530281181
-     * timeStamp : 1554705868
-     * nonceStr : Eq4fYFNnPoDxtxMN
-     * prepayId : wx081446239178073430f980b80526737257
-     * signType : MD5
-     * paySign : 44638657D2A3587C08F5F948DB8ED4FC
+     * code : 200
+     * message : 生成订单成功!
+     * obj : {"appId":"wxc3bb9837cc1ebb6d","partnerId":"1530281181","prepayId":"wx251721525264358ebe9114036322217300","package":"Sign=WXPay","nonceStr":"0fztGejq7Sf39F0v","timestamp":1558776112,"sign":"E57491C3BA785769880431004AB17FBB","pay_type":0}
      */
 
-    private String appId;
-    private String mchId;
-    private String timeStamp;
-    private String nonceStr;
-    private String prepayId;
-    private String signType;
-    private String paySign;
+    private int code;
+    private String message;
+    private ObjBean obj;
 
-    public String getAppId() {
-        return appId;
+    public int getCode() {
+        return code;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public String getMchId() {
-        return mchId;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMchId(String mchId) {
-        this.mchId = mchId;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public ObjBean getObj() {
+        return obj;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setObj(ObjBean obj) {
+        this.obj = obj;
     }
 
-    public String getNonceStr() {
-        return nonceStr;
-    }
+    public static class ObjBean {
+        /**
+         * appId : wxc3bb9837cc1ebb6d
+         * partnerId : 1530281181
+         * prepayId : wx251721525264358ebe9114036322217300
+         * package : Sign=WXPay
+         * nonceStr : 0fztGejq7Sf39F0v
+         * timestamp : 1558776112
+         * sign : E57491C3BA785769880431004AB17FBB
+         * pay_type : 0
+         */
 
-    public void setNonceStr(String nonceStr) {
-        this.nonceStr = nonceStr;
-    }
+        private String appId;
+        private String partnerId;
+        private String prepayId;
+        @SerializedName("package")
+        private String packageX;
+        private String nonceStr;
+        private int timestamp;
+        private String sign;
+        private int pay_type;
 
-    public String getPrepayId() {
-        return prepayId;
-    }
+        public String getAppId() {
+            return appId;
+        }
 
-    public void setPrepayId(String prepayId) {
-        this.prepayId = prepayId;
-    }
+        public void setAppId(String appId) {
+            this.appId = appId;
+        }
 
-    public String getSignType() {
-        return signType;
-    }
+        public String getPartnerId() {
+            return partnerId;
+        }
 
-    public void setSignType(String signType) {
-        this.signType = signType;
-    }
+        public void setPartnerId(String partnerId) {
+            this.partnerId = partnerId;
+        }
 
-    public String getPaySign() {
-        return paySign;
-    }
+        public String getPrepayId() {
+            return prepayId;
+        }
 
-    public void setPaySign(String paySign) {
-        this.paySign = paySign;
+        public void setPrepayId(String prepayId) {
+            this.prepayId = prepayId;
+        }
+
+        public String getPackageX() {
+            return packageX;
+        }
+
+        public void setPackageX(String packageX) {
+            this.packageX = packageX;
+        }
+
+        public String getNonceStr() {
+            return nonceStr;
+        }
+
+        public void setNonceStr(String nonceStr) {
+            this.nonceStr = nonceStr;
+        }
+
+        public int getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(int timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public String getSign() {
+            return sign;
+        }
+
+        public void setSign(String sign) {
+            this.sign = sign;
+        }
+
+        public int getPay_type() {
+            return pay_type;
+        }
+
+        public void setPay_type(int pay_type) {
+            this.pay_type = pay_type;
+        }
     }
 }
