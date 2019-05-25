@@ -21,11 +21,17 @@ import com.jingna.xssapp.bean.IndexBannerBean;
 import com.jingna.xssapp.bean.IndexServiceListBean;
 import com.jingna.xssapp.bean.NewsListBean;
 import com.jingna.xssapp.bean.PriceListBean;
+import com.jingna.xssapp.bean.WxPayBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.page.CityActivity;
+import com.jingna.xssapp.page.ServiceDetailsActivity;
 import com.jingna.xssapp.page.ServicePersonnelActivity;
 import com.jingna.xssapp.page.ZixunActivity;
 import com.jingna.xssapp.widget.ScrollTextView;
+import com.jingna.xssapp.wxapi.WXShare;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.youth.banner.Banner;
@@ -74,6 +80,9 @@ public class FragmentIndex extends BaseFragment {
     private String id = "";
     private String city = "";
 
+    private WXShare wxShare;
+    private IWXAPI api;
+
     public static FragmentIndex newInstance(String id, String city) {
         FragmentIndex newFragment = new FragmentIndex();
         Bundle bundle = new Bundle();
@@ -88,6 +97,7 @@ public class FragmentIndex extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, null);
 
+        api = WXAPIFactory.createWXAPI(getContext(), null);
         Bundle args = getArguments();
         if (args != null) {
             id = args.getString("id");
@@ -113,12 +123,57 @@ public class FragmentIndex extends BaseFragment {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.optInt("code") == 200){
                                 Gson gson = new Gson();
-                                PriceListBean bean = gson.fromJson(data, PriceListBean.class);
+                                final PriceListBean bean = gson.fromJson(data, PriceListBean.class);
                                 Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(0).getImgurl()).into(iv1);
                                 Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(1).getImgurl()).into(iv2);
                                 Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(2).getImgurl()).into(iv3);
                                 Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(3).getImgurl()).into(iv4);
                                 Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(4).getImgurl()).into(iv5);
+                                iv1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                        intent.putExtra("id", bean.getObj().get(0).getServerid());
+                                        startActivity(intent);
+                                    }
+                                });
+                                iv2.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                        intent.putExtra("id", bean.getObj().get(1).getServerid());
+                                        startActivity(intent);
+                                    }
+                                });
+                                iv3.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                        intent.putExtra("id", bean.getObj().get(2).getServerid());
+                                        startActivity(intent);
+                                    }
+                                });
+                                iv4.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                        intent.putExtra("id", bean.getObj().get(3).getServerid());
+                                        startActivity(intent);
+                                    }
+                                });
+                                iv5.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                        intent.putExtra("id", bean.getObj().get(4).getServerid());
+                                        startActivity(intent);
+                                    }
+                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -269,4 +324,19 @@ public class FragmentIndex extends BaseFragment {
         super.onDestroy();
         tvZixun.stopScroll();
     }
+
+    public void wxPay(WxPayBean model) {
+        api.registerApp(WXShare.APP_ID);
+        PayReq req = new PayReq();
+        req.appId = model.getAppId();
+        req.partnerId = model.getMchId();
+        req.prepayId = model.getPrepayId();
+        req.nonceStr = model.getNonceStr();
+        req.timeStamp = model.getTimeStamp() + "";
+        req.packageValue = "Sign=WXPay";
+        req.sign = model.getPaySign();
+        req.extData = "app data";
+        api.sendReq(req);
+    }
+
 }

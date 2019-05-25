@@ -2,55 +2,56 @@ package com.jingna.xssapp.page;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.adapter.ZixunAdapter;
 import com.jingna.xssapp.base.BaseActivity;
-import com.jingna.xssapp.bean.NewsContentBean;
+import com.jingna.xssapp.bean.ZixunListBean;
 import com.jingna.xssapp.net.NetUrl;
-import com.jingna.xssapp.util.Base64Utils;
-import com.jingna.xssapp.util.HtmlFromUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ZixunDetailsActivity extends BaseActivity {
+public class SearchZixunActivity extends BaseActivity {
 
-    private Context context = ZixunDetailsActivity.this;
+    private Context context = SearchZixunActivity.this;
 
-    @BindView(R.id.tv)
-    TextView tv;
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.tv_time)
-    TextView tvTime;
+    @BindView(R.id.rv)
+    RecyclerView recyclerView;
 
-    private String id = "";
+    private ZixunAdapter adapter;
+    private List<ZixunListBean.ObjBean> mList;
+
+    private String text = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zixun_details);
+        setContentView(R.layout.activity_search_zixun);
 
-        id = getIntent().getStringExtra("id");
-        ButterKnife.bind(ZixunDetailsActivity.this);
+        text = getIntent().getStringExtra("text");
+        ButterKnife.bind(SearchZixunActivity.this);
         initData();
 
     }
 
     private void initData() {
 
-        ViseHttp.POST(NetUrl.news_contentUrl)
-                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.news_contentUrl))
-                .addParam("newsid", id)
+        ViseHttp.POST(NetUrl.seachNewsUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.seachNewsUrl))
+                .addParam("text", text)
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -58,12 +59,13 @@ public class ZixunDetailsActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.optInt("code") == 200){
                                 Gson gson = new Gson();
-                                NewsContentBean bean = gson.fromJson(data, NewsContentBean.class);
-                                tvTitle.setText(bean.getObj().getTitle());
-                                tvTime.setText(bean.getObj().getAddtime());
-                                String content = bean.getObj().getContent();
-                                content = Base64Utils.setDecrypt(content);
-                                HtmlFromUtils.setTextFromHtml(ZixunDetailsActivity.this, tv, content);
+                                ZixunListBean bean = gson.fromJson(data, ZixunListBean.class);
+                                mList = bean.getObj();
+                                adapter = new ZixunAdapter(mList);
+                                LinearLayoutManager manager = new LinearLayoutManager(context);
+                                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                recyclerView.setLayoutManager(manager);
+                                recyclerView.setAdapter(adapter);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

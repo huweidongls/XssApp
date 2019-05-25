@@ -52,6 +52,8 @@ public class FragmentMy extends BaseFragment {
     TextView tvKefuPhone;
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
+    @BindView(R.id.rl_login)
+    RelativeLayout rlLogin;
 
     private String uid = "";
 
@@ -61,7 +63,6 @@ public class FragmentMy extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_my, null);
 
         ButterKnife.bind(this, view);
-        initData();
 
         return view;
     }
@@ -70,6 +71,7 @@ public class FragmentMy extends BaseFragment {
     public void onStart() {
         super.onStart();
         uid = SpUtils.getUid(getContext());
+        initData();
     }
 
     private void initData() {
@@ -86,7 +88,14 @@ public class FragmentMy extends BaseFragment {
                                 Gson gson = new Gson();
                                 MemberInfoBean memberInfoBean = gson.fromJson(data, MemberInfoBean.class);
                                 tvKefuPhone.setText(memberInfoBean.getObj().getTel());
-                                Glide.with(getContext()).load(NetUrl.BASE_URL+memberInfoBean.getObj().getHeadimg()).into(ivAvatar);
+                                if(uid.equals("0")){
+                                    rlLogin.setVisibility(View.VISIBLE);
+                                    ivAvatar.setVisibility(View.GONE);
+                                }else {
+                                    rlLogin.setVisibility(View.GONE);
+                                    ivAvatar.setVisibility(View.VISIBLE);
+                                    Glide.with(getContext()).load(NetUrl.BASE_URL+memberInfoBean.getObj().getHeadimg()).into(ivAvatar);
+                                }
                                 String num = memberInfoBean.getObj().getNum();
                                 new QBadgeView(getContext())
                                         .bindTarget(rlCouponsNum)

@@ -1,12 +1,14 @@
 package com.jingna.xssapp.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jingna.xssapp.R;
@@ -45,6 +47,8 @@ public class ZixunActivity extends BaseActivity {
     TextView tvQidai2;
     @BindView(R.id.view_qidai2)
     View viewQidai2;
+    @BindView(R.id.et_search)
+    EditText etSearch;
 
     private FragmentManager mFragmentManager;
     private ViewpagerAdapter mViewPagerFragmentAdapter;
@@ -130,8 +134,9 @@ public class ZixunActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_all, R.id.rl_lingquan, R.id.rl_qidai1, R.id.rl_qidai2})
+    @OnClick({R.id.rl_back, R.id.rl_all, R.id.rl_lingquan, R.id.rl_qidai1, R.id.rl_qidai2, R.id.rl_search})
     public void onClick(View view){
+        Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
@@ -147,6 +152,12 @@ public class ZixunActivity extends BaseActivity {
                 break;
             case R.id.rl_qidai2:
                 mViewPager.setCurrentItem(3);
+                break;
+            case R.id.rl_search:
+                String search = etSearch.getText().toString();
+                intent.setClass(context, SearchZixunActivity.class);
+                intent.putExtra("text", search);
+                startActivity(intent);
                 break;
         }
     }

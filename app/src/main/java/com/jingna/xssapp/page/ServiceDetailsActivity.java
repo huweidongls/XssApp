@@ -61,6 +61,7 @@ public class ServiceDetailsActivity extends BaseActivity {
     private List<ServiceContentBean.ObjBean.PriceBean> priceList;
 
     private String id = "";
+    private ServiceContentBean bean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,7 @@ public class ServiceDetailsActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.optInt("code") == 200){
                                 Gson gson = new Gson();
-                                ServiceContentBean bean = gson.fromJson(data, ServiceContentBean.class);
+                                bean = gson.fromJson(data, ServiceContentBean.class);
                                 Glide.with(context).load(NetUrl.BASE_URL+bean.getObj().getBackimg()).into(ivTitle);
                                 tvName.setText(bean.getObj().getServicename());
                                 tvText.setText(bean.getObj().getServicetext());
@@ -150,6 +151,8 @@ public class ServiceDetailsActivity extends BaseActivity {
                 break;
             case R.id.tv_sure:
                 intent.setClass(context, BookingOrderActivity.class);
+                intent.putExtra("id", bean.getObj().getId());
+                intent.putExtra("name", bean.getObj().getServicename());
                 startActivity(intent);
                 break;
         }

@@ -8,9 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.ZixunAdapter;
 import com.jingna.xssapp.base.BaseFragment;
+import com.jingna.xssapp.bean.ZixunListBean;
+import com.jingna.xssapp.net.NetUrl;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +36,7 @@ public class FragmentZixun extends BaseFragment {
     RecyclerView recyclerView;
 
     private ZixunAdapter adapter;
-    private List<String> mList;
+    private List<ZixunListBean.ObjBean> mList;
 
     @Nullable
     @Override
@@ -43,14 +51,34 @@ public class FragmentZixun extends BaseFragment {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        adapter = new ZixunAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        ViseHttp.POST(NetUrl.news_ListUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.news_ListUrl))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                ZixunListBean bean = gson.fromJson(data, ZixunListBean.class);
+                                mList = bean.getObj();
+                                adapter = new ZixunAdapter(mList);
+                                LinearLayoutManager manager = new LinearLayoutManager(getContext());
+                                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                recyclerView.setLayoutManager(manager);
+                                recyclerView.setAdapter(adapter);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
+
 }

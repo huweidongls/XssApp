@@ -5,7 +5,7 @@ package com.jingna.xssapp.net;
  */
 
 public class NetUrl {
-    public static final String BASE_URL = "http://39.98.188.171/";
+    public static final String BASE_URL = "http://xss.5ijiaoyu.cn/";
     //登录
     public static String loginUrl = "index.php/api/Login/Logins/login";
     //获取验证码
@@ -58,4 +58,18 @@ public class NetUrl {
     public static String serviceTypeAndServiceListUrl = "index.php/api/Index/Home/ServiceTypeAndServiceList";
     //服务详情
     public static String serviceContentUrl = "index.php/api/Index/Home/ServiceContent";
+    //咨询快报列表
+    public static String news_ListUrl = "index.php/api/Index/Home/News_List";
+    //资讯详情
+    public static String news_contentUrl = "index.php/api/Index/Home/News_content";
+    //优惠券列表
+    public static String CouponListUrl = "index.php/api/Index/Home/CouponList";
+    //领取优惠券
+    public static String get_couponsUrl = "index.php/api/Index/Home/Get_coupons";
+    //搜索资讯
+    public static String seachNewsUrl = "index.php/api/Index/Home/SeachNews";
+    //预约服务信息获取
+    public static String preAboutUrl = "index.php/api/Order/Member_order/PreAbout";
+    //提交订单
+    public static String order_insertUrl = "index.php/api/Order/Member_order/order_insert";
 }

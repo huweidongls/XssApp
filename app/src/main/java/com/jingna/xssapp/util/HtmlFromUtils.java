@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jingna.xssapp.net.NetUrl;
+
 import org.xml.sax.XMLReader;
 
 import java.io.InputStream;
@@ -71,7 +73,7 @@ public class HtmlFromUtils {
 
                         @Override
                         public Drawable getDrawable(String source) {
-//                            source = "http://www.dujiaoshou.com/" + source;//source就是img标签中src属性值，相对路径的此处可以对其进行处理添加头部
+                            source = NetUrl.BASE_URL + source;//source就是img标签中src属性值，相对路径的此处可以对其进行处理添加头部
                             drawable = getImageFromNetwork(source);
                             if (drawable != null) {
 

@@ -50,7 +50,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".page.LoginActivity" />
         <activity android:name=".page.ForgotPwdActivity" />
         <activity android:name=".page.ForgotPwd1Activity" />
@@ -99,6 +99,24 @@
         <activity android:name=".page.OrderDetailsActivity" />
         <activity android:name=".page.ServicePersonnelActivity" />
         <activity android:name=".page.ServicePersonnelDetailsActivity" />
+        <activity android:name=".page.SearchZixunActivity"/>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wxc3bb9837cc1ebb6d" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

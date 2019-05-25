@@ -8,9 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.LingquanAdapter;
 import com.jingna.xssapp.base.BaseFragment;
+import com.jingna.xssapp.bean.LingquanBean;
+import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.SpUtils;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +37,7 @@ public class FragmentLingquan extends BaseFragment {
     RecyclerView recyclerView;
 
     private LingquanAdapter adapter;
-    private List<String> mList;
+    private List<LingquanBean.ObjBean> mList;
 
     @Nullable
     @Override
@@ -43,15 +52,34 @@ public class FragmentLingquan extends BaseFragment {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        adapter = new LingquanAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        ViseHttp.POST(NetUrl.CouponListUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.CouponListUrl))
+                .addParam("uid", SpUtils.getUid(getContext()))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                LingquanBean bean = gson.fromJson(data, LingquanBean.class);
+                                mList = bean.getObj();
+                                adapter = new LingquanAdapter(mList);
+                                LinearLayoutManager manager = new LinearLayoutManager(getContext());
+                                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                recyclerView.setLayoutManager(manager);
+                                recyclerView.setAdapter(adapter);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
 

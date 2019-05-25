@@ -35,9 +35,13 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
 
     private Context context;
     private List<MemberAddressListBean.ObjBean> data;
+    private ClickListener listener;
+    private int order;
 
-    public MyAddressAdapter(List<MemberAddressListBean.ObjBean> data) {
+    public MyAddressAdapter(List<MemberAddressListBean.ObjBean> data, ClickListener listener, int order) {
         this.data = data;
+        this.listener = listener;
+        this.order = order;
     }
 
     @Override
@@ -108,6 +112,14 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
                 context.startActivity(intent);
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(order == 1){
+                    listener.onItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -133,6 +145,10 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
             rlDel = itemView.findViewById(R.id.rl_del);
             rlEdit = itemView.findViewById(R.id.rl_edit);
         }
+    }
+
+    public interface ClickListener{
+        void onItemClick(int pos);
     }
 
 }

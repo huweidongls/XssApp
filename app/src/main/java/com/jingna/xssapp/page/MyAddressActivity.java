@@ -42,11 +42,14 @@ public class MyAddressActivity extends BaseActivity {
     private MyAddressAdapter adapter;
     private List<MemberAddressListBean.ObjBean> mList;
 
+    private int order;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_address);
 
+        order = getIntent().getIntExtra("order", 0);
         ButterKnife.bind(MyAddressActivity.this);
 
     }
@@ -72,7 +75,15 @@ public class MyAddressActivity extends BaseActivity {
                                 MemberAddressListBean bean = gson.fromJson(data, MemberAddressListBean.class);
                                 mList = bean.getObj();
                                 if(mList.size()>0){
-                                    adapter = new MyAddressAdapter(mList);
+                                    adapter = new MyAddressAdapter(mList, new MyAddressAdapter.ClickListener() {
+                                        @Override
+                                        public void onItemClick(int pos) {
+                                            Intent intent = new Intent();
+                                            intent.putExtra("bean", mList.get(pos));
+                                            setResult(1001, intent);
+                                            finish();
+                                        }
+                                    }, order);
                                     LinearLayoutManager manager = new LinearLayoutManager(context);
                                     manager.setOrientation(LinearLayoutManager.VERTICAL);
                                     recyclerView.setLayoutManager(manager);

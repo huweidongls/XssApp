@@ -41,31 +41,30 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_title"
+                android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
-                android:layout_marginLeft="14dp"
                 android:layout_marginTop="19dp"
-                android:textSize="21sp"
                 android:textColor="@color/black_333333"
-                android:text="一加7正式宣战！国产不再是华为小米主场！"
+                android:textSize="21sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:layout_marginTop="21dp"
+                android:id="@+id/tv_time"
                 android:layout_marginLeft="14dp"
-                android:textColor="#999999"
+                android:layout_marginRight="14dp"
+                android:layout_marginTop="21dp"
                 android:textSize="10sp"
-                android:text="04-04发布"
+                android:textColor="#999999"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tv"
                 android:layout_marginRight="14dp"
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="20dp"
-                android:text="现在在国产手机中，很多人看好的仍然是华为华小米"
-                android:textSize="13sp"
-                android:textColor="@color/black_333333"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

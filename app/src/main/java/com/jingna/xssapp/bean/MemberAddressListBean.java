@@ -1,12 +1,13 @@
 package com.jingna.xssapp.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2019/5/21.
  */
 
-public class MemberAddressListBean {
+public class MemberAddressListBean implements Serializable {
 
     /**
      * code : 200
@@ -42,7 +43,7 @@ public class MemberAddressListBean {
         this.obj = obj;
     }
 
-    public static class ObjBean {
+    public static class ObjBean implements Serializable {
         /**
          * id : 1
          * name : 祁连超
