@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingna.xssapp.R;
@@ -11,6 +12,7 @@ import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.WxPayBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.Logger;
+import com.jingna.xssapp.util.ToastUtil;
 import com.jingna.xssapp.wxapi.WXShare;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -23,6 +25,7 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -30,8 +33,10 @@ public class PayBookingOrderActivity extends BaseActivity {
 
     private Context context = PayBookingOrderActivity.this;
 
+    @BindView(R.id.tv_price)
+    TextView tvPrice;
+
     private Map<String, String> map;
-    private WXShare wxShare;
     private IWXAPI api;
 
     @Override
@@ -43,11 +48,19 @@ public class PayBookingOrderActivity extends BaseActivity {
         api.registerApp(WXShare.APP_ID);
         map = (Map<String, String>) getIntent().getSerializableExtra("map");
         ButterKnife.bind(PayBookingOrderActivity.this);
+        initData();
+
+    }
+
+    private void initData() {
+
+        tvPrice.setText(map.get("price"));
 
     }
 
     private void pay() {
 
+        map.put("pay_type", "1");
         ViseHttp.POST(NetUrl.order_insertUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.order_insertUrl))
                 .addParams(map)
@@ -61,6 +74,8 @@ public class PayBookingOrderActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 WxPayBean payBean = gson.fromJson(data, WxPayBean.class);
                                 wxPay(payBean.getObj());
+                            }else {
+                                ToastUtil.showShort(context, jsonObject.optString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

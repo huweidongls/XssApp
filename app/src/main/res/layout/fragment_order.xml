@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:visibility="gone"
         style="@style/rl_top_bar">
 
         <RelativeLayout

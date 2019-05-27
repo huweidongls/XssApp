@@ -56,6 +56,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/tv_price"
             android:layout_marginLeft="8dp"
             android:textColor="#f83030"
             android:textSize="25sp"

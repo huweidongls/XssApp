@@ -72,4 +72,14 @@ public class NetUrl {
     public static String preAboutUrl = "index.php/api/Order/Member_order/PreAbout";
     //提交订单
     public static String order_insertUrl = "index.php/api/Order/Member_order/order_insert";
+    //交易记录详情
+    public static String transaction_ContentUrl = "index.php/api/Member/Index/Transaction_Content";
+    //订单列表
+    public static String order_listUrl = "index.php/api/Order/Member_order/Order_list";
+    //取消订单
+    public static String cancel_orderUrl = "index.php/api/Order/Member_order/cancel_order";
+    //去支付
+    public static String topay_OrderUrl = "index.php/api/Order/Member_order/Topay_Order";
+    //订单退款
+    public static String orderRefundUrl = "index.php/api/Order/Member_order/OrderRefund";
 }

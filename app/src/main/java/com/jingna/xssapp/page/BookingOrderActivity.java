@@ -26,6 +26,7 @@ import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.MemberAddressListBean;
 import com.jingna.xssapp.bean.PreAboutBean;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.Logger;
 import com.jingna.xssapp.util.SpUtils;
 import com.jingna.xssapp.util.StringUtils;
 import com.jingna.xssapp.util.ToastUtil;
@@ -78,6 +79,8 @@ public class BookingOrderActivity extends BaseActivity {
     TextView tvJichuPrice;
     @BindView(R.id.tv_num_content)
     TextView tvNumContent;
+    @BindView(R.id.tv_price)
+    TextView tvPrice;
 
     private int personNum = 1;
     private String name = "";
@@ -148,7 +151,9 @@ public class BookingOrderActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                int serviceNum = Integer.valueOf(etNum.getText().toString());
+                double price = jichuPrice+(numMoney*serviceNum)-couponsPrice;
+                tvPrice.setText("￥"+price);
             }
         });
         tvServiceName.setText(name);
@@ -197,6 +202,9 @@ public class BookingOrderActivity extends BaseActivity {
                                             tvCoupons.setText(bean.getObj().getCoupon().get(pos).getOption());
                                             couponsId = bean.getObj().getCoupon().get(pos).getId();
                                             couponsPrice = Double.valueOf(bean.getObj().getCoupon().get(pos).getMoney());
+                                            int serviceNum = Integer.valueOf(etNum.getText().toString());
+                                            double price = jichuPrice+(numMoney*serviceNum)-couponsPrice;
+                                            tvPrice.setText("￥"+price);
                                             popCoupons.dismiss();
                                         }
                                     });

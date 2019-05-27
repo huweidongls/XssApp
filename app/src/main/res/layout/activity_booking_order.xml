@@ -475,12 +475,13 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_price"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="16dp"
                         android:layout_alignParentRight="true"
                         android:textColor="#F83030"
                         android:textSize="17sp"
-                        android:text="￥199.80"
+                        android:text="￥0.0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 

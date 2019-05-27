@@ -37,7 +37,7 @@ public class ConsumptionRecordsAdapter extends RecyclerView.Adapter<ConsumptionR
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.tvType.setText(data.get(position).getTypename());
         holder.tvTime.setText(data.get(position).getAddtime());
@@ -53,6 +53,7 @@ public class ConsumptionRecordsAdapter extends RecyclerView.Adapter<ConsumptionR
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, ConsumptionDetailsActivity.class);
+                intent.putExtra("id", data.get(position).getId());
                 context.startActivity(intent);
             }
         });
