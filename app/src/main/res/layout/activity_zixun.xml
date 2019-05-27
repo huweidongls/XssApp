@@ -21,6 +21,8 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_toLeftOf="@+id/rl_search"
             android:layout_toRightOf="@+id/rl_back"
             android:id="@+id/rl_search_bg"
