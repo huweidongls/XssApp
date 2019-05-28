@@ -27,6 +27,7 @@
             style="@style/tv_top_title" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_width="50dp"
             android:layout_height="match_parent">
@@ -177,11 +178,11 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_service_type"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
                         android:textSize="13sp"
-                        android:text="室内卫生"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -203,11 +204,11 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_order_code"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
                         android:textSize="13sp"
-                        android:text="132464631"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -224,17 +225,17 @@
                         android:layout_marginLeft="14dp"
                         android:textColor="@color/black_333333"
                         android:textSize="13sp"
-                        android:text="上门时间"
+                        android:text="下单时间"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_time"
                         android:layout_marginRight="14dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
                         android:textSize="13sp"
-                        android:text="2019-04-22    15:20:32"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -257,12 +258,12 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_address"
                         android:layout_marginRight="14dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
                         android:textSize="13sp"
-                        android:text="北京市海淀区知春路56号院  14#3单元1205"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -287,13 +288,13 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_remarks"
                     android:layout_marginRight="14dp"
                     android:layout_marginBottom="26dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="14dp"
                     android:textColor="#666666"
                     android:textSize="11sp"
-                    android:text="请使用消毒液彻底消毒。"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

@@ -82,4 +82,14 @@ public class NetUrl {
     public static String topay_OrderUrl = "index.php/api/Order/Member_order/Topay_Order";
     //订单退款
     public static String orderRefundUrl = "index.php/api/Order/Member_order/OrderRefund";
+    //评价信息获取
+    public static String evaluate_infoUrl = "index.php/api/Order/Member_order/evaluate_info";
+    //保存评价信息
+    public static String evaluate_saveUrl = "index.php/api/Order/Member_order/evaluate_save";
+    //服务列表(快速下单)
+    public static String pay_ServiceListUrl = "index.php/api/Index/Home/Pay_ServiceList";
+    //个人中心评价列表
+    public static String member_EvaluateUrl = "index.php/api/Order/Member_order/Member_Evaluate";
+    //订单详情
+    public static String order_contentUrl = "index.php/api/Order/Member_order/Order_content";
 }

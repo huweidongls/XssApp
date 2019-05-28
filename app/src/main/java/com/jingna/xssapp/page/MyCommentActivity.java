@@ -6,9 +6,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.MyCommentAdapter;
 import com.jingna.xssapp.base.BaseActivity;
+import com.jingna.xssapp.bean.MemberEvaluateBean;
+import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.SpUtils;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +34,7 @@ public class MyCommentActivity extends BaseActivity {
     RecyclerView recyclerView;
 
     private MyCommentAdapter adapter;
-    private List<String> mList;
+    private List<MemberEvaluateBean.ObjBean> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +48,34 @@ public class MyCommentActivity extends BaseActivity {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        adapter = new MyCommentAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(context);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        ViseHttp.POST(NetUrl.member_EvaluateUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.member_EvaluateUrl))
+                .addParam("uid", SpUtils.getUid(context))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                MemberEvaluateBean bean = gson.fromJson(data, MemberEvaluateBean.class);
+                                mList = bean.getObj();
+                                adapter = new MyCommentAdapter(mList);
+                                LinearLayoutManager manager = new LinearLayoutManager(context);
+                                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                recyclerView.setLayoutManager(manager);
+                                recyclerView.setAdapter(adapter);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
     }
 

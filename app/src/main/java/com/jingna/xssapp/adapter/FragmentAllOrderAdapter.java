@@ -15,6 +15,7 @@ import com.jingna.xssapp.R;
 import com.jingna.xssapp.bean.OrderListBean;
 import com.jingna.xssapp.dialog.CustomDialog;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.page.CommentOrderActivity;
 import com.jingna.xssapp.page.OrderDetailsActivity;
 import com.jingna.xssapp.util.ToastUtil;
 import com.jingna.xssapp.util.TokenUtils;
@@ -117,6 +118,16 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, OrderDetailsActivity.class);
+                intent.putExtra("id", data.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
+        holder.tvComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, CommentOrderActivity.class);
+                intent.putExtra("id", data.get(position).getId());
                 context.startActivity(intent);
             }
         });

@@ -5,11 +5,20 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.MessageDetailsAdapter;
 import com.jingna.xssapp.base.BaseActivity;
+import com.jingna.xssapp.bean.OrderContentBean;
 import com.jingna.xssapp.dialog.CustomDialog;
+import com.jingna.xssapp.net.NetUrl;
+import com.vise.xsnow.http.ViseHttp;
+import com.vise.xsnow.http.callback.ACallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,21 +33,62 @@ public class OrderDetailsActivity extends BaseActivity {
 
     @BindView(R.id.rv)
     RecyclerView recyclerView;
+    @BindView(R.id.tv_service_type)
+    TextView tvServiceType;
+    @BindView(R.id.tv_order_code)
+    TextView tvOrderCode;
+    @BindView(R.id.tv_time)
+    TextView tvTime;
+    @BindView(R.id.tv_address)
+    TextView tvAddress;
+    @BindView(R.id.tv_remarks)
+    TextView tvRemarks;
 
     private MessageDetailsAdapter adapter;
     private List<String> mList;
+
+    private String id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
+        id = getIntent().getStringExtra("id");
         ButterKnife.bind(OrderDetailsActivity.this);
         initData();
 
     }
 
     private void initData() {
+
+        ViseHttp.POST(NetUrl.order_contentUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.order_contentUrl))
+                .addParam("oid", id)
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                OrderContentBean bean = gson.fromJson(data, OrderContentBean.class);
+                                tvServiceType.setText(bean.getObj().getService_type());
+                                tvOrderCode.setText(bean.getObj().getOrder_code());
+                                tvTime.setText(bean.getObj().getAddtime());
+                                tvAddress.setText(bean.getObj().getAddress());
+                                tvRemarks.setText(bean.getObj().getRemarks());
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
         mList = new ArrayList<>();
         mList.add("");

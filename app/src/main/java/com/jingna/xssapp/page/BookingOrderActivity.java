@@ -257,6 +257,7 @@ public class BookingOrderActivity extends BaseActivity {
                     intent.setClass(context, PayBookingOrderActivity.class);
                     intent.putExtra("map", (Serializable) map);
                     startActivity(intent);
+                    finish();
                 }
                 break;
             case R.id.rl_jianhao:
@@ -353,7 +354,7 @@ public class BookingOrderActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1001){
+        if(resultCode == 1001){
             MemberAddressListBean.ObjBean bean = (MemberAddressListBean.ObjBean) data.getSerializableExtra("bean");
             tvAddress.setText(bean.getAddress());
             tvAddressDetails.setText(bean.getDetailedaddress());

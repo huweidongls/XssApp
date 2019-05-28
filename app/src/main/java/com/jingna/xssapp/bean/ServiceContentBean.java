@@ -11,7 +11,7 @@ public class ServiceContentBean {
     /**
      * code : 200
      * message : 获取成功!
-     * obj : {"id":"6","servicename":"asd撒大苏打","backimg":"upload/Admin/2019/05/23/d90b0183d8aa4d75e3aa169a297bad22155857548220.jpg","servicetext":"asda啊实打实","tel":"15244615473","reference":"PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==","servicescope":"PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==","servicestandards":"PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==","warmprompt":"PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==","professionaltools":"PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==","Serviceguarantee":"PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==","price":[{"info":"基础收费:0"},{"info":"深度清洁:3/米"},{"info":"轻度清洁:2/米"}]}
+     * obj : {"id":"5","servicename":"啊大苏打倒萨","backimg":"upload/Admin/2019/05/20/7c37ef69191cb947b561580c05e05e6415583401227.jpg","tel":"15244615473","servicetext":"啊大苏打倒萨","reference":"PHA+5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==","servicescope":"PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==","servicestandards":"PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==","warmprompt":"PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==","professionaltools":"PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==","Serviceguarantee":"PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==","price":[{"info":"基础收费:0"},{"info":"轻度清洁:4/米"},{"info":"深度清洁:6/米"}],"evaluate":[{"id":"7","text":"哈哈","on_satisfied":"0","img":["upload/APP/2019/05/28/196c164506841e43410e84d9bd9f7d0d1559011120421.jpg","upload/APP/2019/05/28/196c164506841e43410e84d9bd9f7d0d1559011120294.jpg"],"username":"186****7319"}]}
      */
 
     private int code;
@@ -44,25 +44,26 @@ public class ServiceContentBean {
 
     public static class ObjBean {
         /**
-         * id : 6
-         * servicename : asd撒大苏打
-         * backimg : upload/Admin/2019/05/23/d90b0183d8aa4d75e3aa169a297bad22155857548220.jpg
-         * servicetext : asda啊实打实
+         * id : 5
+         * servicename : 啊大苏打倒萨
+         * backimg : upload/Admin/2019/05/20/7c37ef69191cb947b561580c05e05e6415583401227.jpg
          * tel : 15244615473
-         * reference : PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==
-         * servicescope : PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==
-         * servicestandards : PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==
-         * warmprompt : PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==
-         * professionaltools : PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==
-         * Serviceguarantee : PHA+YXNk5pKS5aSn6IuP5omTPC9wPg==
-         * price : [{"info":"基础收费:0"},{"info":"深度清洁:3/米"},{"info":"轻度清洁:2/米"}]
+         * servicetext : 啊大苏打倒萨
+         * reference : PHA+5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==
+         * servicescope : PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==
+         * servicestandards : PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==
+         * warmprompt : PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==
+         * professionaltools : PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==
+         * Serviceguarantee : PHA+5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCo5ZWK5aSn6IuP5omT5YCS6JCoPC9wPg==
+         * price : [{"info":"基础收费:0"},{"info":"轻度清洁:4/米"},{"info":"深度清洁:6/米"}]
+         * evaluate : [{"id":"7","text":"哈哈","on_satisfied":"0","img":["upload/APP/2019/05/28/196c164506841e43410e84d9bd9f7d0d1559011120421.jpg","upload/APP/2019/05/28/196c164506841e43410e84d9bd9f7d0d1559011120294.jpg"],"username":"186****7319"}]
          */
 
         private String id;
         private String servicename;
         private String backimg;
-        private String servicetext;
         private String tel;
+        private String servicetext;
         private String reference;
         private String servicescope;
         private String servicestandards;
@@ -70,6 +71,7 @@ public class ServiceContentBean {
         private String professionaltools;
         private String Serviceguarantee;
         private List<PriceBean> price;
+        private List<EvaluateBean> evaluate;
 
         public String getId() {
             return id;
@@ -95,20 +97,20 @@ public class ServiceContentBean {
             this.backimg = backimg;
         }
 
-        public String getServicetext() {
-            return servicetext;
-        }
-
-        public void setServicetext(String servicetext) {
-            this.servicetext = servicetext;
-        }
-
         public String getTel() {
             return tel;
         }
 
         public void setTel(String tel) {
             this.tel = tel;
+        }
+
+        public String getServicetext() {
+            return servicetext;
+        }
+
+        public void setServicetext(String servicetext) {
+            this.servicetext = servicetext;
         }
 
         public String getReference() {
@@ -167,6 +169,14 @@ public class ServiceContentBean {
             this.price = price;
         }
 
+        public List<EvaluateBean> getEvaluate() {
+            return evaluate;
+        }
+
+        public void setEvaluate(List<EvaluateBean> evaluate) {
+            this.evaluate = evaluate;
+        }
+
         public static class PriceBean {
             /**
              * info : 基础收费:0
@@ -180,6 +190,62 @@ public class ServiceContentBean {
 
             public void setInfo(String info) {
                 this.info = info;
+            }
+        }
+
+        public static class EvaluateBean {
+            /**
+             * id : 7
+             * text : 哈哈
+             * on_satisfied : 0
+             * img : ["upload/APP/2019/05/28/196c164506841e43410e84d9bd9f7d0d1559011120421.jpg","upload/APP/2019/05/28/196c164506841e43410e84d9bd9f7d0d1559011120294.jpg"]
+             * username : 186****7319
+             */
+
+            private String id;
+            private String text;
+            private String on_satisfied;
+            private String username;
+            private List<String> img;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getText() {
+                return text;
+            }
+
+            public void setText(String text) {
+                this.text = text;
+            }
+
+            public String getOn_satisfied() {
+                return on_satisfied;
+            }
+
+            public void setOn_satisfied(String on_satisfied) {
+                this.on_satisfied = on_satisfied;
+            }
+
+            public String getUsername() {
+                return username;
+            }
+
+            public void setUsername(String username) {
+                this.username = username;
+            }
+
+            public List<String> getImg() {
+                return img;
+            }
+
+            public void setImg(List<String> img) {
+                this.img = img;
             }
         }
     }

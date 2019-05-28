@@ -27,6 +27,7 @@
             style="@style/tv_top_title" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_width="50dp"
             android:layout_height="match_parent">
@@ -44,7 +45,7 @@
     <ImageView
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="86dp"
-        android:src="#F83030"
+        android:src="@mipmap/app_logo"
         android:layout_width="66dp"
         android:layout_height="66dp" />
 

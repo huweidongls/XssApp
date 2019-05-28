@@ -26,6 +26,7 @@
             style="@style/tv_top_title" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_width="50dp"
             android:layout_height="match_parent">
@@ -113,6 +114,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_exit"
         android:layout_marginBottom="109dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

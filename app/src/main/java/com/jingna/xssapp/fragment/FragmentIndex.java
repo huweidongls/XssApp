@@ -1,32 +1,43 @@
 package com.jingna.xssapp.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.adapter.FastOrderAdapter;
 import com.jingna.xssapp.adapter.FragmentIndexTuijianAdapter;
 import com.jingna.xssapp.base.BaseFragment;
 import com.jingna.xssapp.bean.IndexBannerBean;
 import com.jingna.xssapp.bean.IndexServiceListBean;
 import com.jingna.xssapp.bean.NewsListBean;
+import com.jingna.xssapp.bean.PayServiceListBean;
 import com.jingna.xssapp.bean.PriceListBean;
 import com.jingna.xssapp.bean.WxPayBean;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.page.BookingOrderActivity;
 import com.jingna.xssapp.page.CityActivity;
+import com.jingna.xssapp.page.LoginActivity;
 import com.jingna.xssapp.page.ServiceDetailsActivity;
 import com.jingna.xssapp.page.ServicePersonnelActivity;
 import com.jingna.xssapp.page.ZixunActivity;
+import com.jingna.xssapp.util.SpUtils;
 import com.jingna.xssapp.widget.ScrollTextView;
 import com.jingna.xssapp.wxapi.WXShare;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -80,6 +91,12 @@ public class FragmentIndex extends BaseFragment {
     private String id = "";
     private String city = "";
 
+    private PopupWindow popupWindow;
+    private View popView;
+
+    private List<PayServiceListBean.ObjBean> mFastList;
+    private FastOrderAdapter adapterFast;
+
     public static FragmentIndex newInstance(String id, String city) {
         FragmentIndex newFragment = new FragmentIndex();
         Bundle bundle = new Bundle();
@@ -104,8 +121,53 @@ public class FragmentIndex extends BaseFragment {
         initBanner();
         initZixun();
         initFive();
+        initView();
 
         return view;
+    }
+
+    private void initView() {
+
+        popView = LayoutInflater.from(getContext()).inflate(R.layout.popupwindow_booking_order_num, null);
+        final RecyclerView recyclerView = popView.findViewById(R.id.rv);
+        ViseHttp.POST(NetUrl.pay_ServiceListUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.pay_ServiceListUrl))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                PayServiceListBean bean = gson.fromJson(data, PayServiceListBean.class);
+                                mFastList = bean.getObj();
+                                adapterFast = new FastOrderAdapter(mFastList, new FastOrderAdapter.ClickListener() {
+                                    @Override
+                                    public void onItemClick(int pos) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(getContext(), BookingOrderActivity.class);
+                                        intent.putExtra("id", mFastList.get(pos).getId());
+                                        intent.putExtra("name", mFastList.get(pos).getServicename());
+                                        startActivity(intent);
+                                        popupWindow.dismiss();
+                                    }
+                                });
+                                LinearLayoutManager manager = new LinearLayoutManager(getContext());
+                                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                recyclerView.setLayoutManager(manager);
+                                recyclerView.setAdapter(adapterFast);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
     }
 
     private void initFive() {
@@ -289,7 +351,7 @@ public class FragmentIndex extends BaseFragment {
 
     }
 
-    @OnClick({R.id.ll_city, R.id.ll_zixun, R.id.rl_more, R.id.iv_service_personnel})
+    @OnClick({R.id.ll_city, R.id.ll_zixun, R.id.rl_more, R.id.iv_service_personnel, R.id.iv_yuyue})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -312,7 +374,42 @@ public class FragmentIndex extends BaseFragment {
                 intent.putExtra("id", id);
                 startActivity(intent);
                 break;
+            case R.id.iv_yuyue:
+                if(SpUtils.getUid(getContext()).equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    showFastPop();
+                }
+                break;
         }
+    }
+
+    public void showFastPop(){
+        popupWindow = new PopupWindow(popView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+//        popupWindow.showAsDropDown(rlPro);
+        // 设置popWindow的显示和消失动画
+        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style_bottom);
+        WindowManager.LayoutParams params = getActivity().getWindow().getAttributes();
+        params.alpha = 0.5f;
+        getActivity().getWindow().setAttributes(params);
+        popupWindow.update();
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+                WindowManager.LayoutParams params = getActivity().getWindow().getAttributes();
+                params.alpha = 1f;
+                getActivity().getWindow().setAttributes(params);
+            }
+        });
     }
 
     @Override

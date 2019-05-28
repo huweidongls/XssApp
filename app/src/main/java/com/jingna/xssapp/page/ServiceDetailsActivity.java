@@ -57,7 +57,7 @@ public class ServiceDetailsActivity extends BaseActivity {
     RecyclerView rvPrice;
 
     private ServiceDetailsCommentAdapter adapter;
-    private List<String> mList;
+    private List<ServiceContentBean.ObjBean.EvaluateBean> mList;
     private ServiceDetailsPriceAdapter priceAdapter;
     private List<ServiceContentBean.ObjBean.PriceBean> priceList;
 
@@ -114,6 +114,17 @@ public class ServiceDetailsActivity extends BaseActivity {
                                 manager.setOrientation(LinearLayoutManager.VERTICAL);
                                 rvPrice.setLayoutManager(manager);
                                 rvPrice.setAdapter(priceAdapter);
+                                mList = bean.getObj().getEvaluate();
+                                adapter = new ServiceDetailsCommentAdapter(mList);
+                                LinearLayoutManager manager1 = new LinearLayoutManager(context){
+                                    @Override
+                                    public boolean canScrollVertically() {
+                                        return false;
+                                    }
+                                };
+                                manager1.setOrientation(LinearLayoutManager.VERTICAL);
+                                recyclerView.setLayoutManager(manager1);
+                                recyclerView.setAdapter(adapter);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -125,21 +136,6 @@ public class ServiceDetailsActivity extends BaseActivity {
 
                     }
                 });
-
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        adapter = new ServiceDetailsCommentAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(context){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
 
     }
 
@@ -159,6 +155,7 @@ public class ServiceDetailsActivity extends BaseActivity {
                     intent.putExtra("id", bean.getObj().getId());
                     intent.putExtra("name", bean.getObj().getServicename());
                     startActivity(intent);
+                    finish();
                 }
                 break;
         }

@@ -5,8 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.net.NetUrl;
 
 import java.util.List;
 
@@ -33,7 +36,7 @@ public class CommentPicAdapter extends RecyclerView.Adapter<CommentPicAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        Glide.with(context).load(NetUrl.BASE_URL+data.get(position)).into(holder.iv);
     }
 
     @Override
@@ -43,8 +46,11 @@ public class CommentPicAdapter extends RecyclerView.Adapter<CommentPicAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        private ImageView iv;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            iv = itemView.findViewById(R.id.iv);
         }
     }
 

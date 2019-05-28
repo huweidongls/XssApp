@@ -26,6 +26,7 @@
             style="@style/tv_top_title" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_width="50dp"
             android:layout_height="match_parent">

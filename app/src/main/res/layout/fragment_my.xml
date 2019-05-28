@@ -369,6 +369,7 @@
             android:layout_height="2dp"/>
 
         <RelativeLayout
+            android:id="@+id/rl_lianxikefu"
             android:background="@drawable/selector_fragment_my_bg"
             android:layout_width="match_parent"
             android:layout_height="52dp">
