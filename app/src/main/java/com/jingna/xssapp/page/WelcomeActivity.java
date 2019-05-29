@@ -22,6 +22,7 @@ import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.Gps;
 import com.jingna.xssapp.util.Logger;
 import com.jingna.xssapp.util.PositionUtil;
+import com.jingna.xssapp.util.SpUtils;
 import com.jingna.xssapp.util.ToastUtil;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -151,8 +152,8 @@ public class WelcomeActivity extends BaseActivity {
                                                             Logger.e("2222", bean.getObj().getId());
                                                             Intent intent = new Intent();
                                                             intent.setClass(context, MainActivity.class);
-                                                            intent.putExtra("id", bean.getObj().getId());
-                                                            intent.putExtra("city", bean.getObj().getCity_area());
+                                                            SpUtils.setCityId(context, bean.getObj().getId());
+                                                            SpUtils.setCityName(context, bean.getObj().getCity_area());
                                                             startActivity(intent);
                                                             finish();
                                                         }else {

@@ -20,9 +20,11 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
 
     private Context context;
     private List<OpenCityListBean.ObjBean> data;
+    private ClickListener listener;
 
-    public CityAdapter(List<OpenCityListBean.ObjBean> data) {
+    public CityAdapter(List<OpenCityListBean.ObjBean> data, ClickListener listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -34,9 +36,15 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         String[] s = data.get(position).getCity_area().split("-");
         holder.tvTitle.setText(s[1]);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(position);
+            }
+        });
     }
 
     @Override
@@ -52,6 +60,10 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);
         }
+    }
+
+    public interface ClickListener{
+        void onItemClick(int pos);
     }
 
 }

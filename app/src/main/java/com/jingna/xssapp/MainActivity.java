@@ -52,16 +52,11 @@ public class MainActivity extends BaseActivity {
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-    private String cityId = "";
-    private String cityName = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cityId = getIntent().getStringExtra("id");
-        cityName = getIntent().getStringExtra("city");
         ButterKnife.bind(MainActivity.this);
         init();
 
@@ -81,8 +76,8 @@ public class MainActivity extends BaseActivity {
         rl2.setOnClickListener(listener);
         rl3.setOnClickListener(listener);
         rl4.setOnClickListener(listener);
-        Fragment fragmentIndex = FragmentIndex.newInstance(cityId, cityName);
-        Fragment fragmentService = FragmentService.newInstance(cityId, cityName);
+        Fragment fragmentIndex = new FragmentIndex();
+        Fragment fragmentService = new FragmentService();
         Fragment fragmentOrder = new FragmentOrder();
         Fragment fragmentMy = new FragmentMy();
 

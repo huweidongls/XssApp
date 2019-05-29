@@ -88,42 +88,30 @@ public class FragmentIndex extends BaseFragment {
     private List<IndexBannerBean.ObjBean> bannerList;
     private List<NewsListBean.ObjBean> newsList;
 
-    private String id = "";
-    private String city = "";
-
     private PopupWindow popupWindow;
     private View popView;
 
     private List<PayServiceListBean.ObjBean> mFastList;
     private FastOrderAdapter adapterFast;
 
-    public static FragmentIndex newInstance(String id, String city) {
-        FragmentIndex newFragment = new FragmentIndex();
-        Bundle bundle = new Bundle();
-        bundle.putString("id", id);
-        bundle.putString("city", city);
-        newFragment.setArguments(bundle);
-        return newFragment;
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, null);
 
-        Bundle args = getArguments();
-        if (args != null) {
-            id = args.getString("id");
-            city = args.getString("city");
-        }
         ButterKnife.bind(this, view);
-        initData();
         initBanner();
         initZixun();
         initFive();
         initView();
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initData();
     }
 
     private void initView() {
@@ -313,12 +301,12 @@ public class FragmentIndex extends BaseFragment {
 
     private void initData() {
 
-        String[] s = city.split("-");
+        String[] s = SpUtils.getCityName(getContext()).split("-");
         tvCity.setText(s[1]);
 
         ViseHttp.POST(NetUrl.indexServiceListUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.indexServiceListUrl))
-                .addParam("city_id", id)
+                .addParam("city_id", SpUtils.getCityId(getContext()))
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -356,9 +344,10 @@ public class FragmentIndex extends BaseFragment {
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.ll_city:
-                String[] s = city.split("-");
+                String[] s = SpUtils.getCityName(getContext()).split("-");
                 intent.setClass(getContext(), CityActivity.class);
                 intent.putExtra("city", s[1]);
+                intent.putExtra("type", 1);
                 startActivity(intent);
                 break;
             case R.id.ll_zixun:
@@ -371,7 +360,7 @@ public class FragmentIndex extends BaseFragment {
                 break;
             case R.id.iv_service_personnel:
                 intent.setClass(getContext(), ServicePersonnelActivity.class);
-                intent.putExtra("id", id);
+                intent.putExtra("id", SpUtils.getCityId(getContext()));
                 startActivity(intent);
                 break;
             case R.id.iv_yuyue:

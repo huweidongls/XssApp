@@ -1,6 +1,7 @@
 package com.jingna.xssapp.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +9,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.CityAdapter;
 import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.OpenCityListBean;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.SpUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
@@ -39,12 +42,14 @@ public class CityActivity extends BaseActivity {
     private List<OpenCityListBean.ObjBean> mList;
 
     private String curCity = "";
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
 
+        type = getIntent().getIntExtra("type", 0);
         curCity = getIntent().getStringExtra("city");
         ButterKnife.bind(CityActivity.this);
         initData();
@@ -66,7 +71,23 @@ public class CityActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 OpenCityListBean bean = gson.fromJson(data, OpenCityListBean.class);
                                 mList = bean.getObj();
-                                adapter = new CityAdapter(mList);
+                                adapter = new CityAdapter(mList, new CityAdapter.ClickListener() {
+                                    @Override
+                                    public void onItemClick(int pos) {
+                                        if(type == 1){
+                                            SpUtils.setCityId(context, mList.get(pos).getId());
+                                            SpUtils.setCityName(context, mList.get(pos).getCity_area());
+                                            finish();
+                                        }else if(type == 0){
+                                            Intent intent = new Intent();
+                                            intent.setClass(context, MainActivity.class);
+                                            SpUtils.setCityId(context, mList.get(pos).getId());
+                                            SpUtils.setCityName(context, mList.get(pos).getCity_area());
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                });
                                 LinearLayoutManager manager = new LinearLayoutManager(context){
                                     @Override
                                     public boolean canScrollVertically() {

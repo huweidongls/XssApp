@@ -16,6 +16,7 @@ import com.jingna.xssapp.base.BaseFragment;
 import com.jingna.xssapp.bean.ServiceTypeAndServiceListBean;
 import com.jingna.xssapp.bean.ServiceTypeListBean;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.SpUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
@@ -44,32 +45,20 @@ public class FragmentService extends BaseFragment {
     private FenleiRightAdapter rightAdapter;
     private List<ServiceTypeAndServiceListBean.ObjBean> mList1;
 
-    private String id = "";
-    private String city = "";
-
-    public static FragmentService newInstance(String id, String city) {
-        FragmentService newFragment = new FragmentService();
-        Bundle bundle = new Bundle();
-        bundle.putString("id", id);
-        bundle.putString("city", city);
-        newFragment.setArguments(bundle);
-        return newFragment;
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_service, null);
 
-        Bundle args = getArguments();
-        if (args != null) {
-            id = args.getString("id");
-            city = args.getString("city");
-        }
         ButterKnife.bind(this, view);
-        initData();
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initData();
     }
 
     private void initData() {
@@ -95,7 +84,7 @@ public class FragmentService extends BaseFragment {
                                     public void onItemClick(int i) {
                                         ViseHttp.POST(NetUrl.serviceTypeAndServiceListUrl)
                                                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.serviceTypeAndServiceListUrl))
-                                                .addParam("city", id)
+                                                .addParam("city", SpUtils.getCityId(getContext()))
                                                 .addParam("sid", mList.get(i).getId())
                                                 .request(new ACallback<String>() {
                                                     @Override

@@ -14,16 +14,27 @@ public class SpUtils {
     public static String UID = "uid";
     public static String PHONENUM = "phonenum";
     public static String TOKEN = "token";
-    public static String SEARCH_HISTORY = "search_history";
+    public static String CITY_ID = "city_id";
+    public static String CITY_NAME = "city_name";
 
-    public static void setSearchHistory(Context context, String token){
+    public static void setCityName(Context context, String cityName){
         spCache = new SpCache(context, "user_info");
-        spCache.put(SEARCH_HISTORY, token);
+        spCache.put(CITY_NAME, cityName);
     }
 
-    public static String getSearchHistory(Context context){
+    public static String getCityName(Context context){
         spCache = new SpCache(context, "user_info");
-        return spCache.get(SEARCH_HISTORY, "");
+        return spCache.get(CITY_NAME, "");
+    }
+
+    public static void setCityId(Context context, String cityId){
+        spCache = new SpCache(context, "user_info");
+        spCache.put(CITY_ID, cityId);
+    }
+
+    public static String getCityId(Context context){
+        spCache = new SpCache(context, "user_info");
+        return spCache.get(CITY_ID, "");
     }
 
     public static void setToken(Context context, String token){
