@@ -185,6 +185,11 @@ public class BookingOrderActivity extends BaseActivity {
                                         numMoney = Double.valueOf(bean.getObj().getServicePrice().get(pos).getPrice());
                                         tvNumName.setText(bean.getObj().getServicePrice().get(pos).getTollitem()+"：");
                                         tvNumDanwei.setText(bean.getObj().getServicePrice().get(pos).getText());
+                                        if(!StringUtils.isEmpty(etNum.getText().toString())){
+                                            int serviceNum = Integer.valueOf(etNum.getText().toString());
+                                            double price = jichuPrice+(numMoney*serviceNum)-couponsPrice;
+                                            tvPrice.setText("￥"+price);
+                                        }
                                         popupWindow.dismiss();
                                     }
                                 });
