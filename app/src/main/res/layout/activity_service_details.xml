@@ -304,6 +304,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_comment"
                 android:layout_marginTop="7dp"
                 android:background="@color/white_ffffff"
                 android:orientation="vertical"
@@ -324,12 +325,12 @@
                         android:layout_height="21dp" />
 
                     <TextView
+                        android:id="@+id/tv_comment_num"
                         android:layout_weight="1"
                         android:layout_marginLeft="11dp"
                         android:layout_gravity="center_vertical"
                         android:textSize="17sp"
                         android:textColor="@color/black_333333"
-                        android:text="用户评价（180）"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
 

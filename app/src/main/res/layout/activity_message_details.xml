@@ -58,6 +58,7 @@
                 android:layout_height="149dp">
 
                 <TextView
+                    android:id="@+id/tv_order_type"
                     android:layout_marginTop="54dp"
                     android:layout_marginLeft="14dp"
                     android:textColor="@color/white_ffffff"
@@ -106,6 +107,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_service_type"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
@@ -131,6 +133,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_order_code"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
@@ -156,6 +159,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_time"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
@@ -181,6 +185,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_address"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
@@ -206,6 +211,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_price"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#F83030"
@@ -235,6 +241,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_remarks"
                     android:layout_marginRight="14dp"
                     android:layout_marginBottom="20dp"
                     android:layout_marginLeft="14dp"
@@ -364,6 +371,7 @@
     </ScrollView>
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rl_bottom"
         android:background="@color/white_ffffff"
         android:layout_alignParentBottom="true"

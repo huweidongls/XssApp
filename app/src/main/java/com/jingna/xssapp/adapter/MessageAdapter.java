@@ -1,7 +1,6 @@
 package com.jingna.xssapp.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.bean.MemberMessageBean;
-import com.jingna.xssapp.page.MessageDetailsActivity;
 
 import java.util.List;
 
@@ -43,14 +41,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         holder.tvName.setText(data.get(position).getTypename());
         holder.tvText.setText(data.get(position).getText());
 
-        holder.ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(context, MessageDetailsActivity.class);
-                context.startActivity(intent);
-            }
-        });
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -55,6 +56,10 @@ public class ServiceDetailsActivity extends BaseActivity {
     TextView tvServiceguarantee;
     @BindView(R.id.rv_price)
     RecyclerView rvPrice;
+    @BindView(R.id.tv_comment_num)
+    TextView tvCommentNum;
+    @BindView(R.id.ll_comment)
+    LinearLayout llComment;
 
     private ServiceDetailsCommentAdapter adapter;
     private List<ServiceContentBean.ObjBean.EvaluateBean> mList;
@@ -115,16 +120,22 @@ public class ServiceDetailsActivity extends BaseActivity {
                                 rvPrice.setLayoutManager(manager);
                                 rvPrice.setAdapter(priceAdapter);
                                 mList = bean.getObj().getEvaluate();
-                                adapter = new ServiceDetailsCommentAdapter(mList);
-                                LinearLayoutManager manager1 = new LinearLayoutManager(context){
-                                    @Override
-                                    public boolean canScrollVertically() {
-                                        return false;
-                                    }
-                                };
-                                manager1.setOrientation(LinearLayoutManager.VERTICAL);
-                                recyclerView.setLayoutManager(manager1);
-                                recyclerView.setAdapter(adapter);
+                                if(mList.size()>0){
+                                    llComment.setVisibility(View.VISIBLE);
+                                    tvCommentNum.setText("用户评价（"+mList.size()+"）");
+                                    adapter = new ServiceDetailsCommentAdapter(mList);
+                                    LinearLayoutManager manager1 = new LinearLayoutManager(context){
+                                        @Override
+                                        public boolean canScrollVertically() {
+                                            return false;
+                                        }
+                                    };
+                                    manager1.setOrientation(LinearLayoutManager.VERTICAL);
+                                    recyclerView.setLayoutManager(manager1);
+                                    recyclerView.setAdapter(adapter);
+                                }else {
+                                    llComment.setVisibility(View.GONE);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

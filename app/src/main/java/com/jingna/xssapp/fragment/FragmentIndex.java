@@ -120,6 +120,7 @@ public class FragmentIndex extends BaseFragment {
         final RecyclerView recyclerView = popView.findViewById(R.id.rv);
         ViseHttp.POST(NetUrl.pay_ServiceListUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.pay_ServiceListUrl))
+                .addParam("cid", SpUtils.getCityId(getContext()))
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {

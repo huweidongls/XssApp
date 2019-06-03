@@ -58,6 +58,15 @@ public class OrderContentBean {
         private String addtime;
         private String address;
         private String remarks;
+        private String price;
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
 
         public String getId() {
             return id;
