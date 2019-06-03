@@ -22,7 +22,7 @@
         </RelativeLayout>
 
         <TextView
-            android:text="编辑地址"
+            android:id="@+id/tv_title"
             style="@style/tv_top_title" />
 
     </RelativeLayout>
@@ -40,7 +40,7 @@
             android:layout_marginLeft="14dp"
             android:layout_marginTop="17dp"
             android:textColor="@color/black_333333"
-            android:text="编辑地址地址"
+            android:text="编辑地址"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -74,6 +74,8 @@
                 android:layout_height="match_parent">
 
                 <EditText
+                    android:inputType="text"
+                    android:maxLength="8"
                     android:id="@+id/et_name"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"

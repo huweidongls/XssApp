@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingna.xssapp.R;
@@ -34,6 +35,8 @@ public class FragmentZixun extends BaseFragment {
 
     @BindView(R.id.rv)
     RecyclerView recyclerView;
+    @BindView(R.id.tv)
+    TextView tv;
 
     private ZixunAdapter adapter;
     private List<ZixunListBean.ObjBean> mList;
@@ -67,6 +70,13 @@ public class FragmentZixun extends BaseFragment {
                                 manager.setOrientation(LinearLayoutManager.VERTICAL);
                                 recyclerView.setLayoutManager(manager);
                                 recyclerView.setAdapter(adapter);
+                                if(mList.size()>0){
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    tv.setVisibility(View.GONE);
+                                }else {
+                                    recyclerView.setVisibility(View.GONE);
+                                    tv.setVisibility(View.VISIBLE);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

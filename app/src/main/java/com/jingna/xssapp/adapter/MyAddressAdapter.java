@@ -108,6 +108,7 @@ public class MyAddressAdapter extends RecyclerView.Adapter<MyAddressAdapter.View
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("id", data.get(position).getId());
+                intent.putExtra("type", "编辑地址");
                 intent.setClass(context, InsertAddressActivity.class);
                 context.startActivity(intent);
             }

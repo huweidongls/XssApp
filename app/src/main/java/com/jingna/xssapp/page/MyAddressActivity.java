@@ -119,6 +119,7 @@ public class MyAddressActivity extends BaseActivity {
                 break;
             case R.id.btn_insert:
                 intent.setClass(context, InsertAddressActivity.class);
+                intent.putExtra("type", "新增地址");
                 startActivity(intent);
                 break;
         }

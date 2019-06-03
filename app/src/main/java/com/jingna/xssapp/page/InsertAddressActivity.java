@@ -49,6 +49,8 @@ public class InsertAddressActivity extends BaseActivity {
     EditText etAddress;
     @BindView(R.id.iv_address_default)
     ImageView ivAddressDefault;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
@@ -56,12 +58,14 @@ public class InsertAddressActivity extends BaseActivity {
 
     private String radio = "0";
     private String id;
+    private String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_address);
 
+        type = getIntent().getStringExtra("type");
         id = getIntent().getStringExtra("id");
         ButterKnife.bind(InsertAddressActivity.this);
         initData();
@@ -71,6 +75,7 @@ public class InsertAddressActivity extends BaseActivity {
     private void initData() {
 
         initJsonData();
+        tvTitle.setText(type);
         if(!StringUtils.isEmpty(id)){
             ViseHttp.POST(NetUrl.memberAddressInfoUrl)
                     .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.memberAddressInfoUrl))

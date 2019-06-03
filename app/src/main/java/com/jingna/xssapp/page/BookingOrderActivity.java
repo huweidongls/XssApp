@@ -262,7 +262,6 @@ public class BookingOrderActivity extends BaseActivity {
                     intent.setClass(context, PayBookingOrderActivity.class);
                     intent.putExtra("map", (Serializable) map);
                     startActivity(intent);
-                    finish();
                 }
                 break;
             case R.id.rl_jianhao:
