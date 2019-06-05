@@ -163,6 +163,7 @@ public class FragmentIndex extends BaseFragment {
 
         ViseHttp.POST(NetUrl.priceListUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.priceListUrl))
+                .addParam("cid", SpUtils.getCityId(getContext()))
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -239,6 +240,7 @@ public class FragmentIndex extends BaseFragment {
 
         ViseHttp.POST(NetUrl.newslistUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.newslistUrl))
+                .addParam("cid", SpUtils.getCityId(getContext()))
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
@@ -272,6 +274,7 @@ public class FragmentIndex extends BaseFragment {
 
         ViseHttp.POST(NetUrl.indexBnnerListUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.indexBnnerListUrl))
+                .addParam("cid", SpUtils.getCityId(getContext()))
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {

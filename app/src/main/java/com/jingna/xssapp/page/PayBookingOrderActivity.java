@@ -12,6 +12,7 @@ import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.WxPayBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.Logger;
+import com.jingna.xssapp.util.SpUtils;
 import com.jingna.xssapp.util.ToastUtil;
 import com.jingna.xssapp.wxapi.WXShare;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -63,6 +64,7 @@ public class PayBookingOrderActivity extends BaseActivity {
         map.put("pay_type", "1");
         ViseHttp.POST(NetUrl.order_insertUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.order_insertUrl))
+                .addParam("cid", SpUtils.getCityId(context))
                 .addParams(map)
                 .request(new ACallback<String>() {
                     @Override

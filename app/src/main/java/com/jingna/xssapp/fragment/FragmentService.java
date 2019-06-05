@@ -65,6 +65,7 @@ public class FragmentService extends BaseFragment {
 
         ViseHttp.POST(NetUrl.serviceTypeListUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.serviceTypeListUrl))
+                .addParam("cid", SpUtils.getCityId(getContext()))
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {

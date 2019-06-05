@@ -15,6 +15,7 @@ import com.jingna.xssapp.adapter.ZixunAdapter;
 import com.jingna.xssapp.base.BaseFragment;
 import com.jingna.xssapp.bean.ZixunListBean;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.SpUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
@@ -56,6 +57,7 @@ public class FragmentZixun extends BaseFragment {
 
         ViseHttp.POST(NetUrl.news_ListUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.news_ListUrl))
+                .addParam("cid", SpUtils.getCityId(getContext()))
                 .request(new ACallback<String>() {
                     @Override
                     public void onSuccess(String data) {
