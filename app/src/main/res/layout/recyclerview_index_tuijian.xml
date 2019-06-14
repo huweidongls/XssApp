@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:scaleType="centerCrop"
             android:id="@+id/iv_title"
             android:src="@mipmap/message_details_avatar"
             android:layout_width="104dp"

@@ -62,9 +62,9 @@ public class PayBookingOrderActivity extends BaseActivity {
     private void pay() {
 
         map.put("pay_type", "1");
+        map.put("city", SpUtils.getCityId(context));
         ViseHttp.POST(NetUrl.order_insertUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.order_insertUrl))
-                .addParam("cid", SpUtils.getCityId(context))
                 .addParams(map)
                 .request(new ACallback<String>() {
                     @Override
@@ -100,6 +100,7 @@ public class PayBookingOrderActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_to_pay:
+//                ToastUtil.showShort(context, SpUtils.getCityId(context));
                 pay();
 //                intent.setClass(context, BookingOrderResultActivity.class);
 //                startActivity(intent);
