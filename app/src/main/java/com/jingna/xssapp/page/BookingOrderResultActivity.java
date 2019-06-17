@@ -39,19 +39,19 @@ public class BookingOrderResultActivity extends BaseActivity {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        adapter = new MessageDetailsAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(context){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+//        mList = new ArrayList<>();
+//        mList.add("");
+//        mList.add("");
+//        adapter = new MessageDetailsAdapter(mList);
+//        LinearLayoutManager manager = new LinearLayoutManager(context){
+//            @Override
+//            public boolean canScrollVertically() {
+//                return false;
+//            }
+//        };
+//        manager.setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(manager);
+//        recyclerView.setAdapter(adapter);
 
     }
 

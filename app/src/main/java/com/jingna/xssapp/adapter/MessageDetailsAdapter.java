@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.bean.OrderContentBean;
 
 import java.util.List;
 
@@ -17,9 +18,9 @@ import java.util.List;
 public class MessageDetailsAdapter extends RecyclerView.Adapter<MessageDetailsAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<OrderContentBean.ObjBean.UserBean> data;
 
-    public MessageDetailsAdapter(List<String> data) {
+    public MessageDetailsAdapter(List<OrderContentBean.ObjBean.UserBean> data) {
         this.data = data;
     }
 

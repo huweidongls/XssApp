@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -13,6 +14,7 @@ import com.jingna.xssapp.adapter.MessageDetailsAdapter;
 import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.OrderContentBean;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.StringUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
@@ -46,9 +48,17 @@ public class MessageDetailsActivity extends BaseActivity {
     TextView tvRemarks;
     @BindView(R.id.tv_order_type)
     TextView tvOrderType;
+    @BindView(R.id.tv_shangmen_time)
+    TextView tvShangmenTime;
+    @BindView(R.id.tv_start_time)
+    TextView tvStartTime;
+    @BindView(R.id.tv_end_time)
+    TextView tvEndTime;
+    @BindView(R.id.ll_worker)
+    LinearLayout llWorker;
 
     private MessageDetailsAdapter adapter;
-    private List<String> mList;
+    private List<OrderContentBean.ObjBean.UserBean> mList;
 
     private String id = "";
 
@@ -81,7 +91,11 @@ public class MessageDetailsActivity extends BaseActivity {
                                 tvTime.setText(bean.getObj().getAddtime());
                                 tvAddress.setText(bean.getObj().getAddress());
                                 tvPrice.setText("￥"+bean.getObj().getPrice());
-                                tvRemarks.setText(bean.getObj().getRemarks());
+                                if(StringUtils.isEmpty(bean.getObj().getRemarks())){
+                                    tvRemarks.setText("无");
+                                }else {
+                                    tvRemarks.setText(bean.getObj().getRemarks());
+                                }
                                 String radio = bean.getObj().getRadio();
                                 if(radio.equals("0")){
                                     tvOrderType.setText("未支付");
@@ -98,6 +112,26 @@ public class MessageDetailsActivity extends BaseActivity {
                                 }else if(radio.equals("6")){
                                     tvOrderType.setText("已退款");
                                 }
+                                //工人列表
+                                mList = bean.getObj().getUser();
+                                if(mList.size()>0){
+                                    llWorker.setVisibility(View.VISIBLE);
+                                    tvShangmenTime.setText(bean.getObj().getPretime());
+                                    tvStartTime.setText(bean.getObj().getService_start_time());
+                                    tvEndTime.setText(bean.getObj().getService_end_time());
+                                    adapter = new MessageDetailsAdapter(mList);
+                                    LinearLayoutManager manager = new LinearLayoutManager(context){
+                                        @Override
+                                        public boolean canScrollVertically() {
+                                            return false;
+                                        }
+                                    };
+                                    manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                    recyclerView.setLayoutManager(manager);
+                                    recyclerView.setAdapter(adapter);
+                                }else {
+                                    llWorker.setVisibility(View.GONE);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -109,20 +143,6 @@ public class MessageDetailsActivity extends BaseActivity {
 
                     }
                 });
-
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        adapter = new MessageDetailsAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(context){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
 
     }
 

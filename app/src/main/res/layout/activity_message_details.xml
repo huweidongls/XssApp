@@ -255,6 +255,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_worker"
                 android:layout_marginTop="7dp"
                 android:background="@color/white_ffffff"
                 android:orientation="vertical"
@@ -276,6 +277,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_shangmen_time"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
@@ -329,6 +331,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_start_time"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
@@ -354,6 +357,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_end_time"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
                         android:textColor="#666666"
