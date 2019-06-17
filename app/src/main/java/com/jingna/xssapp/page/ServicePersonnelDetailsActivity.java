@@ -13,9 +13,9 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.ServicePersonnelDetailsImgAdapter;
+import com.jingna.xssapp.adapter.ServicePersonnelDetailsItemAdapter;
 import com.jingna.xssapp.adapter.ServicePersonnelDetailsTrainAdapter;
 import com.jingna.xssapp.adapter.ServicePersonnelDetailsWorkAdapter;
-import com.jingna.xssapp.adapter.ServicePersonnelItemAdapter;
 import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.WokerContentBean;
 import com.jingna.xssapp.net.NetUrl;
@@ -27,7 +27,6 @@ import com.vise.xsnow.http.callback.ACallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -57,8 +56,8 @@ public class ServicePersonnelDetailsActivity extends BaseActivity {
     @BindView(R.id.rv_img)
     RecyclerView rvImg;
 
-    private ServicePersonnelItemAdapter itemAdapter;
-    private List<String> mList;
+    private ServicePersonnelDetailsItemAdapter itemAdapter;
+    private List<WokerContentBean.ObjBean.TableBean> mList;
     private ServicePersonnelDetailsWorkAdapter workAdapter;
     private List<WokerContentBean.ObjBean.ExperienceBean> workList;
     private ServicePersonnelDetailsTrainAdapter trainAdapter;
@@ -131,6 +130,12 @@ public class ServicePersonnelDetailsActivity extends BaseActivity {
                                 };
                                 rvImg.setLayoutManager(manager2);
                                 rvImg.setAdapter(imgAdapter);
+                                mList = bean.getObj().getTable();
+                                itemAdapter = new ServicePersonnelDetailsItemAdapter(mList);
+                                LinearLayoutManager manager3 = new LinearLayoutManager(context);
+                                manager3.setOrientation(LinearLayoutManager.HORIZONTAL);
+                                rvSign.setLayoutManager(manager3);
+                                rvSign.setAdapter(itemAdapter);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -142,15 +147,6 @@ public class ServicePersonnelDetailsActivity extends BaseActivity {
 
                     }
                 });
-
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        itemAdapter = new ServicePersonnelItemAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(context);
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvSign.setLayoutManager(manager);
-        rvSign.setAdapter(itemAdapter);
 
     }
 

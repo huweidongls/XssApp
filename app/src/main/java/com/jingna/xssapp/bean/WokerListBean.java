@@ -11,7 +11,7 @@ public class WokerListBean {
     /**
      * code : 200
      * message : 获取成功!
-     * obj : [{"id":"3","name":"祁连超","headimg":"upload/Admin/2019/05/20/b3cb3b71b97ba68d7c80b38f82023ffc15583202722.jpg","servicenum":"0"}]
+     * obj : [{"id":"5","name":"工人_7319","headimg":"upload/APP/2019/06/11/a52835702ee7f0f076f0ec2bd0679c98156023428717.jpg","servicenum":"0","age":"0","table":[{"id":"13","type_name":"蒸汽洗车","uid":"5"},{"id":"12","type_name":"普通洗车","uid":"5"},{"id":"11","type_name":"家电清洗","uid":"5"},{"id":"10","type_name":"家政清洗","uid":"5"}]},{"id":"9","name":"工人_4492","headimg":"upload/APP/2019/06/13/9801b09d2e83d09668660543cf8ee94d156039315513.jpg","servicenum":"0","age":"0","table":[{"id":"13","type_name":"蒸汽洗车","uid":"5"},{"id":"12","type_name":"普通洗车","uid":"5"},{"id":"11","type_name":"家电清洗","uid":"5"},{"id":"10","type_name":"家政清洗","uid":"5"}]}]
      */
 
     private int code;
@@ -44,10 +44,12 @@ public class WokerListBean {
 
     public static class ObjBean {
         /**
-         * id : 3
-         * name : 祁连超
-         * headimg : upload/Admin/2019/05/20/b3cb3b71b97ba68d7c80b38f82023ffc15583202722.jpg
+         * id : 5
+         * name : 工人_7319
+         * headimg : upload/APP/2019/06/11/a52835702ee7f0f076f0ec2bd0679c98156023428717.jpg
          * servicenum : 0
+         * age : 0
+         * table : [{"id":"13","type_name":"蒸汽洗车","uid":"5"},{"id":"12","type_name":"普通洗车","uid":"5"},{"id":"11","type_name":"家电清洗","uid":"5"},{"id":"10","type_name":"家政清洗","uid":"5"}]
          */
 
         private String id;
@@ -55,14 +57,7 @@ public class WokerListBean {
         private String headimg;
         private String servicenum;
         private String age;
-
-        public String getAge() {
-            return age;
-        }
-
-        public void setAge(String age) {
-            this.age = age;
-        }
+        private List<TableBean> table;
 
         public String getId() {
             return id;
@@ -94,6 +89,58 @@ public class WokerListBean {
 
         public void setServicenum(String servicenum) {
             this.servicenum = servicenum;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
+        }
+
+        public List<TableBean> getTable() {
+            return table;
+        }
+
+        public void setTable(List<TableBean> table) {
+            this.table = table;
+        }
+
+        public static class TableBean {
+            /**
+             * id : 13
+             * type_name : 蒸汽洗车
+             * uid : 5
+             */
+
+            private String id;
+            private String type_name;
+            private String uid;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getType_name() {
+                return type_name;
+            }
+
+            public void setType_name(String type_name) {
+                this.type_name = type_name;
+            }
+
+            public String getUid() {
+                return uid;
+            }
+
+            public void setUid(String uid) {
+                this.uid = uid;
+            }
         }
     }
 }

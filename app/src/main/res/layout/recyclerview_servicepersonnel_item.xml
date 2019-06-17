@@ -8,6 +8,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/tv"
             android:layout_marginRight="7dp"
             android:gravity="center"
             android:textColor="#F83030"

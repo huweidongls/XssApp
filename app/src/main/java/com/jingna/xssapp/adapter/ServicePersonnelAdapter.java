@@ -49,9 +49,7 @@ public class ServicePersonnelAdapter extends RecyclerView.Adapter<ServicePersonn
         holder.tvServiceNum.setText("服务次数："+data.get(position).getServicenum()+"次");
         holder.tvAge.setText(data.get(position).getAge()+"岁");
 
-        List<String> list = new ArrayList<>();
-        list.add("");
-        list.add("");
+        List<WokerListBean.ObjBean.TableBean> list = data.get(position).getTable();
         ServicePersonnelItemAdapter itemAdapter = new ServicePersonnelItemAdapter(list);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);

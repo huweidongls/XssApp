@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jingna.xssapp.R;
-import com.jingna.xssapp.bean.WokerListBean;
+import com.jingna.xssapp.bean.WokerContentBean;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import java.util.List;
  * Created by Administrator on 2019/5/22.
  */
 
-public class ServicePersonnelItemAdapter extends RecyclerView.Adapter<ServicePersonnelItemAdapter.ViewHolder> {
+public class ServicePersonnelDetailsItemAdapter extends RecyclerView.Adapter<ServicePersonnelDetailsItemAdapter.ViewHolder> {
 
     private Context context;
-    private List<WokerListBean.ObjBean.TableBean> data;
+    private List<WokerContentBean.ObjBean.TableBean> data;
 
-    public ServicePersonnelItemAdapter(List<WokerListBean.ObjBean.TableBean> data) {
+    public ServicePersonnelDetailsItemAdapter(List<WokerContentBean.ObjBean.TableBean> data) {
         this.data = data;
     }
 

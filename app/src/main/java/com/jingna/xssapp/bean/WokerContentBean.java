@@ -11,7 +11,7 @@ public class WokerContentBean {
     /**
      * code : 200
      * message : 获取成功!
-     * obj : {"id":"3","name":"祁连超","headimg":"upload/Admin/2019/05/23/c1df2451e9b4578775811c6f8e73d615155857990713.jpg","servicenum":"0","essentialinformation":"PHA+56WB6L+e6LaFPC9wPjxwPuelgei/nui2hTwvcD4=","age":"22","experience":[{"id":"1","companyname":"哈尔滨静娜科技","start_time":"2016-5-1","end_time":"2019-5-1","position":"php","salary":"100000","jobdescription":"PHA+5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqAPC9wPjxkaXYgc3R5bGU9InBvc2l0aW9uOiBhYnNvbHV0ZTsgd2lkdGg6IDFweDsgaGVpZ2h0OiAxcHg7IG92ZXJmbG93OiBoaWRkZW47IGxlZnQ6IC0xMDAwcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHRvcDogOTJweDsiPuWTiOWwlOa7qOmdmeWonOenkeaKgDwvZGl2Pg==","gid":"3"}],"train":[{"id":"1","organizationname":"图灵","start_time":"2015-5-1","end_time":"2015-9-1","description":"PHA+5Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G1PC9wPg==","gid":"3"}],"img":[{"id":"7","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199689.jpg","sid":"3"},{"id":"8","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199354.jpg","sid":"3"},{"id":"9","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199591.jpg","sid":"3"},{"id":"10","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199635.jpg","sid":"3"}]}
+     * obj : {"id":"3","name":"祁连超","headimg":"upload/Admin/2019/05/23/c1df2451e9b4578775811c6f8e73d615155857990713.jpg","servicenum":"0","essentialinformation":"PHA+56WB6L+e6LaFPC9wPjxwPuelgei/nui2hTwvcD4=","age":"22","experience":[{"id":"1","companyname":"哈尔滨静娜科技","start_time":"2016-5-1","end_time":"2019-5-1","position":"php","salary":"100000","jobdescription":"5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA","gid":"3"}],"train":[{"id":"1","organizationname":"图灵","start_time":"2015-5-1","end_time":"2015-9-1","description":"PHA+5Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G1PC9wPg==","gid":"3"}],"img":[{"id":"7","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199689.jpg","sid":"3"},{"id":"8","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199354.jpg","sid":"3"},{"id":"9","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199591.jpg","sid":"3"},{"id":"10","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199635.jpg","sid":"3"}],"table":[{"id":"13","type_name":"蒸汽洗车","uid":"5"},{"id":"12","type_name":"普通洗车","uid":"5"},{"id":"11","type_name":"家电清洗","uid":"5"}]}
      */
 
     private int code;
@@ -50,9 +50,10 @@ public class WokerContentBean {
          * servicenum : 0
          * essentialinformation : PHA+56WB6L+e6LaFPC9wPjxwPuelgei/nui2hTwvcD4=
          * age : 22
-         * experience : [{"id":"1","companyname":"哈尔滨静娜科技","start_time":"2016-5-1","end_time":"2019-5-1","position":"php","salary":"100000","jobdescription":"PHA+5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqAPC9wPjxkaXYgc3R5bGU9InBvc2l0aW9uOiBhYnNvbHV0ZTsgd2lkdGg6IDFweDsgaGVpZ2h0OiAxcHg7IG92ZXJmbG93OiBoaWRkZW47IGxlZnQ6IC0xMDAwcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHRvcDogOTJweDsiPuWTiOWwlOa7qOmdmeWonOenkeaKgDwvZGl2Pg==","gid":"3"}]
+         * experience : [{"id":"1","companyname":"哈尔滨静娜科技","start_time":"2016-5-1","end_time":"2019-5-1","position":"php","salary":"100000","jobdescription":"5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA","gid":"3"}]
          * train : [{"id":"1","organizationname":"图灵","start_time":"2015-5-1","end_time":"2015-9-1","description":"PHA+5Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G15Zu+54G1PC9wPg==","gid":"3"}]
          * img : [{"id":"7","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199689.jpg","sid":"3"},{"id":"8","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199354.jpg","sid":"3"},{"id":"9","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199591.jpg","sid":"3"},{"id":"10","imgurl":"upload/Admin/2019/05/20/bc70955361c4ad1b2fe3d3586eb386b61558338199635.jpg","sid":"3"}]
+         * table : [{"id":"13","type_name":"蒸汽洗车","uid":"5"},{"id":"12","type_name":"普通洗车","uid":"5"},{"id":"11","type_name":"家电清洗","uid":"5"}]
          */
 
         private String id;
@@ -64,6 +65,7 @@ public class WokerContentBean {
         private List<ExperienceBean> experience;
         private List<TrainBean> train;
         private List<ImgBean> img;
+        private List<TableBean> table;
 
         public String getId() {
             return id;
@@ -137,6 +139,14 @@ public class WokerContentBean {
             this.img = img;
         }
 
+        public List<TableBean> getTable() {
+            return table;
+        }
+
+        public void setTable(List<TableBean> table) {
+            this.table = table;
+        }
+
         public static class ExperienceBean {
             /**
              * id : 1
@@ -145,7 +155,7 @@ public class WokerContentBean {
              * end_time : 2019-5-1
              * position : php
              * salary : 100000
-             * jobdescription : PHA+5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqAPC9wPjxkaXYgc3R5bGU9InBvc2l0aW9uOiBhYnNvbHV0ZTsgd2lkdGg6IDFweDsgaGVpZ2h0OiAxcHg7IG92ZXJmbG93OiBoaWRkZW47IGxlZnQ6IC0xMDAwcHg7IHdoaXRlLXNwYWNlOiBub3dyYXA7IHRvcDogOTJweDsiPuWTiOWwlOa7qOmdmeWonOenkeaKgDwvZGl2Pg==
+             * jobdescription : 5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA5ZOI5bCU5ruo6Z2Z5aic56eR5oqA
              * gid : 3
              */
 
@@ -322,6 +332,42 @@ public class WokerContentBean {
 
             public void setSid(String sid) {
                 this.sid = sid;
+            }
+        }
+
+        public static class TableBean {
+            /**
+             * id : 13
+             * type_name : 蒸汽洗车
+             * uid : 5
+             */
+
+            private String id;
+            private String type_name;
+            private String uid;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getType_name() {
+                return type_name;
+            }
+
+            public void setType_name(String type_name) {
+                this.type_name = type_name;
+            }
+
+            public String getUid() {
+                return uid;
+            }
+
+            public void setUid(String uid) {
+                this.uid = uid;
             }
         }
     }
