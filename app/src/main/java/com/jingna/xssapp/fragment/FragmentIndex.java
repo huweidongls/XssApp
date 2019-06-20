@@ -100,10 +100,6 @@ public class FragmentIndex extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_index, null);
 
         ButterKnife.bind(this, view);
-        initBanner();
-        initZixun();
-        initFive();
-        initView();
 
         return view;
     }
@@ -112,6 +108,9 @@ public class FragmentIndex extends BaseFragment {
     public void onStart() {
         super.onStart();
         initData();
+        initZixun();
+        initFive();
+        initView();
     }
 
     private void initView() {
@@ -172,56 +171,58 @@ public class FragmentIndex extends BaseFragment {
                             if(jsonObject.optInt("code") == 200){
                                 Gson gson = new Gson();
                                 final PriceListBean bean = gson.fromJson(data, PriceListBean.class);
-                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(0).getImgurl()).into(iv1);
-                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(1).getImgurl()).into(iv2);
-                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(2).getImgurl()).into(iv3);
-                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(3).getImgurl()).into(iv4);
-                                Glide.with(getContext()).load(NetUrl.BASE_URL+bean.getObj().get(4).getImgurl()).into(iv5);
-                                iv1.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent();
-                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
-                                        intent.putExtra("id", bean.getObj().get(0).getServerid());
-                                        startActivity(intent);
-                                    }
-                                });
-                                iv2.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent();
-                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
-                                        intent.putExtra("id", bean.getObj().get(1).getServerid());
-                                        startActivity(intent);
-                                    }
-                                });
-                                iv3.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent();
-                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
-                                        intent.putExtra("id", bean.getObj().get(2).getServerid());
-                                        startActivity(intent);
-                                    }
-                                });
-                                iv4.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent();
-                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
-                                        intent.putExtra("id", bean.getObj().get(3).getServerid());
-                                        startActivity(intent);
-                                    }
-                                });
-                                iv5.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent();
-                                        intent.setClass(getContext(), ServiceDetailsActivity.class);
-                                        intent.putExtra("id", bean.getObj().get(4).getServerid());
-                                        startActivity(intent);
-                                    }
-                                });
+                                if(bean.getObj().size()>0) {
+                                    Glide.with(getContext()).load(NetUrl.BASE_URL + bean.getObj().get(0).getImgurl()).into(iv1);
+                                    Glide.with(getContext()).load(NetUrl.BASE_URL + bean.getObj().get(1).getImgurl()).into(iv2);
+                                    Glide.with(getContext()).load(NetUrl.BASE_URL + bean.getObj().get(2).getImgurl()).into(iv3);
+                                    Glide.with(getContext()).load(NetUrl.BASE_URL + bean.getObj().get(3).getImgurl()).into(iv4);
+                                    Glide.with(getContext()).load(NetUrl.BASE_URL + bean.getObj().get(4).getImgurl()).into(iv5);
+                                    iv1.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent();
+                                            intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                            intent.putExtra("id", bean.getObj().get(0).getServerid());
+                                            startActivity(intent);
+                                        }
+                                    });
+                                    iv2.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent();
+                                            intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                            intent.putExtra("id", bean.getObj().get(1).getServerid());
+                                            startActivity(intent);
+                                        }
+                                    });
+                                    iv3.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent();
+                                            intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                            intent.putExtra("id", bean.getObj().get(2).getServerid());
+                                            startActivity(intent);
+                                        }
+                                    });
+                                    iv4.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent();
+                                            intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                            intent.putExtra("id", bean.getObj().get(3).getServerid());
+                                            startActivity(intent);
+                                        }
+                                    });
+                                    iv5.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent();
+                                            intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                            intent.putExtra("id", bean.getObj().get(4).getServerid());
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -254,8 +255,10 @@ public class FragmentIndex extends BaseFragment {
                                 for (NewsListBean.ObjBean bean1 : newsList){
                                     list.add(bean1.getTitle());
                                 }
-                                tvZixun.setList(list);
-                                tvZixun.startScroll();
+                                if(list.size()>0){
+                                    tvZixun.setList(list);
+                                    tvZixun.startScroll();
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
