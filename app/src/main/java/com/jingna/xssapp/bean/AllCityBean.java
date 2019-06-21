@@ -56,6 +56,15 @@ public class AllCityBean {
         @Letter(isSortField = true)
         private String area_name;
         private String radio;
+        private String cid;
+
+        public String getCid() {
+            return cid;
+        }
+
+        public void setCid(String cid) {
+            this.cid = cid;
+        }
 
         public String getId() {
             return id;

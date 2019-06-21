@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.jingna.xssapp.bean.AllCityBean;
 import com.jingna.xssapp.bean.OpenCityListBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.SpUtils;
+import com.jingna.xssapp.util.ToastUtil;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
@@ -149,6 +151,27 @@ public class CityActivity extends BaseActivity {
                                 mAllList = bean.getObj();
                                 allCityAdapter = new AllCityAdapter(context, mAllList);
                                 listView.setAdapter(allCityAdapter);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        if(mAllList.get(position-1).getRadio().equals("1")){
+                                            if(type == 1){
+                                                SpUtils.setCityId(context, mAllList.get(position-1).getCid());
+                                                SpUtils.setCityName(context, "-"+mAllList.get(position-1).getArea_name());
+                                                finish();
+                                            }else if(type == 0){
+                                                Intent intent = new Intent();
+                                                intent.setClass(context, MainActivity.class);
+                                                SpUtils.setCityId(context, mAllList.get(position-1).getCid());
+                                                SpUtils.setCityName(context, "-"+mAllList.get(position-1).getArea_name());
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }else {
+                                            ToastUtil.showShort(context, "当前城市未开通");
+                                        }
+                                    }
+                                });
                                 //update data
 //                                adapter.updateListView(mDatas);
 //        tvFoot.setText(mDatas.size() + "位联系人");
