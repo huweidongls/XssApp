@@ -92,4 +92,6 @@ public class NetUrl {
     public static String member_EvaluateUrl = "index.php/api/Order/Member_order/Member_Evaluate";
     //订单详情
     public static String order_contentUrl = "index.php/api/Order/Member_order/Order_content";
+    //所有城市接口
+    public static String allcityUrl = "index.php/api/Index/Home/Allcity";
 }

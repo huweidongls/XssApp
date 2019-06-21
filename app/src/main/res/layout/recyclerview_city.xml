@@ -9,6 +9,17 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@id/tv_letter"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#e9e9e9"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textColor="#7f7f7f"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/tv_title"
             android:paddingLeft="14dp"
             android:gravity="center_vertical"

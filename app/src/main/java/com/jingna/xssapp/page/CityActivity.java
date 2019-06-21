@@ -5,14 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.adapter.AllCityAdapter;
 import com.jingna.xssapp.adapter.CityAdapter;
 import com.jingna.xssapp.base.BaseActivity;
+import com.jingna.xssapp.bean.AllCityBean;
 import com.jingna.xssapp.bean.OpenCityListBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.SpUtils;
@@ -28,21 +33,30 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.zhouzhuo.zzletterssidebar.ZzLetterSideBar;
+import me.zhouzhuo.zzletterssidebar.interf.OnLetterTouchListener;
 
 public class CityActivity extends BaseActivity {
 
     private Context context = CityActivity.this;
 
-    @BindView(R.id.rv)
-    RecyclerView recyclerView;
-    @BindView(R.id.tv_cur_city)
-    TextView tvCurCity;
+    private RecyclerView recyclerView;
+    private TextView tvCurCity;
+
+    private ListView listView;
+    private ZzLetterSideBar sideBar;
+    private TextView dialog;
 
     private CityAdapter adapter;
     private List<OpenCityListBean.ObjBean> mList;
 
     private String curCity = "";
     private int type;
+
+    private AllCityAdapter allCityAdapter;
+    private List<AllCityBean.ObjBean> mAllList;
+
+    private View header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +66,16 @@ public class CityActivity extends BaseActivity {
         type = getIntent().getIntExtra("type", 0);
         curCity = getIntent().getStringExtra("city");
         ButterKnife.bind(CityActivity.this);
+        initHeader();
         initData();
 
     }
 
-    private void initData() {
+    private void initHeader() {
+
+        header = LayoutInflater.from(context).inflate(R.layout.header_city, null);
+        recyclerView = header.findViewById(R.id.rv);
+        tvCurCity = header.findViewById(R.id.tv_cur_city);
 
         tvCurCity.setText(curCity);
 
@@ -97,6 +116,53 @@ public class CityActivity extends BaseActivity {
                                 manager.setOrientation(LinearLayoutManager.VERTICAL);
                                 recyclerView.setLayoutManager(manager);
                                 recyclerView.setAdapter(adapter);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
+
+    }
+
+    private void initData() {
+
+        sideBar = (ZzLetterSideBar) findViewById(R.id.sidebar);
+        dialog = (TextView) findViewById(R.id.tv_dialog);
+        listView = (ListView) findViewById(R.id.list_view);
+
+        ViseHttp.POST(NetUrl.allcityUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.allcityUrl))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optInt("code") == 200){
+                                Gson gson = new Gson();
+                                AllCityBean bean = gson.fromJson(data, AllCityBean.class);
+                                mAllList = bean.getObj();
+                                allCityAdapter = new AllCityAdapter(context, mAllList);
+                                listView.setAdapter(allCityAdapter);
+                                //update data
+//                                adapter.updateListView(mDatas);
+//        tvFoot.setText(mDatas.size() + "位联系人");
+                                //设置右侧触摸监听
+                                sideBar.setLetterTouchListener(listView, allCityAdapter, dialog, new OnLetterTouchListener() {
+                                    @Override
+                                    public void onLetterTouch(String letter, int position) {
+                                    }
+
+                                    @Override
+                                    public void onActionUp() {
+                                    }
+                                });
+                                listView.addHeaderView(header);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

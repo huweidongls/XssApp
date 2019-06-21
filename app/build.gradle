@@ -58,4 +58,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     implementation 'top.zibin:Luban:1.1.8'
+    compile 'me.zhouzhuo.zzletterssidebar:zz-letters-sidebar:1.0.2'
 }
