@@ -83,6 +83,22 @@ public class PreAboutBean {
             private String price;
             private String text;
             private String tollitem;
+            private int isSelect = 0;
+
+            public ServicePriceBean(String id, String price, String text, String tollitem) {
+                this.id = id;
+                this.price = price;
+                this.text = text;
+                this.tollitem = tollitem;
+            }
+
+            public int getIsSelect() {
+                return isSelect;
+            }
+
+            public void setIsSelect(int isSelect) {
+                this.isSelect = isSelect;
+            }
 
             public String getId() {
                 return id;

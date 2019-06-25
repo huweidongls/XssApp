@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.bean.PreAboutBean;
 
@@ -22,10 +24,12 @@ public class PopBookingOrderNumAdapter extends RecyclerView.Adapter<PopBookingOr
     private Context context;
     private List<PreAboutBean.ObjBean.ServicePriceBean> data;
     private ClickListener listener;
+    private String isMore;
 
-    public PopBookingOrderNumAdapter(List<PreAboutBean.ObjBean.ServicePriceBean> data, ClickListener listener) {
+    public PopBookingOrderNumAdapter(List<PreAboutBean.ObjBean.ServicePriceBean> data, String isMore, ClickListener listener) {
         this.data = data;
         this.listener = listener;
+        this.isMore = isMore;
     }
 
     @Override
@@ -42,7 +46,17 @@ public class PopBookingOrderNumAdapter extends RecyclerView.Adapter<PopBookingOr
         holder.rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(position, holder.tv.getText().toString());
+                if(isMore.equals("0")){
+                    listener.onItemClick(data.get(position));
+                }else if(isMore.equals("1")){
+                    if(data.get(position).getIsSelect() == 0){
+                        data.get(position).setIsSelect(1);
+                        Glide.with(context).load(R.mipmap.zhifu_select).into(holder.iv);
+                    }else {
+                        data.get(position).setIsSelect(0);
+                        Glide.with(context).load(R.mipmap.zhifu_unselect).into(holder.iv);
+                    }
+                }
             }
         });
     }
@@ -56,16 +70,18 @@ public class PopBookingOrderNumAdapter extends RecyclerView.Adapter<PopBookingOr
 
         private RelativeLayout rl;
         private TextView tv;
+        private ImageView iv;
 
         public ViewHolder(View itemView) {
             super(itemView);
             rl = itemView.findViewById(R.id.rl);
             tv = itemView.findViewById(R.id.tv);
+            iv = itemView.findViewById(R.id.iv);
         }
     }
 
     public interface ClickListener{
-        void onItemClick(int pos, String content);
+        void onItemClick(PreAboutBean.ObjBean.ServicePriceBean bean);
     }
 
 }

@@ -20,6 +20,7 @@ import com.jingna.xssapp.bean.ServiceContentBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.Base64Utils;
 import com.jingna.xssapp.util.HtmlFromUtils;
+import com.jingna.xssapp.util.Logger;
 import com.jingna.xssapp.util.SpUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -165,6 +166,7 @@ public class ServiceDetailsActivity extends BaseActivity {
                     intent.setClass(context, BookingOrderActivity.class);
                     intent.putExtra("id", bean.getObj().getId());
                     intent.putExtra("name", bean.getObj().getServicename());
+                    intent.putExtra("ismore", bean.getObj().getSpecifications_status());
                     startActivity(intent);
                     finish();
                 }

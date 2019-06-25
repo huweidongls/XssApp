@@ -72,6 +72,15 @@ public class ServiceContentBean {
         private String Serviceguarantee;
         private List<PriceBean> price;
         private List<EvaluateBean> evaluate;
+        private String specifications_status;
+
+        public String getSpecifications_status() {
+            return specifications_status;
+        }
+
+        public void setSpecifications_status(String specifications_status) {
+            this.specifications_status = specifications_status;
+        }
 
         public String getId() {
             return id;

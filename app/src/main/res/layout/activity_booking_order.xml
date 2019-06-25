@@ -196,11 +196,13 @@
                 </RelativeLayout>
 
                 <View
+                    android:visibility="gone"
                     android:background="@color/line"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"/>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="52dp">
 
@@ -339,49 +341,16 @@
 
                 </RelativeLayout>
 
-                <View
-                    android:background="@color/line"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
 
                 <RelativeLayout
-                    android:visibility="gone"
-                    android:id="@+id/rl_num_content"
+                    android:descendantFocusability="blocksDescendants"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_num_name"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:textColor="@color/black_333333"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:inputType="number"
-                        android:id="@+id/et_num"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center"
-                        android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/tv_num_danwei"
-                        android:background="@null"
-                        android:hint="请输入"
-                        android:textColor="#333333"
-                        android:textSize="14sp"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/tv_num_danwei"
-                        android:layout_marginRight="16dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:textColor="#333333"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
                 </RelativeLayout>
 

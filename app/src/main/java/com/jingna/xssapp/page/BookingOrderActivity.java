@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingna.xssapp.R;
+import com.jingna.xssapp.adapter.BookingOrderAdapter;
 import com.jingna.xssapp.adapter.PopBookingOrderCouponsAdapter;
 import com.jingna.xssapp.adapter.PopBookingOrderNumAdapter;
 import com.jingna.xssapp.base.BaseActivity;
@@ -39,11 +41,14 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,14 +66,6 @@ public class BookingOrderActivity extends BaseActivity {
     TextView tvAddress;
     @BindView(R.id.tv_address_details)
     TextView tvAddressDetails;
-    @BindView(R.id.tv_num_name)
-    TextView tvNumName;
-    @BindView(R.id.tv_num_danwei)
-    TextView tvNumDanwei;
-    @BindView(R.id.et_num)
-    EditText etNum;
-    @BindView(R.id.rl_num_content)
-    RelativeLayout rlNumContent;
     @BindView(R.id.et_more_note)
     EditText etMoreNote;
     @BindView(R.id.tv_coupons)
@@ -81,6 +78,8 @@ public class BookingOrderActivity extends BaseActivity {
     TextView tvNumContent;
     @BindView(R.id.tv_price)
     TextView tvPrice;
+    @BindView(R.id.rv_num)
+    RecyclerView rvNum;
 
     private int personNum = 1;
     private String name = "";
@@ -92,6 +91,7 @@ public class BookingOrderActivity extends BaseActivity {
     private RecyclerView rvSelectNum;
     private PopBookingOrderNumAdapter numAdapter;
     private List<PreAboutBean.ObjBean.ServicePriceBean> numList;
+    private Button btnSure;
 
     private PopupWindow popCoupons;
     private View couponsView;
@@ -103,11 +103,18 @@ public class BookingOrderActivity extends BaseActivity {
     private CustomDatePicker customDatePicker;
     private String now;
 
-    private String specid = "";
     private String couponsId = "0";
     private double jichuPrice;
     private double couponsPrice;
-    private double numMoney;
+    private String isMore = "";
+
+    //多规格输入列表
+    private BookingOrderAdapter bookingOrderAdapter;
+    private List<PreAboutBean.ObjBean.ServicePriceBean> mBookingList;
+    //服务价格id-服务数量id  map
+    private Map<String, String> numMap;
+    private Map<String, Double> priceMap;
+    private double allMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +123,7 @@ public class BookingOrderActivity extends BaseActivity {
 
         id = getIntent().getStringExtra("id");
         name = getIntent().getStringExtra("name");
+        isMore = getIntent().getStringExtra("ismore");
         ButterKnife.bind(BookingOrderActivity.this);
         initData();
         initDatePicker();
@@ -138,27 +146,45 @@ public class BookingOrderActivity extends BaseActivity {
 
     private void initData() {
 
-        etNum.addTextChangedListener(new TextWatcher() {
+        numMap = new LinkedHashMap<>();
+        priceMap = new LinkedHashMap<>();
+        mBookingList = new ArrayList<>();
+        bookingOrderAdapter = new BookingOrderAdapter(mBookingList, new BookingOrderAdapter.ClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                int serviceNum = Integer.valueOf(etNum.getText().toString());
-                double price = jichuPrice+(numMoney*serviceNum)-couponsPrice;
-                tvPrice.setText("￥"+price);
+            public void onClick(String id, String num, String price) {
+                allMoney = 0.00;
+                numMap.put(id, num);
+                priceMap.put(id, Double.valueOf(price));
+                Set set = priceMap.keySet();
+                for(Iterator iter = set.iterator(); iter.hasNext();)
+                {
+                    String key = (String)iter.next();
+                    Double value = priceMap.get(key);
+                    allMoney = allMoney + value;
+                }
+                double priceI = jichuPrice+allMoney-couponsPrice;
+                tvPrice.setText("￥"+priceI);
             }
         });
+        LinearLayoutManager manager = new LinearLayoutManager(context){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvNum.setLayoutManager(manager);
+        rvNum.setAdapter(bookingOrderAdapter);
+
         tvServiceName.setText(name);
         selectNumView = LayoutInflater.from(context).inflate(R.layout.popupwindow_booking_order_num, null);
         rvSelectNum = selectNumView.findViewById(R.id.rv);
+        btnSure = selectNumView.findViewById(R.id.btn_sure);
+        if(isMore.equals("1")){
+            btnSure.setVisibility(View.VISIBLE);
+        }else {
+            btnSure.setVisibility(View.GONE);
+        }
         couponsView = LayoutInflater.from(context).inflate(R.layout.popupwindow_booking_order_num, null);
         rvCoupons = couponsView.findViewById(R.id.rv);
         ViseHttp.POST(NetUrl.preAboutUrl)
@@ -175,21 +201,18 @@ public class BookingOrderActivity extends BaseActivity {
                                 final PreAboutBean bean = gson.fromJson(data, PreAboutBean.class);
                                 tvJichuPrice.setText(bean.getObj().getBasicservice()+"元");
                                 jichuPrice = Double.valueOf(bean.getObj().getBasicservice());
+
+                                //规格
                                 numList = bean.getObj().getServicePrice();
-                                numAdapter = new PopBookingOrderNumAdapter(numList, new PopBookingOrderNumAdapter.ClickListener() {
+                                numAdapter = new PopBookingOrderNumAdapter(numList, isMore, new PopBookingOrderNumAdapter.ClickListener() {
                                     @Override
-                                    public void onItemClick(int pos, String content) {
-                                        rlNumContent.setVisibility(View.VISIBLE);
-                                        tvNumContent.setText(content);
-                                        specid = bean.getObj().getServicePrice().get(pos).getId();
-                                        numMoney = Double.valueOf(bean.getObj().getServicePrice().get(pos).getPrice());
-                                        tvNumName.setText(bean.getObj().getServicePrice().get(pos).getTollitem()+"：");
-                                        tvNumDanwei.setText(bean.getObj().getServicePrice().get(pos).getText());
-                                        if(!StringUtils.isEmpty(etNum.getText().toString())){
-                                            int serviceNum = Integer.valueOf(etNum.getText().toString());
-                                            double price = jichuPrice+(numMoney*serviceNum)-couponsPrice;
-                                            tvPrice.setText("￥"+price);
-                                        }
+                                    public void onItemClick(PreAboutBean.ObjBean.ServicePriceBean bean) {
+                                        allMoney = 0.00;
+                                        tvPrice.setText("￥"+"0.0");
+                                        tvNumContent.setText("已选择");
+                                        mBookingList.clear();
+                                        mBookingList.add(bean);
+                                        bookingOrderAdapter.notifyDataSetChanged();
                                         popupWindow.dismiss();
                                     }
                                 });
@@ -197,6 +220,26 @@ public class BookingOrderActivity extends BaseActivity {
                                 manager.setOrientation(LinearLayoutManager.VERTICAL);
                                 rvSelectNum.setLayoutManager(manager);
                                 rvSelectNum.setAdapter(numAdapter);
+                                btnSure.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        allMoney = 0.00;
+                                        tvPrice.setText("￥"+"0.0");
+                                        tvNumContent.setText("已选择");
+                                        mBookingList.clear();
+                                        numMap.clear();
+                                        priceMap.clear();
+                                        for (PreAboutBean.ObjBean.ServicePriceBean bean1 : numList){
+                                            if(bean1.getIsSelect() == 1){
+                                                mBookingList.add(bean1);
+                                            }
+                                        }
+                                        bookingOrderAdapter.notifyDataSetChanged();
+                                        popupWindow.dismiss();
+                                    }
+                                });
+
+                                //优惠券
                                 couponsList = bean.getObj().getCoupon();
                                 if(couponsList.size()>0){
                                     tvCoupons.setText("请选择优惠券");
@@ -207,8 +250,7 @@ public class BookingOrderActivity extends BaseActivity {
                                             tvCoupons.setText(bean.getObj().getCoupon().get(pos).getOption());
                                             couponsId = bean.getObj().getCoupon().get(pos).getId();
                                             couponsPrice = Double.valueOf(bean.getObj().getCoupon().get(pos).getMoney());
-                                            int serviceNum = Integer.valueOf(etNum.getText().toString());
-                                            double price = jichuPrice+(numMoney*serviceNum)-couponsPrice;
+                                            double price = jichuPrice+allMoney-couponsPrice;
                                             tvPrice.setText("￥"+price);
                                             popCoupons.dismiss();
                                         }
@@ -243,12 +285,24 @@ public class BookingOrderActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_sure:
-                if(StringUtils.isEmpty(addressId)||StringUtils.isEmpty(tvTime.getText().toString())||StringUtils.isEmpty(etNum.getText().toString())
-                        ||StringUtils.isEmpty(specid)){
+                if(StringUtils.isEmpty(addressId)||StringUtils.isEmpty(tvTime.getText().toString())||
+                        mBookingList.size()!=numMap.size()){
                     ToastUtil.showShort(context, "请完善信息后提交");
                 }else {
-                    int serviceNum = Integer.valueOf(etNum.getText().toString());
-                    double price = jichuPrice+(numMoney*serviceNum)-couponsPrice;
+                    Set set = numMap.keySet();
+                    String specid_number = "";
+                    for(Iterator iter = set.iterator(); iter.hasNext();)
+                    {
+                        String key = (String)iter.next();
+                        String value = numMap.get(key);
+                        if(!iter.hasNext()){
+                            specid_number = specid_number+key+"-"+value;
+                        }else {
+                            specid_number = specid_number+key+"-"+value+",";
+                        }
+                    }
+                    Logger.e("123123", specid_number);
+                    double price = jichuPrice+allMoney-couponsPrice;
                     Map<String, String> map = new LinkedHashMap<>();
                     map.put("uid", SpUtils.getUid(context));
                     map.put("fid", id);
@@ -256,9 +310,8 @@ public class BookingOrderActivity extends BaseActivity {
                     map.put("ptime", tvTime.getText().toString());
                     map.put("price", price+"");
                     map.put("remarks", etMoreNote.getText().toString()+"");
-                    map.put("number", etNum.getText().toString());
-                    map.put("specid", specid);
                     map.put("dis_id", couponsId);
+                    map.put("specid_number", specid_number);
                     intent.setClass(context, PayBookingOrderActivity.class);
                     intent.putExtra("map", (Serializable) map);
                     startActivity(intent);
