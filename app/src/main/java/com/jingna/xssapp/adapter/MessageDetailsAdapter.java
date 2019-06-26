@@ -5,9 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.bean.OrderContentBean;
+import com.jingna.xssapp.net.NetUrl;
 
 import java.util.List;
 
@@ -34,7 +38,9 @@ public class MessageDetailsAdapter extends RecyclerView.Adapter<MessageDetailsAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getHeadimg()).into(holder.ivAvatar);
+        holder.tvName.setText(data.get(position).getName());
+        holder.tvPhoneNum.setText(data.get(position).getUser());
     }
 
     @Override
@@ -44,8 +50,15 @@ public class MessageDetailsAdapter extends RecyclerView.Adapter<MessageDetailsAd
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        private ImageView ivAvatar;
+        private TextView tvName;
+        private TextView tvPhoneNum;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            ivAvatar = itemView.findViewById(R.id.iv_avatar);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvPhoneNum = itemView.findViewById(R.id.tv_phone_num);
         }
     }
 

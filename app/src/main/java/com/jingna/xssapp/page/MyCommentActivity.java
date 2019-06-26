@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.jingna.xssapp.R;
@@ -32,6 +33,8 @@ public class MyCommentActivity extends BaseActivity {
 
     @BindView(R.id.rv)
     RecyclerView recyclerView;
+    @BindView(R.id.iv_message_null)
+    ImageView ivMessageNull;
 
     private MyCommentAdapter adapter;
     private List<MemberEvaluateBean.ObjBean> mList;
@@ -60,11 +63,18 @@ public class MyCommentActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 MemberEvaluateBean bean = gson.fromJson(data, MemberEvaluateBean.class);
                                 mList = bean.getObj();
-                                adapter = new MyCommentAdapter(mList);
-                                LinearLayoutManager manager = new LinearLayoutManager(context);
-                                manager.setOrientation(LinearLayoutManager.VERTICAL);
-                                recyclerView.setLayoutManager(manager);
-                                recyclerView.setAdapter(adapter);
+                                if(mList.size()>0){
+                                    adapter = new MyCommentAdapter(mList);
+                                    LinearLayoutManager manager = new LinearLayoutManager(context);
+                                    manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                    recyclerView.setLayoutManager(manager);
+                                    recyclerView.setAdapter(adapter);
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    ivMessageNull.setVisibility(View.GONE);
+                                }else {
+                                    recyclerView.setVisibility(View.GONE);
+                                    ivMessageNull.setVisibility(View.VISIBLE);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

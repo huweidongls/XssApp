@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +47,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.operators.observable.ObservableError;
 import io.reactivex.schedulers.Schedulers;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public class PersonInformationActivity extends BaseActivity {
 
@@ -188,36 +193,61 @@ public class PersonInformationActivity extends BaseActivity {
                                 }
                             });
                 }else {
-                    File file = new File(picUrl);
-                    ViseHttp.UPLOAD(NetUrl.saveUserInfoUrl)
-                            .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.saveUserInfoUrl))
-                            .addParam("uid", SpUtils.getUid(context))
-                            .addParam("nickname", etName.getText().toString())
-                            .addParam("sex", sex)
-                            .addParam("birthday", tvBirthday.getText().toString())
-                            .addFile("headimg", file)
-                            .request(new ACallback<String>() {
+                    List<String> mList = new ArrayList<>();
+                    mList.add(picUrl);
+                    Luban.with(context)
+                            .load(mList)
+                            .ignoreBy(100)
+                            .filter(new CompressionPredicate() {
                                 @Override
-                                public void onSuccess(String data) {
-                                    try {
-                                        JSONObject jsonObject = new JSONObject(data);
-                                        if(jsonObject.optInt("code") == 200){
-                                            ToastUtil.showShort(context, jsonObject.optString("message"));
-                                            finish();
-                                        }else {
-                                            ToastUtil.showShort(context, jsonObject.optString("message"));
-                                        }
-                                        WeiboDialogUtils.closeDialog(dialog);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
+                                public boolean apply(String path) {
+                                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                                }
+                            })
+                            .setCompressListener(new OnCompressListener() {
+                                @Override
+                                public void onStart() {
+
                                 }
 
                                 @Override
-                                public void onFail(int errCode, String errMsg) {
+                                public void onSuccess(File file) {
+                                    ViseHttp.UPLOAD(NetUrl.saveUserInfoUrl)
+                                            .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.saveUserInfoUrl))
+                                            .addParam("uid", SpUtils.getUid(context))
+                                            .addParam("nickname", etName.getText().toString())
+                                            .addParam("sex", sex)
+                                            .addParam("birthday", tvBirthday.getText().toString())
+                                            .addFile("headimg", file)
+                                            .request(new ACallback<String>() {
+                                                @Override
+                                                public void onSuccess(String data) {
+                                                    try {
+                                                        JSONObject jsonObject = new JSONObject(data);
+                                                        if(jsonObject.optInt("code") == 200){
+                                                            ToastUtil.showShort(context, jsonObject.optString("message"));
+                                                            finish();
+                                                        }else {
+                                                            ToastUtil.showShort(context, jsonObject.optString("message"));
+                                                        }
+                                                        WeiboDialogUtils.closeDialog(dialog);
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFail(int errCode, String errMsg) {
+                                                    WeiboDialogUtils.closeDialog(dialog);
+                                                }
+                                            });
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
                                     WeiboDialogUtils.closeDialog(dialog);
                                 }
-                            });
+                            }).launch();
                 }
 //                Observable<File> observable = ObservableError.create(new ObservableOnSubscribe<File>() {
 //                    @Override

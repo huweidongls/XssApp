@@ -100,6 +100,7 @@ public class FragmentIndex extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_index, null);
 
         ButterKnife.bind(this, view);
+        initBanner();
 
         return view;
     }

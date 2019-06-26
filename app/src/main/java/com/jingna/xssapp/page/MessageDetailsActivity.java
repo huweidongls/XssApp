@@ -98,19 +98,19 @@ public class MessageDetailsActivity extends BaseActivity {
                                 }
                                 String radio = bean.getObj().getRadio();
                                 if(radio.equals("0")){
-                                    tvOrderType.setText("未支付");
+                                    tvOrderType.setText("订单未支付");
                                 }else if(radio.equals("1")){
-                                    tvOrderType.setText("未派单");
+                                    tvOrderType.setText("订单未派单");
                                 }else if(radio.equals("2")){
-                                    tvOrderType.setText("派单成功");
+                                    tvOrderType.setText("订单派单成功");
                                 }else if(radio.equals("3")){
-                                    tvOrderType.setText("服务开始");
+                                    tvOrderType.setText("订单服务开始");
                                 }else if(radio.equals("4")){
-                                    tvOrderType.setText("服务结束");
+                                    tvOrderType.setText("订单服务结束");
                                 }else if(radio.equals("5")){
-                                    tvOrderType.setText("已评价");
+                                    tvOrderType.setText("订单已评价");
                                 }else if(radio.equals("6")){
-                                    tvOrderType.setText("已退款");
+                                    tvOrderType.setText("订单已退款");
                                 }
                                 //工人列表
                                 mList = bean.getObj().getUser();
@@ -131,6 +131,7 @@ public class MessageDetailsActivity extends BaseActivity {
                                     recyclerView.setAdapter(adapter);
                                 }else {
                                     llWorker.setVisibility(View.GONE);
+                                    tvShangmenTime.setText(bean.getObj().getPretime());
                                 }
                             }
                         } catch (JSONException e) {

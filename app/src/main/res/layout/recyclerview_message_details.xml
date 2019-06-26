@@ -10,6 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/iv_avatar"
             android:src="@mipmap/message_details_avatar"
             android:layout_width="42dp"
             android:layout_height="42dp" />
@@ -32,6 +33,7 @@
                     android:layout_height="12dp" />
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_marginLeft="7dp"
                     android:textColor="#666666"
                     android:textSize="10sp"
@@ -53,6 +55,7 @@
                     android:layout_height="12dp" />
 
                 <TextView
+                    android:id="@+id/tv_phone_num"
                     android:layout_marginLeft="7dp"
                     android:textColor="#666666"
                     android:textSize="10sp"
