@@ -222,14 +222,14 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_marginTop="12dp"
-        android:layout_gravity="end"
-        android:layout_marginRight="16dp"
-        android:textColor="@color/black_333333"
-        android:textSize="10sp"
-        android:text="修改绑定的手机号码后，请用新手机号码登录。"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <!--<TextView-->
+        <!--android:layout_marginTop="12dp"-->
+        <!--android:layout_gravity="end"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:textColor="@color/black_333333"-->
+        <!--android:textSize="10sp"-->
+        <!--android:text="修改绑定的手机号码后，请用新手机号码登录。"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
 
 </LinearLayout>
