@@ -111,6 +111,10 @@ public class MessageDetailsActivity extends BaseActivity {
                                     tvOrderType.setText("订单已评价");
                                 }else if(radio.equals("6")){
                                     tvOrderType.setText("订单已退款");
+                                }else if(radio.equals("7")){
+                                    tvOrderType.setText("订单退款中");
+                                }else if(radio.equals("8")){
+                                    tvOrderType.setText("订单退款成功");
                                 }
                                 //工人列表
                                 mList = bean.getObj().getUser();

@@ -102,6 +102,18 @@
             android:layout_height="57dp">
 
             <TextView
+                android:id="@+id/tv_order_refund"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:text="申请退款"
+                android:textColor="@color/white_ffffff"
+                android:background="@drawable/bg_f83030_2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="7dp"
+                android:layout_width="83dp"
+                android:layout_height="31dp" />
+
+            <TextView
                 android:id="@+id/tv_to_pay"
                 android:gravity="center"
                 android:textSize="13sp"

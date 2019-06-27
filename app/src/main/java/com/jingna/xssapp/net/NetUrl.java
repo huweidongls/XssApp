@@ -94,4 +94,6 @@ public class NetUrl {
     public static String order_contentUrl = "index.php/api/Order/Member_order/Order_content";
     //所有城市接口
     public static String allcityUrl = "index.php/api/Index/Home/Allcity";
+    //申请退款
+    public static String order_RefundUrl = "index.php/api/Order/Member_order/Order_Refund";
 }

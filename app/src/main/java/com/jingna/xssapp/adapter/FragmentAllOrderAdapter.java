@@ -66,6 +66,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvComment.setVisibility(View.GONE);
             holder.tvCancelYuyue.setVisibility(View.GONE);
             holder.tvDelete.setVisibility(View.GONE);
+            holder.tvOrderRefund.setVisibility(View.GONE);
         }else if(radio.equals("1")){
             holder.tvType.setText("未派单");
             holder.tvToPay.setVisibility(View.GONE);
@@ -73,6 +74,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvComment.setVisibility(View.GONE);
             holder.tvCancelYuyue.setVisibility(View.VISIBLE);
             holder.tvDelete.setVisibility(View.GONE);
+            holder.tvOrderRefund.setVisibility(View.GONE);
         }else if(radio.equals("2")){
             holder.tvType.setText("派单成功");
             holder.tvToPay.setVisibility(View.GONE);
@@ -80,6 +82,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvComment.setVisibility(View.GONE);
             holder.tvCancelYuyue.setVisibility(View.VISIBLE);
             holder.tvDelete.setVisibility(View.GONE);
+            holder.tvOrderRefund.setVisibility(View.GONE);
         }else if(radio.equals("3")){
             holder.tvType.setText("服务开始");
             holder.tvToPay.setVisibility(View.GONE);
@@ -87,6 +90,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvComment.setVisibility(View.GONE);
             holder.tvCancelYuyue.setVisibility(View.GONE);
             holder.tvDelete.setVisibility(View.GONE);
+            holder.tvOrderRefund.setVisibility(View.VISIBLE);
         }else if(radio.equals("4")){
             holder.tvType.setText("服务结束");
             holder.tvToPay.setVisibility(View.GONE);
@@ -94,6 +98,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvComment.setVisibility(View.VISIBLE);
             holder.tvCancelYuyue.setVisibility(View.GONE);
             holder.tvDelete.setVisibility(View.GONE);
+            holder.tvOrderRefund.setVisibility(View.GONE);
         }else if(radio.equals("5")){
             holder.tvType.setText("已评价");
             holder.tvToPay.setVisibility(View.GONE);
@@ -101,6 +106,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvComment.setVisibility(View.GONE);
             holder.tvCancelYuyue.setVisibility(View.GONE);
             holder.tvDelete.setVisibility(View.VISIBLE);
+            holder.tvOrderRefund.setVisibility(View.GONE);
         }else if(radio.equals("6")){
             holder.tvType.setText("已退款");
             holder.tvToPay.setVisibility(View.GONE);
@@ -108,11 +114,67 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvComment.setVisibility(View.GONE);
             holder.tvCancelYuyue.setVisibility(View.GONE);
             holder.tvDelete.setVisibility(View.VISIBLE);
+            holder.tvOrderRefund.setVisibility(View.GONE);
+        }else if(radio.equals("7")){
+            holder.tvType.setText("退款中");
+            holder.tvToPay.setVisibility(View.GONE);
+            holder.tvCancelOrder.setVisibility(View.GONE);
+            holder.tvComment.setVisibility(View.GONE);
+            holder.tvCancelYuyue.setVisibility(View.GONE);
+            holder.tvDelete.setVisibility(View.GONE);
+            holder.tvOrderRefund.setVisibility(View.GONE);
+        }else if(radio.equals("8")){
+            holder.tvType.setText("退款成功");
+            holder.tvToPay.setVisibility(View.GONE);
+            holder.tvCancelOrder.setVisibility(View.GONE);
+            holder.tvComment.setVisibility(View.GONE);
+            holder.tvCancelYuyue.setVisibility(View.GONE);
+            holder.tvDelete.setVisibility(View.VISIBLE);
+            holder.tvOrderRefund.setVisibility(View.GONE);
         }
         holder.tvOrderId.setText("订单编号："+data.get(position).getOrder_code());
         holder.tvTime.setText("预约时间："+data.get(position).getPretime());
         holder.tvAddress.setText("服务地址："+data.get(position).getAddress());
 
+        holder.tvOrderRefund.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDialog customDialog = new CustomDialog(context, "是否发起退款申请", new CustomDialog.ClickListener() {
+                    @Override
+                    public void onSure() {
+                        ViseHttp.POST(NetUrl.order_RefundUrl)
+                                .addParam("app_key", TokenUtils.getToken(NetUrl.BASE_URL+NetUrl.order_RefundUrl))
+                                .addParam("oid", data.get(position).getId())
+                                .request(new ACallback<String>() {
+                                    @Override
+                                    public void onSuccess(String d) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(d);
+                                            if(jsonObject.optInt("code") == 200){
+                                                ToastUtil.showShort(context, "成功发起退款申请");
+                                                data.get(position).setRadio("7");
+                                                notifyDataSetChanged();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(int errCode, String errMsg) {
+
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
+                customDialog.show();
+            }
+        });
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -281,6 +343,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
         private TextView tvCancelOrder;
         private TextView tvComment;
         private TextView tvCancelYuyue;
+        private TextView tvOrderRefund;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -296,6 +359,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             tvCancelOrder = itemView.findViewById(R.id.tv_cancel_order);
             tvComment = itemView.findViewById(R.id.tv_comment);
             tvCancelYuyue = itemView.findViewById(R.id.tv_cancel_yuyue);
+            tvOrderRefund = itemView.findViewById(R.id.tv_order_refund);
         }
     }
 
