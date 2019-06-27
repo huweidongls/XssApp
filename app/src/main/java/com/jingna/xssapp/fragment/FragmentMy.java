@@ -109,6 +109,7 @@ public class FragmentMy extends BaseFragment {
                                         intent.setClass(getContext(), BookingOrderActivity.class);
                                         intent.putExtra("id", mList.get(pos).getId());
                                         intent.putExtra("name", mList.get(pos).getServicename());
+                                        intent.putExtra("ismore", mList.get(pos).getSpecifications_status());
                                         startActivity(intent);
                                         popupWindow.dismiss();
                                     }

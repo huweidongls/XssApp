@@ -50,6 +50,15 @@ public class PayServiceListBean {
 
         private String id;
         private String servicename;
+        private String specifications_status;
+
+        public String getSpecifications_status() {
+            return specifications_status;
+        }
+
+        public void setSpecifications_status(String specifications_status) {
+            this.specifications_status = specifications_status;
+        }
 
         public String getId() {
             return id;

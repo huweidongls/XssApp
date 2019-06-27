@@ -137,6 +137,7 @@ public class FragmentIndex extends BaseFragment {
                                         intent.setClass(getContext(), BookingOrderActivity.class);
                                         intent.putExtra("id", mFastList.get(pos).getId());
                                         intent.putExtra("name", mFastList.get(pos).getServicename());
+                                        intent.putExtra("ismore", mFastList.get(pos).getSpecifications_status());
                                         startActivity(intent);
                                         popupWindow.dismiss();
                                     }
