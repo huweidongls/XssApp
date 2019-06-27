@@ -15,6 +15,10 @@
             android:layout_height="54dp" />
 
         <TextView
+            android:gravity="center"
+            android:maxEms="6"
+            android:ellipsize="end"
+            android:lines="2"
             android:id="@+id/tv"
             android:layout_centerInParent="true"
             android:textSize="12sp"
