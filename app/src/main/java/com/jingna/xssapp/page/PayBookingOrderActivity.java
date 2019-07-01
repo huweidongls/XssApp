@@ -1,11 +1,18 @@
 package com.jingna.xssapp.page;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseActivity;
@@ -36,9 +43,16 @@ public class PayBookingOrderActivity extends BaseActivity {
 
     @BindView(R.id.tv_price)
     TextView tvPrice;
+    @BindView(R.id.iv_wx)
+    ImageView ivWx;
+    @BindView(R.id.iv_zfb)
+    ImageView ivZfb;
 
     private Map<String, String> map;
     private IWXAPI api;
+
+    private static final int SDK_PAY_FLAG = 1;
+    private String payType = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +106,7 @@ public class PayBookingOrderActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.btn_to_pay})
+    @OnClick({R.id.rl_back, R.id.btn_to_pay, R.id.rl_wx, R.id.rl_zfb})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -104,6 +118,16 @@ public class PayBookingOrderActivity extends BaseActivity {
                 pay();
 //                intent.setClass(context, BookingOrderResultActivity.class);
 //                startActivity(intent);
+                break;
+            case R.id.rl_wx:
+                payType = "1";
+                Glide.with(context).load(R.mipmap.zhifu_select).into(ivWx);
+                Glide.with(context).load(R.mipmap.zhifu_unselect).into(ivZfb);
+                break;
+            case R.id.rl_zfb:
+                payType = "2";
+                Glide.with(context).load(R.mipmap.zhifu_unselect).into(ivWx);
+                Glide.with(context).load(R.mipmap.zhifu_select).into(ivZfb);
                 break;
         }
     }
@@ -121,5 +145,42 @@ public class PayBookingOrderActivity extends BaseActivity {
         req.extData = "app data";
         api.sendReq(req);
     }
+
+    public void aliPay(String info) {
+        final String orderInfo = info;   // 订单信息
+
+        Runnable payRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                PayTask alipay = new PayTask(PayBookingOrderActivity.this);
+                Map<String, String> result = alipay.payV2(orderInfo,true);
+
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
+            }
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @SuppressWarnings("unused")
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SDK_PAY_FLAG:
+                    Map<String, String> result = (Map<String, String>) msg.obj;
+                    if(result.get("resultStatus").equals("9000")){
+                        Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+
+    };
 
 }

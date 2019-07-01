@@ -84,6 +84,7 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/rl_wx"
             android:layout_width="match_parent"
             android:layout_height="52dp">
 
@@ -104,6 +105,7 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
+                android:id="@+id/iv_wx"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="15dp"
@@ -119,6 +121,7 @@
             android:layout_height="1dp"/>
 
         <RelativeLayout
+            android:id="@+id/rl_zfb"
             android:layout_width="match_parent"
             android:layout_height="52dp">
 
@@ -139,6 +142,7 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
+                android:id="@+id/iv_zfb"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="15dp"
