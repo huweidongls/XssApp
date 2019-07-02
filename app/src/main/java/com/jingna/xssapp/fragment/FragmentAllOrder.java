@@ -1,8 +1,11 @@
 package com.jingna.xssapp.fragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +17,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.google.gson.Gson;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.adapter.FragmentAllOrderAdapter;
@@ -42,6 +47,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +72,7 @@ public class FragmentAllOrder extends BaseFragment {
     private View view;
 
     private IWXAPI api;
+    private static final int SDK_PAY_FLAG = 1;
 
     @Nullable
     @Override
@@ -204,6 +211,36 @@ public class FragmentAllOrder extends BaseFragment {
         RelativeLayout rlWx = view.findViewById(R.id.rl_wx);
         RelativeLayout rlZfb = view.findViewById(R.id.rl_zfb);
 
+        rlZfb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                ViseHttp.POST(NetUrl.topay_OrderUrl)
+                        .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.topay_OrderUrl))
+                        .addParam("oid", id)
+                        .addParam("pay_type", "2")
+                        .request(new ACallback<String>() {
+                            @Override
+                            public void onSuccess(String data) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(data);
+                                    if(jsonObject.optInt("code") == 300){
+                                        String s = jsonObject.optString("obj");
+                                        aliPay(s);
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errCode, String errMsg) {
+
+                            }
+                        });
+            }
+        });
+
         rlWx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -232,12 +269,6 @@ public class FragmentAllOrder extends BaseFragment {
 
                             }
                         });
-            }
-        });
-        rlZfb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
             }
         });
 
@@ -280,5 +311,42 @@ public class FragmentAllOrder extends BaseFragment {
         req.extData = "app data";
         api.sendReq(req);
     }
+
+    public void aliPay(String info) {
+        final String orderInfo = info;   // 订单信息
+
+        Runnable payRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                PayTask alipay = new PayTask(getActivity());
+                Map<String, String> result = alipay.payV2(orderInfo,true);
+
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
+            }
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @SuppressWarnings("unused")
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SDK_PAY_FLAG:
+                    Map<String, String> result = (Map<String, String>) msg.obj;
+                    if(result.get("resultStatus").equals("9000")){
+                        Toast.makeText(getContext(), "支付成功", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+
+    };
 
 }

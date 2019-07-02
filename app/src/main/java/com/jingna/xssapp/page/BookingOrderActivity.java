@@ -282,7 +282,7 @@ public class BookingOrderActivity extends BaseActivity {
                 break;
             case R.id.btn_sure:
                 if (StringUtils.isEmpty(addressId) || StringUtils.isEmpty(tvTime.getText().toString()) ||
-                        mBookingList.size() != numMap.size()) {
+                        mBookingList.size() != numMap.size() || mBookingList.size() == 0) {
                     ToastUtil.showShort(context, "请完善信息后提交");
                 } else {
                     Set set = numMap.keySet();

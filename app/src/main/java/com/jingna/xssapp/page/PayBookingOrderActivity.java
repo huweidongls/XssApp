@@ -75,7 +75,7 @@ public class PayBookingOrderActivity extends BaseActivity {
 
     private void pay() {
 
-        map.put("pay_type", "1");
+        map.put("pay_type", payType);
         map.put("city", SpUtils.getCityId(context));
         ViseHttp.POST(NetUrl.order_insertUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.order_insertUrl))
@@ -90,6 +90,9 @@ public class PayBookingOrderActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 WxPayBean payBean = gson.fromJson(data, WxPayBean.class);
                                 wxPay(payBean.getObj());
+                            }else if(jsonObject.optInt("code") == 300){
+                                String s = jsonObject.optString("obj");
+                                aliPay(s);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("message"));
                             }
