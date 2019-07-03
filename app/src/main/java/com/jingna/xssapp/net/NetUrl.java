@@ -96,4 +96,6 @@ public class NetUrl {
     public static String allcityUrl = "index.php/api/Index/Home/Allcity";
     //申请退款
     public static String order_RefundUrl = "index.php/api/Order/Member_order/Order_Refund";
+    //消息设置已读
+    public static String SetMessageUrl = "index.php/api/Member/Index/SetMessage";
 }

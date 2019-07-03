@@ -52,6 +52,15 @@ public class MemberInfoBean {
         private String headimg;
         private String num;
         private String tel;
+        private String red;
+
+        public String getRed() {
+            return red;
+        }
+
+        public void setRed(String red) {
+            this.red = red;
+        }
 
         public String getId() {
             return id;

@@ -64,6 +64,8 @@ public class FragmentMy extends BaseFragment {
     ImageView ivAvatar;
     @BindView(R.id.rl_login)
     RelativeLayout rlLogin;
+    @BindView(R.id.iv_red)
+    ImageView ivRed;
 
     private String uid = "";
 
@@ -153,6 +155,11 @@ public class FragmentMy extends BaseFragment {
                                 Gson gson = new Gson();
                                 MemberInfoBean memberInfoBean = gson.fromJson(data, MemberInfoBean.class);
                                 tvKefuPhone.setText(memberInfoBean.getObj().getTel());
+                                if(memberInfoBean.getObj().getRed().equals("0")){
+                                    ivRed.setVisibility(View.GONE);
+                                }else {
+                                    ivRed.setVisibility(View.VISIBLE);
+                                }
                                 if(uid.equals("0")){
                                     rlLogin.setVisibility(View.VISIBLE);
                                     ivAvatar.setVisibility(View.GONE);

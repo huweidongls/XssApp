@@ -13,6 +13,7 @@ import com.jingna.xssapp.adapter.MessageAdapter;
 import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.MemberMessageBean;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.Logger;
 import com.jingna.xssapp.util.SpUtils;
 import com.jingna.xssapp.util.ToastUtil;
 import com.vise.xsnow.http.ViseHttp;
@@ -51,6 +52,21 @@ public class MessageActivity extends BaseActivity {
     }
 
     private void initData() {
+
+        ViseHttp.POST(NetUrl.SetMessageUrl)
+                .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.SetMessageUrl))
+                .addParam("uid", SpUtils.getUid(context))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        Logger.e("123123", data);
+                    }
+
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
 
         ViseHttp.POST(NetUrl.member_messageUrl)
                 .addParam("app_key", getToken(NetUrl.BASE_URL+NetUrl.member_messageUrl))
