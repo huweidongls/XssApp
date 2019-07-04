@@ -1,6 +1,7 @@
 package com.jingna.xssapp.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -151,11 +152,17 @@ public class MessageDetailsActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back, R.id.rl_right})
     public void onClick(View view){
+        Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.rl_right:
+                intent.setClass(context, MapActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
                 break;
         }
     }

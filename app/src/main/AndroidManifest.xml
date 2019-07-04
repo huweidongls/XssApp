@@ -36,6 +36,9 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:name=".app.MyApplication"
         android:allowBackup="true"
@@ -92,12 +95,9 @@
 
         <activity android:name=".page.SetActivity" />
         <activity android:name=".page.AboutActivity" />
-        <activity android:name=".page.BookingOrderActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-
-
-
-        </activity>
+        <activity
+            android:name=".page.BookingOrderActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
@@ -116,7 +116,7 @@
         <activity android:name=".page.OrderDetailsActivity" />
         <activity android:name=".page.ServicePersonnelActivity" />
         <activity android:name=".page.ServicePersonnelDetailsActivity" />
-        <activity android:name=".page.SearchZixunActivity"/>
+        <activity android:name=".page.SearchZixunActivity" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
@@ -134,6 +134,17 @@
                 <data android:scheme="wxc3bb9837cc1ebb6d" />
             </intent-filter>
         </activity>
+        <activity android:name=".page.MapActivity"/>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="HLm4tor6I1U222TnRBqDrVgQNrV8OMUd" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
     </application>
 
 </manifest>

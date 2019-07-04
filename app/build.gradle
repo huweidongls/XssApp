@@ -16,6 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+            //说明so的路径为该libs路径，关联所有地图SDK的so文件
+        }
+    }
     configurations.all {
 
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
@@ -60,4 +66,5 @@ dependencies {
     implementation 'top.zibin:Luban:1.1.8'
     compile 'me.zhouzhuo.zzletterssidebar:zz-letters-sidebar:1.0.2'
     implementation files('libs/alipaySdk-20180601.jar')
+    implementation files('libs/BaiduLBS_Android.jar')
 }

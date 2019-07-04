@@ -98,4 +98,6 @@ public class NetUrl {
     public static String order_RefundUrl = "index.php/api/Order/Member_order/Order_Refund";
     //消息设置已读
     public static String SetMessageUrl = "index.php/api/Member/Index/SetMessage";
+    //获取工人坐标
+    public static String coordListUrl = "index.php/api/Order/Member_order/CoordList";
 }
