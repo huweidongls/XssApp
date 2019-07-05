@@ -100,4 +100,6 @@ public class NetUrl {
     public static String SetMessageUrl = "index.php/api/Member/Index/SetMessage";
     //获取工人坐标
     public static String coordListUrl = "index.php/api/Order/Member_order/CoordList";
+    //用户确认订单完成
+    public static String orderCompleteUrl = "index.php/api/Order/Member_order/OrderComplete";
 }
