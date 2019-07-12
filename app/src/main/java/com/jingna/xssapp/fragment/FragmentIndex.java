@@ -18,6 +18,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
@@ -94,12 +95,16 @@ public class FragmentIndex extends BaseFragment {
     private List<PayServiceListBean.ObjBean> mFastList;
     private FastOrderAdapter adapterFast;
 
+    private RequestOptions options;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, null);
 
         ButterKnife.bind(this, view);
+        options = new RequestOptions()
+                .placeholder(R.mipmap.app_logo);//图片加载出来前，显示的图片
         initBanner();
 
         return view;

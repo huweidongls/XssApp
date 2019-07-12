@@ -72,6 +72,7 @@ public class ForgotPwdActivity extends BaseActivity {
                     ViseHttp.POST(NetUrl.getCodeUrl)
                             .addParam("app_key", getToken(NetUrl.BASE_URL+ NetUrl.getCodeUrl))
                             .addParam("tel", phone)
+                            .addParam("type", "2")
                             .request(new ACallback<String>() {
                                 @Override
                                 public void onSuccess(String data) {

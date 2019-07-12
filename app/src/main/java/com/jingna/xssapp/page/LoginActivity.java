@@ -124,6 +124,7 @@ public class LoginActivity extends BaseActivity {
                     ViseHttp.POST(NetUrl.getCodeUrl)
                             .addParam("app_key", getToken(NetUrl.BASE_URL+ NetUrl.getCodeUrl))
                             .addParam("tel", codePhone)
+                            .addParam("type", "1")
                             .request(new ACallback<String>() {
                                 @Override
                                 public void onSuccess(String data) {
