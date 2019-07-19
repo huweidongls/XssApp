@@ -102,4 +102,6 @@ public class NetUrl {
     public static String coordListUrl = "index.php/api/Order/Member_order/CoordList";
     //用户确认订单完成
     public static String orderCompleteUrl = "index.php/api/Order/Member_order/OrderComplete";
+    //隐私政策与用户协议
+    public static String user_ProtocolUrl = "index.php/api/Login/Logins/User_Protocol";
 }

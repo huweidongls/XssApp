@@ -84,7 +84,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     @OnClick({R.id.rl_back, R.id.rl_is_show_pwd, R.id.rl_is_show_register_pwd, R.id.rl_get_code, R.id.ll_type_login,
-    R.id.ll_type_register, R.id.tv_forgot_pwd, R.id.btn_fast_register, R.id.btn_login})
+    R.id.ll_type_register, R.id.tv_forgot_pwd, R.id.btn_fast_register, R.id.btn_login, R.id.tv_user_agreement,
+    R.id.tv_privacy})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -253,6 +254,14 @@ public class LoginActivity extends BaseActivity {
                                 }
                             });
                 }
+                break;
+            case R.id.tv_user_agreement:
+                intent.setClass(context, UserAgreementActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_privacy:
+                intent.setClass(context, PrivacyPolicyActivity.class);
+                startActivity(intent);
                 break;
         }
     }
