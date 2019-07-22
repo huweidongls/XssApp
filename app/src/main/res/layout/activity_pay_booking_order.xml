@@ -68,6 +68,7 @@
     </LinearLayout>
 
     <TextView
+        android:visibility="gone"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="22dp"
         android:textColor="#666666"
