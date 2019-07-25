@@ -54,21 +54,21 @@ public class ForgotPwdActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_get_code, R.id.btn_next})
+    @OnClick({R.id.rl_back, R.id.tv_code, R.id.btn_next})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
                 break;
-            case R.id.rl_get_code:
-                MyApplication.forgotTimeCount.start();
+            case R.id.tv_code:
                 phone = etPhone.getText().toString();
                 if(StringUtils.isEmpty(phone)){
                     ToastUtil.showShort(context, "电话号码不能为空");
                 }else if(!StringUtils.isPhoneNumberValid(phone)){
                     ToastUtil.showShort(context, "请输入正确格式的电话号码");
                 }else {
+                    MyApplication.forgotTimeCount.start();
                     ViseHttp.POST(NetUrl.getCodeUrl)
                             .addParam("app_key", getToken(NetUrl.BASE_URL+ NetUrl.getCodeUrl))
                             .addParam("tel", phone)

@@ -61,6 +61,8 @@ public class ServiceDetailsActivity extends BaseActivity {
     TextView tvCommentNum;
     @BindView(R.id.ll_comment)
     LinearLayout llComment;
+    @BindView(R.id.tv_comment)
+    TextView tvComment;
 
     private ServiceDetailsCommentAdapter adapter;
     private List<ServiceContentBean.ObjBean.EvaluateBean> mList;
@@ -122,7 +124,7 @@ public class ServiceDetailsActivity extends BaseActivity {
                                 rvPrice.setAdapter(priceAdapter);
                                 mList = bean.getObj().getEvaluate();
                                 if(mList.size()>0){
-                                    llComment.setVisibility(View.VISIBLE);
+                                    tvComment.setVisibility(View.GONE);
                                     tvCommentNum.setText("用户评价（"+mList.size()+"）");
                                     adapter = new ServiceDetailsCommentAdapter(mList);
                                     LinearLayoutManager manager1 = new LinearLayoutManager(context){
@@ -135,7 +137,8 @@ public class ServiceDetailsActivity extends BaseActivity {
                                     recyclerView.setLayoutManager(manager1);
                                     recyclerView.setAdapter(adapter);
                                 }else {
-                                    llComment.setVisibility(View.GONE);
+                                    tvCommentNum.setText("用户评价（0）");
+                                    tvComment.setVisibility(View.VISIBLE);
                                 }
                             }
                         } catch (JSONException e) {

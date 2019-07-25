@@ -41,8 +41,7 @@ public class EditPwdTimeCount extends CountDownTimer {
      */
     @Override
     public void onTick(long millisUntilFinished) {
-        activity.getCode_btn().setEnabled(
-                false);
+        activity.getCode_btn().setEnabled(false);
         int timeInt = (int) (millisUntilFinished / 1000);
         setTimeNum(timeInt);
 

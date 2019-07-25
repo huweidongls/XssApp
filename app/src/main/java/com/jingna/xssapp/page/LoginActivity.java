@@ -83,7 +83,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_is_show_pwd, R.id.rl_is_show_register_pwd, R.id.rl_get_code, R.id.ll_type_login,
+    @OnClick({R.id.rl_back, R.id.rl_is_show_pwd, R.id.rl_is_show_register_pwd, R.id.tv_code, R.id.ll_type_login,
     R.id.ll_type_register, R.id.tv_forgot_pwd, R.id.btn_fast_register, R.id.btn_login, R.id.tv_user_agreement,
     R.id.tv_privacy})
     public void onClick(View view){
@@ -118,10 +118,10 @@ public class LoginActivity extends BaseActivity {
                     etRegisterPwd.setSelection(etRegisterPwd.getText().length());
                 }
                 break;
-            case R.id.rl_get_code:
-                MyApplication.editPwdTimeCount.start();
+            case R.id.tv_code:
                 codePhone = etRegisterPhone.getText().toString();
                 if(StringUtils.isPhoneNumberValid(codePhone)){
+                    MyApplication.editPwdTimeCount.start();
                     ViseHttp.POST(NetUrl.getCodeUrl)
                             .addParam("app_key", getToken(NetUrl.BASE_URL+ NetUrl.getCodeUrl))
                             .addParam("tel", codePhone)
