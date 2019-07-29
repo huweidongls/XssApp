@@ -130,7 +130,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="wxc3bb9837cc1ebb6d" />
+                <data android:scheme="wx4b5efd1b13a03777" />
             </intent-filter>
         </activity>
         <activity android:name=".page.MapActivity" />
