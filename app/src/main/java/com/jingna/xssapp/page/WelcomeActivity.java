@@ -20,6 +20,7 @@ import com.jingna.xssapp.bean.BaiduCityBean;
 import com.jingna.xssapp.bean.LocationBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.Gps;
+import com.jingna.xssapp.util.GpsUtil;
 import com.jingna.xssapp.util.Logger;
 import com.jingna.xssapp.util.PositionUtil;
 import com.jingna.xssapp.util.SpUtils;
@@ -84,7 +85,8 @@ public class WelcomeActivity extends BaseActivity {
 
     private void initData() {
 
-        if (locationManager.getProvider(LocationManager.NETWORK_PROVIDER) != null || locationManager.getProvider(LocationManager.GPS_PROVIDER) != null) {
+//        if (locationManager.getProvider(LocationManager.NETWORK_PROVIDER) != null || locationManager.getProvider(LocationManager.GPS_PROVIDER) != null) {
+        if (GpsUtil.isLocServiceEnable(context)) {
             /*
              * 进行定位
              * provider:用于定位的locationProvider字符串:LocationManager.NETWORK_PROVIDER/LocationManager.GPS_PROVIDER
@@ -99,6 +101,7 @@ public class WelcomeActivity extends BaseActivity {
             Intent i = new Intent();
             i.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(i);
+            finish();
         }
 
     }

@@ -37,7 +37,7 @@
             android:layout_centerInParent="true"
             android:textColor="#F83030"
             android:textSize="21sp"
-            android:text="洗刷刷"
+            android:text="易洁"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
