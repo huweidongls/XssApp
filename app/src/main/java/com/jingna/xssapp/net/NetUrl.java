@@ -5,7 +5,7 @@ package com.jingna.xssapp.net;
  */
 
 public class NetUrl {
-    public static final String BASE_URL = "http://xss.5ijiaoyu.cn/";
+    public static final String BASE_URL = "http://yj.liaofankeji.com/";
     //登录
     public static String loginUrl = "index.php/api/Login/Logins/login";
     //获取验证码
