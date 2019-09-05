@@ -20,6 +20,7 @@ import com.jingna.xssapp.bean.JsonBean;
 import com.jingna.xssapp.bean.MemberAddressInfoBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.GetJsonDataUtil;
+import com.jingna.xssapp.util.Logger;
 import com.jingna.xssapp.util.SpUtils;
 import com.jingna.xssapp.util.StringUtils;
 import com.jingna.xssapp.util.ToastUtil;
@@ -264,7 +265,7 @@ public class InsertAddressActivity extends BaseActivity {
          * 关键逻辑在于循环体
          *
          * */
-        String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
+//        String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
         ViseHttp.POST(NetUrl.BASE_URL+"api/Member/Index/Adress_Insert_List")
                 .addParam("id",SpUtils.getCityId(context))
                 .request(new ACallback<String>() {
@@ -273,7 +274,47 @@ public class InsertAddressActivity extends BaseActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.optString("code").equals("200")){
-                                Json_str = jsonObject.getString("obj");
+//                                Json_str = jsonObject.getString("obj");
+                                Json_str = "[{\"name\":\"黑龙江省\",\"city\":{\"name\":\"鸡西市\",\"area\":[\"鸡冠区\",\"恒山区\",\"滴道区\",\"梨树区\",\"城子河区\",\"麻山区\",\"鸡东县\",\"虎林市\",\"密山市\"]}}]";
+                                Logger.e("123123", Json_str);
+                                ArrayList<JsonBean> jsonBean = parseData(Json_str);//用Gson 转成实体
+
+                                /**
+                                 * 添加省份数据
+                                 *
+                                 * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
+                                 * PickerView会通过getPickerViewText方法获取字符串显示出来。
+                                 */
+                                options1Items = jsonBean;
+                                for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
+                                    ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
+                                    ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
+
+                                    for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
+                                        String CityName = jsonBean.get(i).getCityList().get(c).getName();
+                                        CityList.add(CityName);//添加城市
+                                        ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
+
+                                        //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
+                                        if (jsonBean.get(i).getCityList().get(c).getArea() == null
+                                                || jsonBean.get(i).getCityList().get(c).getArea().size() == 0) {
+                                            City_AreaList.add("");
+                                        } else {
+                                            City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
+                                        }
+                                        Province_AreaList.add(City_AreaList);//添加该省所有地区数据
+                                    }
+
+                                    /**
+                                     * 添加城市数据
+                                     */
+                                    options2Items.add(CityList);
+
+                                    /**
+                                     * 添加地区数据
+                                     */
+                                    options3Items.add(Province_AreaList);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -285,45 +326,6 @@ public class InsertAddressActivity extends BaseActivity {
 
                     }
                 });
-
-        ArrayList<JsonBean> jsonBean = parseData(Json_str);//用Gson 转成实体
-
-        /**
-         * 添加省份数据
-         *
-         * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
-         * PickerView会通过getPickerViewText方法获取字符串显示出来。
-         */
-        options1Items = jsonBean;
-        for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
-            ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
-            ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
-
-            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
-                String CityName = jsonBean.get(i).getCityList().get(c).getName();
-                CityList.add(CityName);//添加城市
-                ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
-
-                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
-                if (jsonBean.get(i).getCityList().get(c).getArea() == null
-                        || jsonBean.get(i).getCityList().get(c).getArea().size() == 0) {
-                    City_AreaList.add("");
-                } else {
-                    City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
-                }
-                Province_AreaList.add(City_AreaList);//添加该省所有地区数据
-            }
-
-            /**
-             * 添加城市数据
-             */
-            options2Items.add(CityList);
-
-            /**
-             * 添加地区数据
-             */
-            options3Items.add(Province_AreaList);
-        }
 
     }
 
