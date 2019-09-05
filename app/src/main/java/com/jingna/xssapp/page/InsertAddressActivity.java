@@ -64,6 +64,8 @@ public class InsertAddressActivity extends BaseActivity {
     private String radio = "0";
     private String id;
     private String type = "";
+    private String Json_str;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,27 +79,6 @@ public class InsertAddressActivity extends BaseActivity {
     }
 
     private void initData() {
-        ViseHttp.POST(NetUrl.BASE_URL+"api/Member/Index/Adress_Insert_List")
-                .addParam("id",SpUtils.getCityId(context))
-                .request(new ACallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if(jsonObject.optString("code").equals("200")){
-                                String Json = jsonObject.getString("obj");
-                                writeStringToFile(Json,"province.json");
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
-
-                    }
-                });
         initJsonData();
         tvTitle.setText(type);
         if(!StringUtils.isEmpty(id)){
@@ -284,9 +265,28 @@ public class InsertAddressActivity extends BaseActivity {
          *
          * */
         String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
+        ViseHttp.POST(NetUrl.BASE_URL+"api/Member/Index/Adress_Insert_List")
+                .addParam("id",SpUtils.getCityId(context))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optString("code").equals("200")){
+                                Json_str = jsonObject.getString("obj");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
 
-        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
+                    }
+                });
+
+        ArrayList<JsonBean> jsonBean = parseData(Json_str);//用Gson 转成实体
 
         /**
          * 添加省份数据
