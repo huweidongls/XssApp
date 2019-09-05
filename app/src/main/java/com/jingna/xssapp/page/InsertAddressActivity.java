@@ -274,29 +274,9 @@ public class InsertAddressActivity extends BaseActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.optString("code").equals("200")){
-//                                Json_str = jsonObject.getString("obj");
-                                Json_str = "[\n" +
-                                        "        {\n" +
-                                        "            \"name\":\"黑龙江省\",\n" +
-                                        "            \"city\":{\n" +
-                                        "                \"name\":\"鸡西市\",\n" +
-                                        "                \"area\":[\n" +
-                                        "                    \"鸡冠区\",\n" +
-                                        "                    \"恒山区\",\n" +
-                                        "                    \"滴道区\",\n" +
-                                        "                    \"梨树区\",\n" +
-                                        "                    \"城子河区\",\n" +
-                                        "                    \"麻山区\",\n" +
-                                        "                    \"鸡东县\",\n" +
-                                        "                    \"虎林市\",\n" +
-                                        "                    \"密山市\"\n" +
-                                        "                ]\n" +
-                                        "            }\n" +
-                                        "        }\n" +
-                                        "    ]";
-                                Logger.e("123123", Json_str);
+                                Json_str = jsonObject.getString("obj");
+                                //Log.e("55555",Json_str);
                                 ArrayList<JsonBean> jsonBean = parseData(Json_str);//用Gson 转成实体
-
                                 /**
                                  * 添加省份数据
                                  *
