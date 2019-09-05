@@ -275,7 +275,25 @@ public class InsertAddressActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(data);
                             if(jsonObject.optString("code").equals("200")){
 //                                Json_str = jsonObject.getString("obj");
-                                Json_str = "[{\"name\":\"黑龙江省\",\"city\":{\"name\":\"鸡西市\",\"area\":[\"鸡冠区\",\"恒山区\",\"滴道区\",\"梨树区\",\"城子河区\",\"麻山区\",\"鸡东县\",\"虎林市\",\"密山市\"]}}]";
+                                Json_str = "[\n" +
+                                        "        {\n" +
+                                        "            \"name\":\"黑龙江省\",\n" +
+                                        "            \"city\":{\n" +
+                                        "                \"name\":\"鸡西市\",\n" +
+                                        "                \"area\":[\n" +
+                                        "                    \"鸡冠区\",\n" +
+                                        "                    \"恒山区\",\n" +
+                                        "                    \"滴道区\",\n" +
+                                        "                    \"梨树区\",\n" +
+                                        "                    \"城子河区\",\n" +
+                                        "                    \"麻山区\",\n" +
+                                        "                    \"鸡东县\",\n" +
+                                        "                    \"虎林市\",\n" +
+                                        "                    \"密山市\"\n" +
+                                        "                ]\n" +
+                                        "            }\n" +
+                                        "        }\n" +
+                                        "    ]";
                                 Logger.e("123123", Json_str);
                                 ArrayList<JsonBean> jsonBean = parseData(Json_str);//用Gson 转成实体
 
