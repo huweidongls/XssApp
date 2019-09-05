@@ -3,6 +3,7 @@ package com.jingna.xssapp.page;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +30,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -59,7 +64,6 @@ public class InsertAddressActivity extends BaseActivity {
     private String radio = "0";
     private String id;
     private String type = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,11 +73,31 @@ public class InsertAddressActivity extends BaseActivity {
         id = getIntent().getStringExtra("id");
         ButterKnife.bind(InsertAddressActivity.this);
         initData();
-
+        //String JsonData = new GetJsonDataUtil()
     }
 
     private void initData() {
+        ViseHttp.POST(NetUrl.BASE_URL+"api/Member/Index/Adress_Insert_List")
+                .addParam("id",SpUtils.getCityId(context))
+                .request(new ACallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            if(jsonObject.optString("code").equals("200")){
+                                String Json = jsonObject.getString("obj");
+                                writeStringToFile(Json,"province.json");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
+                    @Override
+                    public void onFail(int errCode, String errMsg) {
+
+                    }
+                });
         initJsonData();
         tvTitle.setText(type);
         if(!StringUtils.isEmpty(id)){
@@ -227,7 +251,31 @@ public class InsertAddressActivity extends BaseActivity {
                 break;
         }
     }
+    public static void writeStringToFile(String json, String filePath) {
+        File txt = new File(filePath);
+        if (!txt.exists()) {
+            try {
+                txt.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
+        byte[] bytes = json.getBytes(); //新加的
+        int b = json.length(); //改
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(txt);
+            fos.write(bytes);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     private void initJsonData() {//解析数据
 
         /**
@@ -236,6 +284,7 @@ public class InsertAddressActivity extends BaseActivity {
          *
          * */
         String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
+
 
         ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
 
@@ -246,7 +295,6 @@ public class InsertAddressActivity extends BaseActivity {
          * PickerView会通过getPickerViewText方法获取字符串显示出来。
          */
         options1Items = jsonBean;
-
         for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
             ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
             ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
