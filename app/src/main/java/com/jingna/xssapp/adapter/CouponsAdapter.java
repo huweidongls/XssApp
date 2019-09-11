@@ -22,9 +22,10 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
 
     private Context context;
     private List<CouponListBean.ObjBean> data;
-
-    public CouponsAdapter(List<CouponListBean.ObjBean> data) {
+    private ClickListener listener;
+    public CouponsAdapter(List<CouponListBean.ObjBean> data,ClickListener listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -36,7 +37,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvPrice.setText(data.get(position).getMoney());
         holder.tvType.setText(data.get(position).getDecript());
         holder.tvName.setText(data.get(position).getDiscountname());
@@ -52,6 +53,12 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
                     holder.tvText.setVisibility(View.GONE);
                     Glide.with(context).load(R.mipmap.round_right).into(holder.ivRight);
                 }
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onPayOrder(position);
             }
         });
     }
@@ -80,5 +87,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
             tvText = itemView.findViewById(R.id.tv_text);
         }
     }
-
+    public interface ClickListener{
+        void onPayOrder(int pos);
+    }
 }

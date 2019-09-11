@@ -9,10 +9,12 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.jingna.xssapp.broadcastreceiver.NetBroadcastReceiver;
 import com.jingna.xssapp.util.NetUtil;
 import com.jingna.xssapp.util.StringUtils;
+import com.jingna.xssapp.util.ToastUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;

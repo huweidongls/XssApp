@@ -104,4 +104,6 @@ public class NetUrl {
     public static String orderCompleteUrl = "index.php/api/Order/Member_order/OrderComplete";
     //隐私政策与用户协议
     public static String user_ProtocolUrl = "index.php/api/Login/Logins/User_Protocol";
+    //轮播图详情
+    public static String SlideDetaileRow = "index.php/api/Index/Home/SlideDetaileRow";
 }

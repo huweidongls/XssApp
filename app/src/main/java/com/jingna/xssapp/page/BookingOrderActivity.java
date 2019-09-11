@@ -196,8 +196,7 @@ public class BookingOrderActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 final PreAboutBean bean = gson.fromJson(data, PreAboutBean.class);
                                 tvJichuPrice.setText(bean.getObj().getBasicservice() + "元");
-                                jichuPrice = Double.valueOf(bean.getObj().getBasicservice());
-
+                                //jichuPrice = Double.valueOf(bean.getObj().getBasicservice()+"");
                                 //规格
                                 numList = bean.getObj().getServicePrice();
                                 numAdapter = new PopBookingOrderNumAdapter(numList, isMore, new PopBookingOrderNumAdapter.ClickListener() {

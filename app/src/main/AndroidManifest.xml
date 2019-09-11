@@ -145,7 +145,8 @@
             android:process=":remote" />
 
         <activity android:name=".page.UserAgreementActivity" />
-        <activity android:name=".page.PrivacyPolicyActivity"></activity>
+        <activity android:name=".page.PrivacyPolicyActivity" />
+        <activity android:name=".page.SlideDetailsActivity"></activity>
     </application>
 
 </manifest>

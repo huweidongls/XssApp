@@ -37,8 +37,11 @@ import com.jingna.xssapp.page.CityActivity;
 import com.jingna.xssapp.page.LoginActivity;
 import com.jingna.xssapp.page.ServiceDetailsActivity;
 import com.jingna.xssapp.page.ServicePersonnelActivity;
+import com.jingna.xssapp.page.SlideDetailsActivity;
 import com.jingna.xssapp.page.ZixunActivity;
+import com.jingna.xssapp.page.ZixunDetailsActivity;
 import com.jingna.xssapp.util.SpUtils;
+import com.jingna.xssapp.util.ToastUtil;
 import com.jingna.xssapp.widget.ScrollTextView;
 import com.jingna.xssapp.wxapi.WXShare;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -47,6 +50,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -106,7 +110,6 @@ public class FragmentIndex extends BaseFragment {
         options = new RequestOptions()
                 .placeholder(R.mipmap.app_logo);//图片加载出来前，显示的图片
         initBanner();
-
         return view;
     }
 
@@ -299,6 +302,27 @@ public class FragmentIndex extends BaseFragment {
                                     list.add(NetUrl.BASE_URL+bean.getImgurl());
                                 }
                                 init(banner, list);
+                                banner.setOnBannerListener(new OnBannerListener() {
+                                    @Override
+                                    public void OnBannerClick(int position) {
+                                        if (bannerList.get(position).getIs_new().equals("0")){
+                                            Intent intent = new Intent();
+                                            intent.setClass(getContext(), SlideDetailsActivity.class);
+                                            intent.putExtra("id", bannerList.get(position).getId());
+                                            startActivity(intent);
+                                        }else if(bannerList.get(position).getIs_new().equals("1")){
+                                            Intent intent = new Intent();
+                                            intent.setClass(getContext(), ZixunDetailsActivity.class);
+                                            intent.putExtra("id", bannerList.get(position).getNews_id());
+                                            startActivity(intent);
+                                        }else if(bannerList.get(position).getIs_new().equals("2")){
+                                            Intent intent = new Intent();
+                                            intent.setClass(getContext(), ServiceDetailsActivity.class);
+                                            intent.putExtra("id", bannerList.get(position).getNews_id());
+                                            startActivity(intent);
+                                        }
+                                    }
+                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -312,7 +336,6 @@ public class FragmentIndex extends BaseFragment {
                 });
 
     }
-
     private void initData() {
 
         String[] s = SpUtils.getCityName(getContext()).split("-");
@@ -353,7 +376,7 @@ public class FragmentIndex extends BaseFragment {
 
     }
 
-    @OnClick({R.id.ll_city, R.id.ll_zixun, R.id.rl_more, R.id.iv_service_personnel, R.id.iv_yuyue})
+    @OnClick({R.id.ll_city, R.id.ll_zixun, R.id.rl_more, R.id.iv_service_personnel, R.id.iv_yuyue,R.id.banner})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
