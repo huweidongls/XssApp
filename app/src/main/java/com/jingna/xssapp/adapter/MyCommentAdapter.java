@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +16,7 @@ import com.jingna.xssapp.R;
 import com.jingna.xssapp.bean.MemberEvaluateBean;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.page.CommentOrderActivity;
+import com.jingna.xssapp.page.ServiceDetailsActivity;
 
 import java.util.List;
 
@@ -66,6 +68,15 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.View
                 context.startActivity(intent);
             }
         });
+        holder.llYipingjia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, ServiceDetailsActivity.class);
+                intent.putExtra("id", data.get(position).getServiceid());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -74,7 +85,6 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-
         private TextView tvCommentOrder;
         private LinearLayout llYipingjia;
         private LinearLayout llDaipingjia;
@@ -85,7 +95,6 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.View
         private TextView tvBottom;
         private ImageView ivTop;
         private TextView tvTop;
-
         public ViewHolder(View itemView) {
             super(itemView);
             tvCommentOrder = itemView.findViewById(R.id.tv_comment_order);
