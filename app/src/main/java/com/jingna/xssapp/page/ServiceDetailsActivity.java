@@ -154,7 +154,7 @@ public class ServiceDetailsActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.tv_sure})
+    @OnClick({R.id.rl_back, R.id.tv_sure, R.id.ll_all_comment})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -173,6 +173,11 @@ public class ServiceDetailsActivity extends BaseActivity {
                     startActivity(intent);
                     finish();
                 }
+                break;
+            case R.id.ll_all_comment:
+                intent.setClass(context, AllCommentActivity.class);
+                intent.putExtra("sid", id);
+                startActivity(intent);
                 break;
         }
     }

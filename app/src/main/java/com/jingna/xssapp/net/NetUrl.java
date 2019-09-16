@@ -106,4 +106,6 @@ public class NetUrl {
     public static String user_ProtocolUrl = "index.php/api/Login/Logins/User_Protocol";
     //轮播图详情
     public static String SlideDetaileRow = "index.php/api/Index/Home/SlideDetaileRow";
+    //服务评价列表
+    public static String service_list = "/index.php/api/Order/Member_order/service_list";
 }

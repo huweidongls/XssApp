@@ -312,6 +312,7 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:id="@+id/ll_all_comment"
                     android:layout_marginLeft="7dp"
                     android:layout_marginTop="15dp"
                     android:orientation="horizontal"

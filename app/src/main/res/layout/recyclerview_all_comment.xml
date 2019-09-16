@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginTop="7dp"
+        android:background="@color/white_ffffff"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_yipingjia"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_head"
+                    android:src="@mipmap/comment_name"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="11dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/black_333333"
+                    android:text="用户名名称"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="13sp"
+                    android:textColor="#666666"
+                    android:text="2019-01-21 10:45:02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_text"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:textColor="#999999"
+                android:textSize="10sp"
+                android:text="评价，内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:id="@+id/ll_service"
+                android:layout_marginBottom="14dp"
+                android:layout_marginTop="24dp"
+                android:background="#EEEEEE"
+                android:layout_marginRight="14dp"
+                android:layout_gravity="end"
+                android:layout_width="299dp"
+                android:layout_height="76dp">
+
+                <ImageView
+                    android:id="@+id/iv_bottom"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="7dp"
+                    android:src="#333333"
+                    android:layout_width="63dp"
+                    android:layout_height="63dp" />
+
+                <TextView
+                    android:id="@+id/tv_bottom"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="87dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/black_333333"
+                    android:text="油烟机"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content" />
+                
+                <ImageView
+                    android:layout_marginRight="7dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/right_gray"
+                    android:layout_width="11dp"
+                    android:layout_height="22dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

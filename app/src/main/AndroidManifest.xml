@@ -146,7 +146,8 @@
 
         <activity android:name=".page.UserAgreementActivity" />
         <activity android:name=".page.PrivacyPolicyActivity" />
-        <activity android:name=".page.SlideDetailsActivity"></activity>
+        <activity android:name=".page.SlideDetailsActivity" />
+        <activity android:name=".page.AllCommentActivity"></activity>
     </application>
 
 </manifest>
