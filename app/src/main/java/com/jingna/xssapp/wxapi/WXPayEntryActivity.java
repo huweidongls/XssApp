@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseActivity;
@@ -18,6 +19,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
     private IWXAPI api;
 
     private RelativeLayout rlBack;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
                 finish();
             }
         });
+        tv = findViewById(R.id.tv);
 
     }
 
@@ -59,11 +62,15 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         switch (baseResp.errCode) {
             case 0:
                 ToastUtil.showShort(WXPayEntryActivity.this, "支付成功");
+                tv.setText("支付成功");
                 break;
             case -1:
                 ToastUtil.showShort(WXPayEntryActivity.this, "支付失败");
+                tv.setText("支付失败");
                 break;
             case -2:
+                ToastUtil.showShort(WXPayEntryActivity.this, "取消支付");
+                tv.setText("取消支付");
                 break;
         }
     }
