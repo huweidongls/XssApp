@@ -78,7 +78,7 @@ public class FragmentAllOrderAdapter extends RecyclerView.Adapter<FragmentAllOrd
             holder.tvOrderRefund.setVisibility(View.GONE);
             holder.tvSure.setVisibility(View.GONE);
         }else if(radio.equals("2")){
-            holder.tvType.setText("派单成功");
+            holder.tvType.setText("已接单");
             holder.tvToPay.setVisibility(View.GONE);
             holder.tvCancelOrder.setVisibility(View.GONE);
             holder.tvComment.setVisibility(View.GONE);

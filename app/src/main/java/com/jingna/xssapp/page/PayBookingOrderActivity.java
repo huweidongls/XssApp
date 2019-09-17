@@ -90,6 +90,7 @@ public class PayBookingOrderActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 WxPayBean payBean = gson.fromJson(data, WxPayBean.class);
                                 wxPay(payBean.getObj());
+                                finish();
                             }else if(jsonObject.optInt("code") == 300){
                                 String s = jsonObject.optString("obj");
                                 aliPay(s);
@@ -179,6 +180,9 @@ public class PayBookingOrderActivity extends BaseActivity {
                     Map<String, String> result = (Map<String, String>) msg.obj;
                     if(result.get("resultStatus").equals("9000")){
                         Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent();
+//                        intent.setClass(context, BookingOrderResultActivity.class);
+//                        startActivity(intent);
                     }
                     break;
             }

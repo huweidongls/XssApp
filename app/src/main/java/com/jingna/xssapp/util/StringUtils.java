@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,6 +29,14 @@ import java.util.regex.Pattern;
 public class StringUtils {
 
 	public static int sysVersion = Integer.parseInt(VERSION.SDK);
+
+	public static double stringToDouble(String a){
+		double b = Double.valueOf(a);
+		DecimalFormat df = new DecimalFormat("######0.00");//此为保留1位小数，若想保留2位小数，则填写#.00  ，以此类推
+		String temp = df.format(b);
+		b = Double.valueOf(temp);
+		return b;
+	}
 
 	/**
 	 * InputStream to byte[]

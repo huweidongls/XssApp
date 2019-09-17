@@ -159,7 +159,7 @@ public class BookingOrderActivity extends BaseActivity {
                     allMoney = allMoney + value;
                 }
                 double priceI = jichuPrice + allMoney - couponsPrice;
-                tvPrice.setText("￥" + priceI);
+                tvPrice.setText("￥" + String.format("%.2f", priceI));
             }
         });
         LinearLayoutManager manager = new LinearLayoutManager(context) {
@@ -195,15 +195,15 @@ public class BookingOrderActivity extends BaseActivity {
                             if (jsonObject.optInt("code") == 200) {
                                 Gson gson = new Gson();
                                 final PreAboutBean bean = gson.fromJson(data, PreAboutBean.class);
-                                tvJichuPrice.setText(bean.getObj().getBasicservice() + "元");
-                                //jichuPrice = Double.valueOf(bean.getObj().getBasicservice()+"");
+                                jichuPrice = Double.valueOf(bean.getObj().getBasicservice()+"");
+                                tvJichuPrice.setText(String.format("%.2f", jichuPrice) + "元");
                                 //规格
                                 numList = bean.getObj().getServicePrice();
                                 numAdapter = new PopBookingOrderNumAdapter(numList, isMore, new PopBookingOrderNumAdapter.ClickListener() {
                                     @Override
                                     public void onItemClick(PreAboutBean.ObjBean.ServicePriceBean bean) {
                                         allMoney = 0.00;
-                                        tvPrice.setText("￥" + "0.0");
+                                        tvPrice.setText("￥0.00");
                                         tvNumContent.setText("已选择");
                                         mBookingList.clear();
                                         mBookingList.add(bean);
@@ -219,7 +219,7 @@ public class BookingOrderActivity extends BaseActivity {
                                     @Override
                                     public void onClick(View v) {
                                         allMoney = 0.00;
-                                        tvPrice.setText("￥" + "0.0");
+                                        tvPrice.setText("￥0.00");
                                         tvNumContent.setText("已选择");
                                         mBookingList.clear();
                                         numMap.clear();
@@ -246,7 +246,7 @@ public class BookingOrderActivity extends BaseActivity {
                                             couponsId = bean.getObj().getCoupon().get(pos).getId();
                                             couponsPrice = Double.valueOf(bean.getObj().getCoupon().get(pos).getMoney());
                                             double price = jichuPrice + allMoney - couponsPrice;
-                                            tvPrice.setText("￥" + price);
+                                            tvPrice.setText("￥" + String.format("%.2f", price));
                                             popCoupons.dismiss();
                                         }
                                     });
@@ -302,13 +302,14 @@ public class BookingOrderActivity extends BaseActivity {
                     map.put("fid", id);
                     map.put("cid", addressId);
                     map.put("ptime", tvTime.getText().toString());
-                    map.put("price", price + "");
+                    map.put("price", String.format("%.2f", price));
                     map.put("remarks", etMoreNote.getText().toString() + "");
                     map.put("dis_id", couponsId);
                     map.put("specid_number", specid_number);
                     intent.setClass(context, PayBookingOrderActivity.class);
                     intent.putExtra("map", (Serializable) map);
                     startActivity(intent);
+                    finish();
                 }
                 break;
             case R.id.rl_jianhao:

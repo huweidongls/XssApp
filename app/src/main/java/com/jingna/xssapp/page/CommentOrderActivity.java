@@ -254,7 +254,7 @@ public class CommentOrderActivity extends BaseActivity {
                         .addParam("uid", SpUtils.getUid(context))
                         .addParam("content",commentContent)
                         .addParam("satisfied",satisfied)
-                        .addParam("anonymous","0")
+                        .addParam("anonymous",anonymous)
                         .addFiles(value)
                         .request(new ACallback<String>() {
                             @Override
