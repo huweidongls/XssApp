@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
+import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.EditPwdTimeCount;
 import com.jingna.xssapp.util.ForgotTimeCount;
@@ -23,6 +24,7 @@ public class MyApplication extends Application {
     private List<Activity> mList = new LinkedList<Activity>();
     public static EditPwdTimeCount editPwdTimeCount;
     public static ForgotTimeCount forgotTimeCount;
+    public MainActivity mainActivity;
 
     public MyApplication() {
     }

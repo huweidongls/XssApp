@@ -1,6 +1,11 @@
 package com.jingna.xssapp;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +16,8 @@ import android.widget.RelativeLayout;
 
 import com.jingna.xssapp.app.MyApplication;
 import com.jingna.xssapp.base.BaseActivity;
+import com.jingna.xssapp.broadcastreceiver.MyReceiver;
+import com.jingna.xssapp.broadcastreceiver.NetBroadcastReceiver;
 import com.jingna.xssapp.fragment.FragmentIndex;
 import com.jingna.xssapp.fragment.FragmentMy;
 import com.jingna.xssapp.fragment.FragmentOrder;
@@ -52,12 +59,18 @@ public class MainActivity extends BaseActivity {
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+    private MyReceiver receiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(MainActivity.this);
+        receiver = new MyReceiver(MainActivity.this, context);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.jingna.xss.PAY_SUCCESS");
+        registerReceiver(receiver, filter);
         init();
 
     }
@@ -176,7 +189,7 @@ public class MainActivity extends BaseActivity {
                 fragmentTransaction.hide(fragmentList.get(i));
             }
         }
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     /**
@@ -209,5 +222,18 @@ public class MainActivity extends BaseActivity {
             exitTime = 0;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
+
+    //    public class MyRecever extends BroadcastReceiver {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            selectFragment(2);
+//        }
+//    }
 
 }

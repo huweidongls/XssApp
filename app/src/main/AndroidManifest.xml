@@ -147,7 +147,23 @@
         <activity android:name=".page.UserAgreementActivity" />
         <activity android:name=".page.PrivacyPolicyActivity" />
         <activity android:name=".page.SlideDetailsActivity" />
-        <activity android:name=".page.AllCommentActivity"></activity>
+        <activity android:name=".page.AllCommentActivity" />
+        <!--<receiver android:name=".page.PayBookingOrderActivity$MyRecever"-->
+        <!--android:enabled="true"-->
+        <!--android:exported="true">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.jingna.xss.PAY_SUCCESS"/>-->
+        <!--</intent-filter>-->
+
+        <!--</receiver>-->
+        <!--<receiver android:name=".MainActivity$MyRecever"-->
+        <!--android:enabled="true"-->
+        <!--android:exported="true">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.jingna.xss.PAY_SUCCESS"/>-->
+        <!--</intent-filter>-->
+
+        <!--</receiver>-->
     </application>
 
 </manifest>

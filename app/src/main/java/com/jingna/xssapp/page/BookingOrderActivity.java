@@ -25,6 +25,7 @@ import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.MemberAddressListBean;
 import com.jingna.xssapp.bean.PreAboutBean;
 import com.jingna.xssapp.net.NetUrl;
+import com.jingna.xssapp.util.DateUtil;
 import com.jingna.xssapp.util.Logger;
 import com.jingna.xssapp.util.SpUtils;
 import com.jingna.xssapp.util.StringUtils;
@@ -136,7 +137,7 @@ public class BookingOrderActivity extends BaseActivity {
             public void handle(String time) { // 回调接口，获得选中的时间
                 tvTime.setText(time);
             }
-        }, now, "2100-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        }, now, DateUtil.get7DayTime()); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行DateUtil.get7DayTime()2100-01-01 00:00
         customDatePicker.showSpecificTime(true); // 不显示时和分
         customDatePicker.setIsLoop(false); // 不允许循环滚动
     }

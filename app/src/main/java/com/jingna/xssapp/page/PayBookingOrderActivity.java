@@ -1,6 +1,7 @@
 package com.jingna.xssapp.page;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -180,14 +181,23 @@ public class PayBookingOrderActivity extends BaseActivity {
                     Map<String, String> result = (Map<String, String>) msg.obj;
                     if(result.get("resultStatus").equals("9000")){
                         Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent();
-//                        intent.setClass(context, BookingOrderResultActivity.class);
-//                        startActivity(intent);
+                        sendBroadcast(new Intent("com.jingna.xss.PAY_SUCCESS"));
+                        PayBookingOrderActivity.this.finish();
+                    }else {
+                        sendBroadcast(new Intent("com.jingna.xss.PAY_SUCCESS"));
+                        PayBookingOrderActivity.this.finish();
                     }
                     break;
             }
         }
 
     };
+
+//    public class MyRecever extends BroadcastReceiver {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            finish();
+//        }
+//    }
 
 }

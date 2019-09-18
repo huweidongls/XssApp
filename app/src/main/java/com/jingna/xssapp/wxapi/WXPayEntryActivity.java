@@ -18,8 +18,8 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandler {
     private IWXAPI api;
 
-    private RelativeLayout rlBack;
-    private TextView tv;
+//    private RelativeLayout rlBack;
+//    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +29,22 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         api.registerApp(WXShare.APP_ID);
         api.handleIntent(getIntent(), this);
 
-        initData();
+//        initData();
 
     }
 
-    private void initData() {
-
-        rlBack = findViewById(R.id.rl_back);
-        rlBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        tv = findViewById(R.id.tv);
-
-    }
+//    private void initData() {
+//
+//        rlBack = findViewById(R.id.rl_back);
+//        rlBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+//        tv = findViewById(R.id.tv);
+//
+//    }
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -62,15 +62,18 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         switch (baseResp.errCode) {
             case 0:
                 ToastUtil.showShort(WXPayEntryActivity.this, "支付成功");
-                tv.setText("支付成功");
+                sendBroadcast(new Intent("com.jingna.xss.PAY_SUCCESS"));
+                finish();
                 break;
             case -1:
                 ToastUtil.showShort(WXPayEntryActivity.this, "支付失败");
-                tv.setText("支付失败");
+                sendBroadcast(new Intent("com.jingna.xss.PAY_SUCCESS"));
+                finish();
                 break;
             case -2:
                 ToastUtil.showShort(WXPayEntryActivity.this, "取消支付");
-                tv.setText("取消支付");
+                sendBroadcast(new Intent("com.jingna.xss.PAY_SUCCESS"));
+                finish();
                 break;
         }
     }

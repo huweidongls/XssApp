@@ -488,7 +488,7 @@ public class CustomDatePicker {
                     initParameter();
                     initTimer();
                     addListener();
-                    setSelectedTime(time);
+//                    setSelectedTime(time);
                     datePickerDialog.show();
                 }
             } else {
