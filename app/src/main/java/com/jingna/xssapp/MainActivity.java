@@ -22,6 +22,7 @@ import com.jingna.xssapp.fragment.FragmentIndex;
 import com.jingna.xssapp.fragment.FragmentMy;
 import com.jingna.xssapp.fragment.FragmentOrder;
 import com.jingna.xssapp.fragment.FragmentService;
+import com.jingna.xssapp.util.SpUtils;
 import com.jingna.xssapp.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SpUtils.setIsFirst(context, "1");
         ButterKnife.bind(MainActivity.this);
         receiver = new MyReceiver(MainActivity.this, context);
         IntentFilter filter = new IntentFilter();
