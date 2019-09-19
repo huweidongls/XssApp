@@ -145,8 +145,8 @@ public class WelcomeActivity extends BaseActivity {
 
     public void getCity() {
         try {
-            String url = "http://api.map.baidu.com/geocoder?output=json&location=" + latitude + "," + longitude + "&key=8dDPAEEMwPNZgxg4YhNUXqWoV8GNItO1";
-            ViseHttp.GET(url)
+            String url = "http://api.map.baidu.com/geocoder?output=json&location=" + latitude + "," + longitude + "&key=HLm4tor6I1U222TnRBqDrVgQNrV8OMUd";
+            ViseHttp.GET(url)//8dDPAEEMwPNZgxg4YhNUXqWoV8GNItO1
                     .request(new ACallback<String>() {
                         @Override
                         public void onSuccess(String data) {

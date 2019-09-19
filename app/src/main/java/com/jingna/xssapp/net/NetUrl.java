@@ -108,4 +108,6 @@ public class NetUrl {
     public static String SlideDetaileRow = "index.php/api/Index/Home/SlideDetaileRow";
     //服务评价列表
     public static String service_list = "/index.php/api/Order/Member_order/service_list";
+    //获取版本信息
+    public static String get_version = "/index.php/api/Member/Index/get_version";
 }

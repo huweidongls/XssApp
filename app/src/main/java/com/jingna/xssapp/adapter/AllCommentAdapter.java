@@ -2,6 +2,7 @@ package com.jingna.xssapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.page.CommentOrderActivity;
 import com.jingna.xssapp.page.ServiceDetailsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +38,7 @@ public class AllCommentAdapter extends RecyclerView.Adapter<AllCommentAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_all_comment, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_service_details_comment, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -44,12 +46,32 @@ public class AllCommentAdapter extends RecyclerView.Adapter<AllCommentAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getHeadimg()).into(holder.ivHead);
-        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getImg()).into(holder.ivBottom);
-        holder.tvName.setText(data.get(position).getUsername());
-        holder.tvTime.setText(data.get(position).getAddtime());
+        if(data.get(position).getIs_anonymous().equals("1")){
+            holder.tvName.setText("用户：匿名用户");
+        }else {
+            holder.tvName.setText("用户："+data.get(position).getUsername());
+        }
         holder.tvText.setText(data.get(position).getText());
-        holder.tvBottom.setText(data.get(position).getServicename());
+        if(data.get(position).getOn_satisfied().equals("0")){
+            holder.tvManyi.setText("满意");
+        }else if(data.get(position).getOn_satisfied().equals("1")){
+            holder.tvManyi.setText("不满意");
+        }
+
+        String[] s = data.get(position).getImg().split(",");
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i<s.length; i++){
+            list.add(s[i]);
+        }
+        CommentPicAdapter picAdapter = new CommentPicAdapter(list);
+        GridLayoutManager manager = new GridLayoutManager(context, 3){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        holder.rv.setLayoutManager(manager);
+        holder.rv.setAdapter(picAdapter);
 
     }
 
@@ -60,21 +82,17 @@ public class AllCommentAdapter extends RecyclerView.Adapter<AllCommentAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView ivHead;
-        private TextView tvName;
-        private TextView tvTime;
+        private RecyclerView rv;
+        private TextView tvManyi;
         private TextView tvText;
-        private ImageView ivBottom;
-        private TextView tvBottom;
+        private TextView tvName;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivHead = itemView.findViewById(R.id.iv_head);
-            tvName = itemView.findViewById(R.id.tv_name);
-            tvTime = itemView.findViewById(R.id.tv_time);
+            rv = itemView.findViewById(R.id.rv);
+            tvManyi = itemView.findViewById(R.id.tv_manyi);
             tvText = itemView.findViewById(R.id.tv_text);
-            ivBottom = itemView.findViewById(R.id.iv_bottom);
-            tvBottom = itemView.findViewById(R.id.tv_bottom);
+            tvName = itemView.findViewById(R.id.tv_name);
         }
     }
 

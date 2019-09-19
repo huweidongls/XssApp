@@ -151,11 +151,16 @@ public class CityActivity extends BaseActivity {
                                 AllCityBean bean = gson.fromJson(data, AllCityBean.class);
                                 mAllList = bean.getObj();
                                 allCityAdapter = new AllCityAdapter(context, mAllList);
+                                listView.addHeaderView(header);
                                 listView.setAdapter(allCityAdapter);
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        if(mAllList.get(position-1).getRadio().equals("1")){
+                                        if(position == 0&&type == 0){
+                                            ToastUtil.showShort(context, "当前城市未开通");
+                                        }else if(position == 0&&type == 1){
+                                            finish();
+                                        }else if(mAllList.get(position-1).getRadio().equals("1")){
                                             if(type == 1){
                                                 SpUtils.setCityId(context, mAllList.get(position-1).getCid());
                                                 SpUtils.setCityName(context, "-"+mAllList.get(position-1).getArea_name());
@@ -186,7 +191,6 @@ public class CityActivity extends BaseActivity {
                                     public void onActionUp() {
                                     }
                                 });
-                                listView.addHeaderView(header);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

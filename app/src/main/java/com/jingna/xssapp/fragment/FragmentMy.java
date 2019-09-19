@@ -36,6 +36,7 @@ import com.jingna.xssapp.page.MyCommentActivity;
 import com.jingna.xssapp.page.MyCouponsActivity;
 import com.jingna.xssapp.page.PersonInformationActivity;
 import com.jingna.xssapp.page.SetActivity;
+import com.jingna.xssapp.util.Logger;
 import com.jingna.xssapp.util.SpUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -169,6 +170,8 @@ public class FragmentMy extends BaseFragment {
                                     Glide.with(getContext()).load(NetUrl.BASE_URL+memberInfoBean.getObj().getHeadimg()).into(ivAvatar);
                                 }
                                 String num = memberInfoBean.getObj().getNum();
+                                Logger.e("123123", "num"+num);
+                                rlCouponsNum.setVisibility(View.VISIBLE);
                                 new QBadgeView(getContext())
                                         .bindTarget(rlCouponsNum)
                                         .setShowShadow(false)

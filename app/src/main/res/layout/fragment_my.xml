@@ -308,6 +308,7 @@
                 android:layout_height="22dp" />
             
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_marginRight="8dp"
                 android:layout_toLeftOf="@+id/right4"
                 android:id="@+id/rl_coupons_num"
