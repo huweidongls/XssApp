@@ -58,6 +58,15 @@ public class TransactionDetailsBean {
         private String price;
         private String radio;
         private String uid;
+        private String refundtime;
+
+        public String getRefundtime() {
+            return refundtime;
+        }
+
+        public void setRefundtime(String refundtime) {
+            this.refundtime = refundtime;
+        }
 
         public String getId() {
             return id;

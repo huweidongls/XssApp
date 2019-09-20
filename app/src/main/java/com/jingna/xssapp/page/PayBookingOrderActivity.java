@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,9 +16,12 @@ import android.widget.Toast;
 import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.jingna.xssapp.MainActivity;
 import com.jingna.xssapp.R;
 import com.jingna.xssapp.base.BaseActivity;
 import com.jingna.xssapp.bean.WxPayBean;
+import com.jingna.xssapp.broadcastreceiver.MyReceiver;
+import com.jingna.xssapp.broadcastreceiver.PayReceiver;
 import com.jingna.xssapp.net.NetUrl;
 import com.jingna.xssapp.util.Logger;
 import com.jingna.xssapp.util.SpUtils;
@@ -55,6 +59,8 @@ public class PayBookingOrderActivity extends BaseActivity {
     private static final int SDK_PAY_FLAG = 1;
     private String payType = "1";
 
+    private PayReceiver receiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,10 @@ public class PayBookingOrderActivity extends BaseActivity {
         api.registerApp(WXShare.APP_ID);
         map = (Map<String, String>) getIntent().getSerializableExtra("map");
         ButterKnife.bind(PayBookingOrderActivity.this);
+        receiver = new PayReceiver(PayBookingOrderActivity.this, context);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.jingna.xss.payweixin");
+        registerReceiver(receiver, filter);
         initData();
 
     }
@@ -72,6 +82,12 @@ public class PayBookingOrderActivity extends BaseActivity {
 
         tvPrice.setText(map.get("price"));
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 
     private void pay() {
@@ -91,7 +107,6 @@ public class PayBookingOrderActivity extends BaseActivity {
                                 Gson gson = new Gson();
                                 WxPayBean payBean = gson.fromJson(data, WxPayBean.class);
                                 wxPay(payBean.getObj());
-                                finish();
                             }else if(jsonObject.optInt("code") == 300){
                                 String s = jsonObject.optString("obj");
                                 aliPay(s);

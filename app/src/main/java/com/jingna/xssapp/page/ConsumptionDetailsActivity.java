@@ -36,6 +36,12 @@ public class ConsumptionDetailsActivity extends BaseActivity {
     TextView tvOrderSn;
     @BindView(R.id.tv_wx_order_sn)
     TextView tvWxOrderSn;
+    @BindView(R.id.tv_time_type)
+    TextView tvTimeType;
+    @BindView(R.id.tv_price_type)
+    TextView tvPriceType;
+    @BindView(R.id.tv_tuikuan_type)
+    TextView tvTuikuanType;
 
     private String id = "";
 
@@ -63,19 +69,34 @@ public class ConsumptionDetailsActivity extends BaseActivity {
                             if(jsonObject.optInt("code") == 200){
                                 Gson gson = new Gson();
                                 TransactionContentBean bean = gson.fromJson(data, TransactionContentBean.class);
-                                tvPrice.setText(bean.getObj().getPrice()+"元");
                                 if(bean.getObj().getRadio().equals("1")){
                                     tvRadio.setText("支付成功");
-                                }else {
+                                    tvTimeType.setText("支付创建时间:");
+                                    tvTime.setText(bean.getObj().getPay_time());
+                                    tvPrice.setText(bean.getObj().getPrice()+"元");
+                                    tvPriceType.setText("支付金额");
+                                    tvOrderSn.setText(bean.getObj().getOrder_sn());
+                                }else if(bean.getObj().getRadio().equals("0")){
                                     tvRadio.setText("未支付");
+                                    tvTimeType.setText("支付创建时间:");
+                                    tvTime.setText(bean.getObj().getPay_time());
+                                    tvPrice.setText(bean.getObj().getPrice()+"元");
+                                    tvPriceType.setText("支付金额");
+                                    tvOrderSn.setText(bean.getObj().getOrder_sn());
+                                }else if(bean.getObj().getRadio().equals("2")){
+                                    tvRadio.setText("已退款");
+                                    tvTimeType.setText("退款创建时间:");
+                                    tvTime.setText(bean.getObj().getRefundtime());
+                                    tvPrice.setText(bean.getObj().getRefundprice()+"元");
+                                    tvPriceType.setText("退款金额");
+                                    tvTuikuanType.setText("    退款订单号 :");
+                                    tvOrderSn.setText(bean.getObj().getRefundcode());
                                 }
                                 if(bean.getObj().getPay_type().equals("1")){
                                     tvPayType.setText("微信");
                                 }else if(bean.getObj().getPay_type().equals("2")){
                                     tvPayType.setText("支付宝");
                                 }
-                                tvTime.setText(bean.getObj().getPay_time());
-                                tvOrderSn.setText(bean.getObj().getOrder_sn());
                                 tvWxOrderSn.setText(bean.getObj().getWx_order_sn());
                             }
                         } catch (JSONException e) {

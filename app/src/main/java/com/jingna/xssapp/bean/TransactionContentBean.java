@@ -56,6 +56,33 @@ public class TransactionContentBean {
         private String pay_time;
         private String order_sn;
         private String wx_order_sn;
+        private String refundtime;
+        private String refundcode;
+        private String refundprice;
+
+        public String getRefundprice() {
+            return refundprice;
+        }
+
+        public void setRefundprice(String refundprice) {
+            this.refundprice = refundprice;
+        }
+
+        public String getRefundcode() {
+            return refundcode;
+        }
+
+        public void setRefundcode(String refundcode) {
+            this.refundcode = refundcode;
+        }
+
+        public String getRefundtime() {
+            return refundtime;
+        }
+
+        public void setRefundtime(String refundtime) {
+            this.refundtime = refundtime;
+        }
 
         public String getPrice() {
             return price;

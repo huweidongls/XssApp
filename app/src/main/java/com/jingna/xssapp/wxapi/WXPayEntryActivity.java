@@ -62,16 +62,19 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         switch (baseResp.errCode) {
             case 0:
                 ToastUtil.showShort(WXPayEntryActivity.this, "支付成功");
+                sendBroadcast(new Intent("com.jingna.xss.payweixin"));
                 sendBroadcast(new Intent("com.jingna.xss.PAY_SUCCESS"));
                 finish();
                 break;
             case -1:
                 ToastUtil.showShort(WXPayEntryActivity.this, "支付失败");
+                sendBroadcast(new Intent("com.jingna.xss.payweixin"));
                 sendBroadcast(new Intent("com.jingna.xss.PAY_SUCCESS"));
                 finish();
                 break;
             case -2:
                 ToastUtil.showShort(WXPayEntryActivity.this, "取消支付");
+                sendBroadcast(new Intent("com.jingna.xss.payweixin"));
                 sendBroadcast(new Intent("com.jingna.xss.PAY_SUCCESS"));
                 finish();
                 break;

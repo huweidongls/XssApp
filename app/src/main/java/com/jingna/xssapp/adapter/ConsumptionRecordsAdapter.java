@@ -40,12 +40,16 @@ public class ConsumptionRecordsAdapter extends RecyclerView.Adapter<ConsumptionR
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.tvType.setText(data.get(position).getTypename());
-        holder.tvTime.setText(data.get(position).getAddtime());
         holder.tvPrice.setText(Double.valueOf(data.get(position).getPrice())+"元");
         if(data.get(position).getRadio().equals("0")){
             holder.tvPayType.setText("未支付");
+            holder.tvTime.setText(data.get(position).getAddtime());
         }else if(data.get(position).getRadio().equals("1")){
             holder.tvPayType.setText("支付成功");
+            holder.tvTime.setText(data.get(position).getAddtime());
+        }else if(data.get(position).getRadio().equals("2")){
+            holder.tvPayType.setText("已退款");
+            holder.tvTime.setText(data.get(position).getRefundtime());
         }
 
         holder.ll.setOnClickListener(new View.OnClickListener() {
