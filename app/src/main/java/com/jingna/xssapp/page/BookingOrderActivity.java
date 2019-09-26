@@ -243,12 +243,18 @@ public class BookingOrderActivity extends BaseActivity {
                                     couponsAdapter = new PopBookingOrderCouponsAdapter(couponsList, new PopBookingOrderCouponsAdapter.ClickListener() {
                                         @Override
                                         public void onItemClick(int pos) {
-                                            tvCoupons.setText(bean.getObj().getCoupon().get(pos).getOption());
                                             couponsId = bean.getObj().getCoupon().get(pos).getId();
                                             couponsPrice = Double.valueOf(bean.getObj().getCoupon().get(pos).getMoney());
                                             double price = jichuPrice + allMoney - couponsPrice;
-                                            tvPrice.setText("￥" + String.format("%.2f", price));
-                                            popCoupons.dismiss();
+                                            if(price<=0){
+                                                couponsId = "0";
+                                                couponsPrice = 0.00;
+                                                ToastUtil.showShort(context, "优惠券金额大于总价，优惠券不可用");
+                                            }else {
+                                                tvPrice.setText("￥" + String.format("%.2f", price));
+                                                tvCoupons.setText(bean.getObj().getCoupon().get(pos).getOption());
+                                                popCoupons.dismiss();
+                                            }
                                         }
                                     });
                                     LinearLayoutManager manager1 = new LinearLayoutManager(context);
